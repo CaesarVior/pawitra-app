@@ -1,9 +1,20 @@
-<!-- CORE -->
+# 🚀 Pawitra App - Panduan Git & Kontribusi Tim
 
-git add . ------------------------------------------------------------------ buat nambahkan file baru dari local ke branch local
-git commit -m "Menambah Home Page"------------------------------------------ buat nge komitmen apa yang dirubah branch local
-git push origin <branch-kalian> -------------------------------------------- buat upload ke githubnya'
+Berikut adalah panduan langkah demi langkah untuk mulai berkontribusi dalam project ini.
 
-<!-- END OF CORE -->
+---
 
-git pull origin staging --------------------------------------------------- buat download perubahan yang terjadi di github
+## 📌 Langkah Awal (Setup Pertama Kali)
+
+Jalankan perintah ini saat pertama kali mengunduh project ke PC kamu:
+
+```bash
+# 1. Clone repository ke komputer lokal
+git clone [https://github.com/CaesarVior/pawitra-app.git](https://github.com/CaesarVior/pawitra-app.git)
+
+# 2. Masuk ke folder project
+cd pawitra-app
+
+# 3. Buat dan pindah ke branch milikmu sendiri
+git checkout -b <nama-panggilan>
+```
