@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glosarium Isyarat - Pawitra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            bg: '#F8F7F4', 
+                            dark: '#2C3029', 
+                            accent: '#4C5946', 
+                            gold: '#d4af37',
+                            card: '#FFFFFF'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Luxury Loader Styles */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background-color: #1a1c18;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #loader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+        @keyframes lineGrow {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        .loader-line { 
+            animation: lineGrow 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards; 
+        }
+        
+        /* Animasi Interaksi Kartu */
+        .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+        
+        /* Background Pattern Senada dengan Eksplorasi */
+        .bg-pattern {
+            background-image: radial-gradient(#d4af37 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-color: #F8F7F4;
+        }
+
+        /* Animasi Melayang */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        /* Animasi Muncul dari Bawah (Fade In Up) */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+    </style>
+</head>
+<body class="bg-pattern text-brand-dark font-sans antialiased relative">
+    <!-- LUXURY LOADING SCREEN -->
+    <div id="loader">
+        <div class="text-center space-y-4 px-6">
+            <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#d4af37] tracking-wider">Pawitra<span class="text-white">.</span></h1>
+            <p class="text-xs text-gray-400 uppercase tracking-widest font-light">Memuat Halaman Glossary...</p>
+            <!-- Garis progres emas -->
+            <div class="w-48 h-[2px] bg-white/10 mx-auto rounded-full overflow-hidden mt-6">
+                <div id="loader-progress" class="h-full bg-[#d4af37] w-0 transition-all duration-1000"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay Putih Samar agar teks tetap terbaca di atas pattern -->
+    <div class="absolute inset-0 bg-white/70 pointer-events-none z-[-1] min-h-screen"></div>
+
+    <!-- Navigation (Fixed Position) -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-brand-bg/90 backdrop-blur-md border-b border-gray-200/50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative">
+            <div class="flex items-center gap-2">
+                <span class="font-serif text-2xl font-bold tracking-wide">Pawitra<span class="text-brand-accent">.</span></span>
+            </div>
+            <div class="hidden lg:flex items-center space-x-8 text-sm font-medium text-gray-700">
+                <a href="../home/index.html" class="hover:text-brand-accent transition">Home</a>
+                <a href="index.html" class="text-brand-accent transition font-bold">Glossary</a>
+                <a href="../about/index.html" class="hover:text-brand-accent transition">About</a>
+                <a href="../cultural-exploration/index.html" class="hover:text-brand-accent transition">Cultural Exploration</a>
+                <a href="../inclusive-stories/index.html" class="hover:text-brand-accent transition">Inclusive Stories</a>
+            </div>
+            <div class="hidden lg:block">
+                <a href="#kamus" class="bg-brand-dark text-white px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide hover:bg-brand-accent transition">
+                    Mulai Belajar
+                </a>
+            </div>
+            <button id="mobileMenuBtn" class="lg:hidden text-brand-dark focus:outline-none hover:text-brand-accent transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden px-6 pb-6 pt-2 bg-brand-bg border-t border-gray-200/60 mt-4 absolute w-full">
+            <div class="flex flex-col space-y-4 text-sm font-medium text-gray-700">
+                <a href="../home/index.html" class="hover:text-brand-accent">Home</a>
+                <a href="index.html" class="text-brand-accent font-bold">Glossary</a>
+                <a href="../about/index.html" class="hover:text-brand-accent">About</a>
+                <a href="../cultural-exploration/index.html" class="hover:text-brand-accent">Cultural Exploration</a>
+                <a href="../inclusive-stories/index.html" class="hover:text-brand-accent">Inclusive Stories</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-[#1a1c18] text-white pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden"> 
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            
+            <div class="space-y-6">
+                <p class="animate-fade-in-up text-xs font-semibold tracking-widest uppercase text-[#c4a77d]">Edukasi Budaya Inklusif</p>
+                <h1 class="animate-fade-in-up delay-100 font-serif text-5xl md:text-6xl font-bold leading-tight text-[#d4af37]">
+                    Mengenal Jawa <br> Lewat Isyarat.
+                </h1>
+                <p class="animate-fade-in-up delay-200 text-gray-300 max-w-md text-lg leading-relaxed font-light">
+                    Pelajari istilah-istilah pewayangan dan budaya Jawa melalui perpaduan kamus BISINDO dan panduan transliterasi Aksara Jawa.
+                </p>
+                <div class="animate-fade-in-up delay-300 pt-4 flex gap-4">
+                    <a href="#kamus" class="bg-[#4a3e2e] text-[#c4a77d] px-8 py-3 rounded-full text-sm font-medium hover:bg-[#5e4f3a] transition shadow-md border border-[#c4a77d]/30 flex items-center gap-2 group">
+                        Mulai Belajar <span class="text-lg transform group-hover:translate-x-1 transition">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Area Gambar dengan Animasi Melayang di Kartu Kecil -->
+            <div class="relative animate-fade-in-up delay-200">
+                <div class="relative rounded-[2rem] overflow-hidden aspect-[4/3] bg-[#2a2d26] border-4 border-[#5e4f3a] shadow-2xl p-2">
+                    <img src="https://images.unsplash.com/photo-1629853372861-12c8b7468165?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Wayang" class="w-full h-full object-cover rounded-xl opacity-80 transition duration-700 hover:scale-105 hover:opacity-100">
+                </div>
+
+                <!-- Kartu Ini Sekarang Melayang (animate-float) -->
+                <div class="absolute bottom-[-20px] right-[-20px] bg-[#f4e4bc] p-5 rounded-2xl shadow-xl flex gap-4 items-center border border-[#d4af37]/50 max-w-[280px] animate-float">
+                    <div class="w-14 h-14 bg-[#4a3e2e] rounded-full flex items-center justify-center text-[#d4af37] border-2 border-[#d4af37]">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/></svg>
+                    </div>
+                    <div class="text-[#2a2d26]">
+                        <p class="text-xs font-medium text-[#5e4f3a]">Video Terbaru</p>
+                        <p class="text-lg font-bold font-serif leading-tight">Isyarat 'Dalang'</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Fitur & Stats -->
+    <section class="border-b border-gray-200/60 bg-white relative z-10">
+        <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-200/50">
+            <div class="animate-fade-in-up delay-100"><p class="font-serif text-2xl font-bold">40+</p><p class="text-xs text-gray-500 mt-1 uppercase tracking-wider">Kosa Kata</p></div>
+            <div class="animate-fade-in-up delay-200"><p class="font-serif text-2xl font-bold">HD</p><p class="text-xs text-gray-500 mt-1 uppercase tracking-wider">Video Isyarat</p></div>
+            <div class="animate-fade-in-up delay-300"><p class="font-serif text-2xl font-bold">A-Z</p><p class="text-xs text-gray-500 mt-1 uppercase tracking-wider">Aksara</p></div>
+            <div class="animate-fade-in-up delay-400"><p class="font-serif text-2xl font-bold">Gratis</p><p class="text-xs text-gray-500 mt-1 uppercase tracking-wider">Akses</p></div>
+        </div>
+    </section>
+
+    <!-- Kamus Kata Kunci Section -->
+    <section id="kamus" class="max-w-7xl mx-auto px-6 py-20 relative z-10">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div>
+                <p class="text-xs font-semibold tracking-widest uppercase text-brand-gold mb-2">Eksplorasi Kata</p>
+                <h2 class="font-serif text-4xl font-bold">Kamus BISINDO</h2>
+            </div>
+            <div class="relative group">
+                <input type="text" id="searchInput" placeholder="Cari istilah..." class="w-full md:w-64 pl-4 pr-10 py-2.5 rounded-full border border-gray-300 bg-white/80 backdrop-blur-sm focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition text-sm shadow-sm">
+                <!-- Icon Kaca Pembesar bergoyang halus saat di-hover -->
+                <svg class="w-4 h-4 absolute right-4 top-3.5 text-gray-400 group-hover:text-brand-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="kamusGrid">
+            <!-- Item 1: Dalang -->
+            <div class="animate-fade-in-up delay-100 kamus-item bg-brand-card rounded-3xl p-4 card-hover cursor-pointer border border-gray-100 shadow-sm">
+                <div class="w-full aspect-square bg-gray-200 rounded-2xl mb-4 overflow-hidden relative group">
+                    <img src="https://images.unsplash.com/photo-1629853372861-12c8b7468165?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dalang" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="text-white text-xs bg-brand-accent px-4 py-2 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2">
+                            <span class="w-2 h-2 bg-white rounded-full animate-ping"></span> Putar Isyarat
+                        </span>
+                    </div>
+                </div>
+                <h3 class="font-serif text-xl font-bold term-title">Dalang</h3>
+                <p class="text-sm text-gray-500 mt-1 line-clamp-2">Orang yang memainkan wayang.</p>
+                <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
+                    <span class="text-xs text-gray-400">Aksara:</span>
+                    <span class="font-serif text-lg text-brand-gold">ꦢꦭꦁ</span>
+                </div>
+            </div>
+            
+            <!-- Item 2: Gamelan -->
+            <div class="animate-fade-in-up delay-200 kamus-item bg-brand-card rounded-3xl p-4 card-hover cursor-pointer border border-gray-100 shadow-sm">
+                <div class="w-full aspect-square bg-gray-200 rounded-2xl mb-4 overflow-hidden relative group">
+                    <img src="https://images.unsplash.com/photo-1596489381525-47e155c1b9b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gamelan" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="text-white text-xs bg-brand-accent px-4 py-2 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2">
+                            <span class="w-2 h-2 bg-white rounded-full animate-ping"></span> Putar Isyarat
+                        </span>
+                    </div>
+                </div>
+                <h3 class="font-serif text-xl font-bold term-title">Gamelan</h3>
+                <p class="text-sm text-gray-500 mt-1 line-clamp-2">Alat musik tradisional Jawa.</p>
+                <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
+                    <span class="text-xs text-gray-400">Aksara:</span>
+                    <span class="font-serif text-lg text-brand-gold">ꦒꦩꦼꦭꦤ꧀</span>
+                </div>
+            </div>
+
+            <!-- Item 3: Gunungan -->
+            <div class="animate-fade-in-up delay-300 kamus-item bg-brand-card rounded-3xl p-4 card-hover cursor-pointer border border-gray-100 shadow-sm">
+                <div class="w-full aspect-square bg-gray-200 rounded-2xl mb-4 overflow-hidden relative group">
+                    <img src="https://images.unsplash.com/photo-1583416750470-965b2707b355?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gunungan" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="text-white text-xs bg-brand-accent px-4 py-2 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2">
+                            <span class="w-2 h-2 bg-white rounded-full animate-ping"></span> Putar Isyarat
+                        </span>
+                    </div>
+                </div>
+                <h3 class="font-serif text-xl font-bold term-title">Gunungan</h3>
+                <p class="text-sm text-gray-500 mt-1 line-clamp-2">Simbol alam semesta dalam pewayangan.</p>
+                <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
+                    <span class="text-xs text-gray-400">Aksara:</span>
+                    <span class="font-serif text-lg text-brand-gold">ꦒꦸꦤꦸꦁꦔꦤ꧀</span>
+                </div>
+            </div>
+
+            <!-- Item 4: Gending -->
+            <div class="animate-fade-in-up delay-400 kamus-item bg-brand-card rounded-3xl p-4 card-hover cursor-pointer border border-gray-100 shadow-sm">
+                <div class="w-full aspect-square bg-gray-200 rounded-2xl mb-4 overflow-hidden relative group">
+                    <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gending" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="text-white text-xs bg-brand-accent px-4 py-2 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2">
+                            <span class="w-2 h-2 bg-white rounded-full animate-ping"></span> Putar Isyarat
+                        </span>
+                    </div>
+                </div>
+                <h3 class="font-serif text-xl font-bold term-title">Gending</h3>
+                <p class="text-sm text-gray-500 mt-1 line-clamp-2">Komposisi musik karawitan Jawa.</p>
+                <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
+                    <span class="text-xs text-gray-400">Aksara:</span>
+                    <span class="font-serif text-lg text-brand-gold">ꦒꦼꦤ꧀ꦝꦶꦁ</span>
+                </div>
+            </div>
+        </div>
+        <div id="noResult" class="hidden text-center py-10 text-gray-500">Istilah tidak ditemukan.</div>
+    </section>
+
+    <!-- Panduan Aksara Section -->
+    <section id="aksara" class="max-w-7xl mx-auto px-6 pb-24 relative z-10">
+        <div class="bg-brand-accent text-white rounded-[2.5rem] p-8 md:p-16 flex flex-col md:flex-row gap-10 items-center shadow-2xl relative overflow-hidden">
+            <!-- Dekorasi Background Bulat -->
+            <div class="absolute -top-24 -left-24 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-brand-gold/20 rounded-full blur-3xl"></div>
+
+            <div class="w-full md:w-1/2 space-y-6 relative z-10">
+                <p class="text-xs font-semibold tracking-widest uppercase text-brand-gold">Panduan Praktis</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold leading-tight">Membaca <br> Aksara Jawa</h2>
+                <p class="text-white/80 text-lg leading-relaxed">Pelajari cara mengubah huruf Latin menjadi Aksara Jawa dasar (Hanacaraka). Cocokkan pelafalan dengan simbol kuno yang sarat makna.</p>
+                <button class="bg-brand-gold text-brand-dark px-6 py-3 rounded-full text-sm font-bold hover:bg-white transition shadow-lg flex items-center gap-2 group">
+                    Lihat Tabel Lengkap <span class="animate-bounce inline-block group-hover:animate-none">↓</span>
+                </button>
+            </div>
+
+            <div class="w-full md:w-1/2 bg-white/10 rounded-3xl p-6 backdrop-blur-md border border-white/20 relative z-10">
+                <div class="grid grid-cols-4 gap-4 text-center">
+                    <!-- Kartu Aksara dengan efek hover bounce-in -->
+                    <div class="p-4 bg-white/5 rounded-xl hover:bg-brand-gold hover:text-brand-dark transition duration-300 cursor-pointer transform hover:-translate-y-2 shadow-sm"><div class="font-serif text-3xl mb-1">ꦲ</div><div class="text-[10px] uppercase tracking-wider opacity-80 font-bold">Ha</div></div>
+                    <div class="p-4 bg-white/5 rounded-xl hover:bg-brand-gold hover:text-brand-dark transition duration-300 cursor-pointer transform hover:-translate-y-2 shadow-sm"><div class="font-serif text-3xl mb-1">ꦤ</div><div class="text-[10px] uppercase tracking-wider opacity-80 font-bold">Na</div></div>
+                    <div class="p-4 bg-white/5 rounded-xl hover:bg-brand-gold hover:text-brand-dark transition duration-300 cursor-pointer transform hover:-translate-y-2 shadow-sm"><div class="font-serif text-3xl mb-1">ꦕ</div><div class="text-[10px] uppercase tracking-wider opacity-80 font-bold">Ca</div></div>
+                    <div class="p-4 bg-white/5 rounded-xl hover:bg-brand-gold hover:text-brand-dark transition duration-300 cursor-pointer transform hover:-translate-y-2 shadow-sm"><div class="font-serif text-3xl mb-1">ꦫ</div><div class="text-[10px] uppercase tracking-wider opacity-80 font-bold">Ra</div></div>
+                    <div class="p-4 bg-white/5 rounded-xl hover:bg-brand-gold hover:text-brand-dark transition duration-300 cursor-pointer transform hover:-translate-y-2 shadow-sm"><div class="font-serif text-3xl mb-1">ꦏ</div><div class="text-[10px] uppercase tracking-wider opacity-80 font-bold">Ka</div></div>
+                    <div class="p-4 bg-white/5 rounded-xl hover:bg-brand-gold hover:text-brand-dark transition duration-300 cursor-pointer transform hover:-translate-y-2 shadow-sm"><div class="font-serif text-3xl mb-1">ꦢ</div><div class="text-[10px] uppercase tracking-wider opacity-80 font-bold">Da</div></div>
+                    <div class="p-4 bg-white/5 rounded-xl hover:bg-brand-gold hover:text-brand-dark transition duration-300 cursor-pointer transform hover:-translate-y-2 shadow-sm"><div class="font-serif text-3xl mb-1">ꦠ</div><div class="text-[10px] uppercase tracking-wider opacity-80 font-bold">Ta</div></div>
+                    <div class="p-4 bg-white/5 rounded-xl hover:bg-brand-gold hover:text-brand-dark transition duration-300 cursor-pointer transform hover:-translate-y-2 shadow-sm"><div class="font-serif text-3xl mb-1">ꦱ</div><div class="text-[10px] uppercase tracking-wider opacity-80 font-bold">Sa</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-white border-t border-gray-200/60 pt-20 pb-10 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="bg-brand-bg rounded-[2rem] p-8 md:p-12 mb-16 flex flex-col md:flex-row items-center justify-between gap-8 border border-gray-100 shadow-sm relative overflow-hidden">
+                <div class="absolute right-0 top-0 w-32 h-32 bg-brand-gold/10 rounded-full blur-2xl animate-pulse"></div>
+                <div class="max-w-md relative z-10">
+                    <h3 class="font-serif text-3xl font-bold text-brand-dark mb-2">Tetap Terhubung.</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Dapatkan pembaruan terbaru mengenai kosa kata budaya langsung di kotak masukmu.</p>
+                </div>
+                <div class="w-full md:w-auto flex-1 max-w-md relative z-10">
+                    <input type="email" placeholder="Alamat email Anda..." class="w-full pl-6 pr-32 py-4 rounded-full border border-gray-200 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition text-sm">
+                    <button class="absolute right-2 top-2 bottom-2 bg-brand-dark text-brand-gold px-6 rounded-full text-xs font-bold hover:bg-brand-accent hover:text-white transition">Subscribe &rarr;</button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+                <div class="md:col-span-5 space-y-6">
+                    <a href="../home/index.html" class="inline-block"><h2 class="font-serif text-3xl font-bold text-brand-dark tracking-wide">Pawitra<span class="text-brand-accent">.</span></h2></a>
+                    <p class="text-gray-500 text-sm leading-relaxed max-w-sm">Menjembatani nilai-nilai luhur budaya Jawa dengan ruang yang inklusif untuk semua.</p>
+                </div>
+                <div class="md:col-span-3">
+                    <h4 class="text-xs font-bold tracking-widest uppercase text-brand-dark mb-6">Jelajahi Pawitra</h4>
+                    <ul class="space-y-4 text-sm font-medium text-gray-500">
+                        <li><a href="../home/index.html" class="hover:text-brand-accent transition">Home</a></li>
+                        <li><a href="index.html" class="hover:text-brand-accent transition">Glossary</a></li>
+                        <li><a href="../about/index.html" class="hover:text-brand-accent transition">About</a></li>
+                    </ul>
+                </div>
+                <div class="md:col-span-4">
+                    <h4 class="text-xs font-bold tracking-widest uppercase text-brand-dark mb-6">Hubungi Kami</h4>
+                    <ul class="space-y-4 text-sm text-gray-500">
+                        <li class="flex items-start gap-3"><span class="text-brand-accent mt-0.5">📍</span><span>Sawojajar, Kota Malang<br>Jawa Timur, Indonesia</span></li>
+                        <li class="flex items-center gap-3"><span class="text-brand-accent">✉️</span><a href="mailto:halo@pawitra.id" class="hover:text-brand-accent transition">halo@pawitra.id</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-gray-400 font-medium">&copy; 2026 Pawitra App. Dibuat dengan 💚 untuk Budaya.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Toggle Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+
+        // Search Kamus Live
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const items = document.querySelectorAll('.kamus-item');
+            const noResult = document.getElementById('noResult');
+
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                let hasResult = false;
+                items.forEach(item => {
+                    const title = item.querySelector('.term-title').textContent.toLowerCase();
+                    if (title.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        hasResult = true;
+                    } else { item.style.display = 'none'; }
+                });
+                if (hasResult) { noResult.classList.add('hidden'); } else { noResult.classList.remove('hidden'); }
+            });
+        });
+        // Logika Luxury Loader
+        window.addEventListener("load", function() {
+            const loader = document.getElementById("loader");
+            const progressBar = document.getElementById("loader-progress");
+            
+            // Jalankan animasi garis penuh
+            setTimeout(() => {
+                progressBar.style.width = "100%";
+            }, 100);
+
+            // Hilangkan layar loader setelah 0.9 detik
+            setTimeout(() => {
+                loader.classList.add("fade-out");
+            }, 900);
+        });
+    </script>
+</body>
+</html>
