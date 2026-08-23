@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inclusive Story - Pawitra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            bg: '#F8F7F4', 
+                            dark: '#2C3029', 
+                            accent: '#4C5946', 
+                            gold: '#d4af37',
+                            card: '#FFFFFF'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Luxury Loader Styles */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background-color: #1a1c18;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #loader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+        @keyframes lineGrow {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        .loader-line { 
+            animation: lineGrow 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards; 
+        }
+        
+        /* Animasi Interaksi Kartu */
+        .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+        
+        /* Background Pattern Dasar */
+        .bg-pattern {
+            background-image: radial-gradient(#d4af37 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-color: #F8F7F4;
+        }
+
+        /* --- ANIMASI BACKGROUND MEWAH HEADER (CAHAYA BLENCONG) --- */
+        @keyframes blencongGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1) translate(0, 0); }
+            50% { opacity: 0.6; transform: scale(1.15) translate(-20px, 20px); }
+        }
+        .bg-glow-1 {
+            position: absolute; width: 45vw; height: 45vw; 
+            background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(26,28,24,0) 70%); 
+            top: -10%; left: -10%; border-radius: 50%; 
+            animation: blencongGlow 10s ease-in-out infinite; 
+            z-index: 0; pointer-events: none;
+        }
+        .bg-glow-2 {
+            position: absolute; width: 55vw; height: 55vw; 
+            background: radial-gradient(circle, rgba(196,167,125,0.1) 0%, rgba(26,28,24,0) 70%); 
+            bottom: -20%; right: -15%; border-radius: 50%; 
+            animation: blencongGlow 14s ease-in-out infinite reverse; 
+            z-index: 0; pointer-events: none;
+        }
+
+        @keyframes panPattern {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+        .bg-batik-pan {
+            background-image: radial-gradient(rgba(212, 175, 55, 0.08) 1.5px, transparent 1.5px);
+            background-size: 45px 45px;
+            animation: panPattern 90s linear infinite;
+        }
+
+        /* Animasi Melayang Element */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        /* Animasi Muncul dari Bawah (Untuk Hero Section saat loading) */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+
+        /* --- SCROLL REVEAL ANIMATION --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-pattern text-brand-dark font-sans antialiased flex flex-col min-h-screen relative">
+    <!-- LUXURY LOADING SCREEN -->
+    <div id="loader">
+        <div class="text-center space-y-4 px-6">
+            <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#d4af37] tracking-wider">Pawitra<span class="text-white">.</span></h1>
+            <p class="text-xs text-gray-400 uppercase tracking-widest font-light">Memuat Cerita Inklusif...</p>
+            <div class="w-48 h-[2px] bg-white/10 mx-auto rounded-full overflow-hidden mt-6">
+                <div id="loader-progress" class="h-full bg-[#d4af37] w-0 transition-all duration-1000"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay Putih Samar -->
+    <div class="absolute inset-0 bg-white/70 pointer-events-none z-[-1] min-h-screen"></div>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-brand-bg/90 backdrop-blur-md border-b border-gray-200/50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative">
+            <div class="flex items-center gap-2">
+                <span class="font-serif text-2xl font-bold tracking-wide">Pawitra<span class="text-brand-accent">.</span></span>
+            </div>
+            <div class="hidden lg:flex items-center space-x-8 text-sm font-medium text-gray-700">
+                <a href="../home/index.html" class="hover:text-brand-accent transition">Home</a>
+                <a href="../glossary/index.html" class="hover:text-brand-accent transition">Glossary</a>
+                <a href="../about/index.html" class="hover:text-brand-accent transition">About</a>
+                <a href="../cultural-exploration/index.html" class="hover:text-brand-accent transition">Cultural Exploration</a>
+                <a href="index.html" class="border-b-2 border-brand-accent pb-1 text-brand-accent font-bold transition">Inclusive Stories</a>
+            </div>
+            <div class="hidden lg:block">
+                <a href="#kamus" class="bg-brand-dark text-white px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide hover:bg-brand-accent transition">
+                    Mulai Jelajah
+                </a>
+            </div>
+            <button id="mobileMenuBtn" class="lg:hidden text-brand-dark focus:outline-none hover:text-brand-accent transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden px-6 pb-6 pt-2 bg-brand-bg border-t border-gray-200/60 mt-4 absolute w-full">
+            <div class="flex flex-col space-y-4 text-sm font-medium text-gray-700">
+                <a href="../home/index.html" class="hover:text-brand-accent transition">Home</a>
+                <a href="../glossary/index.html" class="hover:text-brand-accent transition">Glossary</a>
+                <a href="../about/index.html" class="hover:text-brand-accent transition">About</a>
+                <a href="../cultural-exploration/index.html" class="hover:text-brand-accent transition">Cultural Exploration</a>
+                <a href="index.html" class="border-b-2 border-brand-accent pb-1 text-brand-accent font-bold transition">Inclusive Stories</a>
+            </div>
+        </div>
+    </nav>
+
+
+  
+
+    
+    <!-- Footer Section (Ditambah class reveal) -->
+    <footer class="bg-white border-t border-gray-200/60 pt-20 pb-10 relative z-10 reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="bg-brand-bg rounded-[2rem] p-8 md:p-12 mb-16 flex flex-col md:flex-row items-center justify-between gap-8 border border-gray-100 shadow-sm relative overflow-hidden">
+                <div class="absolute right-0 top-0 w-32 h-32 bg-brand-gold/10 rounded-full blur-2xl animate-pulse"></div>
+                <div class="max-w-md relative z-10">
+                    <h3 class="font-serif text-3xl font-bold text-brand-dark mb-2">Tetap Terhubung.</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Dapatkan pembaruan terbaru mengenai kosa kata budaya langsung di kotak masukmu.</p>
+                </div>
+                <div class="w-full md:w-auto flex-1 max-w-md relative z-10">
+                    <input type="email" placeholder="Alamat email Anda..." class="w-full pl-6 pr-32 py-4 rounded-full border border-gray-200 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition text-sm">
+                    <button class="absolute right-2 top-2 bottom-2 bg-brand-dark text-brand-gold px-6 rounded-full text-xs font-bold hover:bg-brand-accent hover:text-white transition">Subscribe &rarr;</button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+                <div class="md:col-span-5 space-y-6">
+                    <a href="../home/index.html" class="inline-block"><h2 class="font-serif text-3xl font-bold text-brand-dark tracking-wide">Pawitra<span class="text-brand-accent">.</span></h2></a>
+                    <p class="text-gray-500 text-sm leading-relaxed max-w-sm">Menjembatani nilai-nilai luhur budaya Jawa dengan ruang yang inklusif untuk semua.</p>
+                </div>
+                <div class="md:col-span-3">
+                    <h4 class="text-xs font-bold tracking-widest uppercase text-brand-dark mb-6">Jelajahi Pawitra</h4>
+                    <ul class="space-y-4 text-sm font-medium text-gray-500">
+                        <a href="../home/index.html" class="hover:text-brand-accent transition">Home</a>
+                        <a href="../glossary/index.html" class="hover:text-brand-accent transition">Glossary</a>
+                        <a href="../about/index.html" class="hover:text-brand-accent transition">About</a>
+                        <a href="../cultural-exploration/index.html" class="hover:text-brand-accent transition">Cultural Exploration</a>
+                        <a href="index.html" class="border-b-2 border-brand-accent pb-1 text-brand-accent font-bold transition">Inclusive Stories</a>
+                    </ul>
+                </div>
+                <div class="md:col-span-4">
+                    <h4 class="text-xs font-bold tracking-widest uppercase text-brand-dark mb-6">Hubungi Kami</h4>
+                    <ul class="space-y-4 text-sm text-gray-500">
+                        <li class="flex items-start gap-3"><span class="text-brand-accent mt-0.5">📍</span><span>Sawojajar, Kota Malang<br>Jawa Timur, Indonesia</span></li>
+                        <li class="flex items-center gap-3"><span class="text-brand-accent">✉️</span><a href="mailto:halo@pawitra.id" class="hover:text-brand-accent transition">halo@pawitra.id</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-gray-400 font-medium">&copy; 2026 Pawitra App. Dibuat dengan 💚 untuk Budaya.</p>
+            </div>
+        </div>
+    </footer>
+
+<script>
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const searchInput = document.getElementById('searchInput');
+
+        // Jalankan search HANYA jika halaman memiliki searchInput
+        if (searchInput) {
+
+            const items = document.querySelectorAll('.kamus-item');
+            const noResult = document.getElementById('noResult');
+
+            searchInput.addEventListener('input', (e) => {
+
+                const searchTerm = e.target.value.toLowerCase();
+                let hasResult = false;
+
+                items.forEach(item => {
+
+                    const title = item
+                        .querySelector('.term-title')
+                        .textContent
+                        .toLowerCase();
+
+                    if (title.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        hasResult = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+
+                });
+
+                if (hasResult) {
+                    noResult.classList.add('hidden');
+                } else {
+                    noResult.classList.remove('hidden');
+                }
+
+            });
+
+        }
+
+        // SCROLL REVEAL
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+
+            });
+
+        }, observerOptions);
+
+
+        document.querySelectorAll('.reveal').forEach(element => {
+            observer.observe(element);
+        });
+
+    });
+
+    // LOADING SCREEN
+    window.addEventListener("load", function() {
+
+        const loader = document.getElementById("loader");
+        const progressBar = document.getElementById("loader-progress");
+
+        setTimeout(() => {
+            progressBar.style.width = "100%";
+        }, 100);
+
+        setTimeout(() => {
+            loader.classList.add("fade-out");
+        }, 900);
+
+    });
+
+</script>
+</body>
+</html>
