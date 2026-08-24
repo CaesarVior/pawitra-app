@@ -162,6 +162,25 @@
             color: #c4a77d;
             stroke-width: 2;
         }
+
+        @media (max-width: 768px) {
+            .card {
+                flex-direction: column;
+                margin: 40px 15px;
+                gap: 10px;
+            }
+
+            .item {
+                padding: 20px 10px;
+                text-align: center;
+            }
+
+            .icon-box {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
     </style>
 </head>
 <body class="bg-pattern text-brand-dark font-sans antialiased flex flex-col min-h-screen relative">
@@ -204,7 +223,7 @@
         <!-- Mobile Dropdown Menu -->
         <div id="mobileMenu" class="hidden lg:hidden px-6 pb-6 pt-2 bg-brand-bg border-t border-gray-200/60 mt-4 absolute w-full">
             <div class="flex flex-col space-y-4 text-sm font-medium text-gray-700">
-                <a href="index.html" class="border-b-2 border-brand-accent pb-1 text-brand-accent font-bold transition">Home</a>
+                <a href="index.html" class="hover:text-brand-accent transition">Home</a>
                 <a href="../glossary/index.html" class="hover:text-brand-accent transition">Glossary</a>
                 <a href="../about/index.html" class="hover:text-brand-accent transition">About</a>
                 <a href="../cultural-exploration/index.html" class="hover:text-brand-accent transition">Cultural Exploration</a>
@@ -240,52 +259,54 @@
             </div>
     </header>
 
-<div class="card" >
-    <div class="item">
-        <div class="icon-box">
-          <i data-lucide="headphones"></i>
+
+    <!-- === CARD === -->
+    <div class="card" >
+        <div class="item">
+            <div class="icon-box">
+            <i data-lucide="headphones"></i>
+            </div>
+            <h1 class="font-serif text-xl font-bold mb-3">Dengarkan</h1>
+            <p class="text-sm text-gray-500 leading-relaxed">
+                Narasi profesional dengan nuansa gamelan
+                yang menenangkan.
+            </p>
         </div>
-        <h1 class="font-serif text-xl font-bold mb-3">Dengarkan</h1>
-        <p class="text-sm text-gray-500 leading-relaxed">
-            Narasi profesional dengan nuansa gamelan
-            yang menenangkan.
-        </p>
+
+        <div class="item">
+            <div class="icon-box">
+            <i data-lucide="eye"></i>
+            </div>        
+            <h1 class="font-serif text-xl font-bold mb-3">Lihat</h1>
+            <p class="text-sm text-gray-500 leading-relaxed">
+                Visual wayang dan ilustrasi
+                yang memanjakan mata.
+            </p>
+        </div>
+
+        <div class="item">
+            <div class="icon-box">
+            <i data-lucide="hand"></i>
+            </div>        
+            <h1 class="font-serif text-xl font-bold mb-3">Rasakan</h1>
+            <p class="text-sm text-gray-500 leading-relaxed">
+                Interaksi yang membuat cerita
+                terasa nyata.
+            </p>
+        </div>
+
+        <div class="item">
+            <div class="icon-box">
+            <i data-lucide="heart"></i>
+            </div>        
+            <h1 class="font-serif text-xl font-bold mb-3">Pahami</h1>
+            <p class="text-sm text-gray-500 leading-relaxed">
+                Nilai-nilai luhur dari cerita
+                untuk kehidupan sehari-hari.
+            </p>
+        </div>
     </div>
 
-    <div class="item">
-        <div class="icon-box">
-          <i data-lucide="eye"></i>
-        </div>        
-        <h1 class="font-serif text-xl font-bold mb-3">Lihat</h1>
-        <p class="text-sm text-gray-500 leading-relaxed">
-            Visual wayang dan ilustrasi
-            yang memanjakan mata.
-        </p>
-    </div>
-
-    <div class="item">
-        <div class="icon-box">
-          <i data-lucide="hand"></i>
-        </div>        
-        <h1 class="font-serif text-xl font-bold mb-3">Rasakan</h1>
-        <p class="text-sm text-gray-500 leading-relaxed">
-            Interaksi yang membuat cerita
-            terasa nyata.
-        </p>
-    </div>
-
-    <div class="item">
-        <div class="icon-box">
-          <i data-lucide="heart"></i>
-        </div>        
-        <h1 class="font-serif text-xl font-bold mb-3">Pahami</h1>
-        <p class="text-sm text-gray-500 leading-relaxed">
-            Nilai-nilai luhur dari cerita
-            untuk kehidupan sehari-hari.
-        </p>
-    </div>
-</div>
-    
     <!-- FOOTER Section (Ditambah class reveal) -->
     <footer class="bg-white border-t border-gray-200/60 pt-20 pb-10 relative z-10 reveal">
         <div class="max-w-7xl mx-auto px-6">
@@ -309,11 +330,11 @@
                 <div class="md:col-span-3">
                     <h4 class="text-xs font-bold tracking-widest uppercase text-brand-dark mb-6">Jelajahi Pawitra</h4>
                     <ul class="space-y-4 text-sm font-medium text-gray-500">
-                        <a href="index.html" class="border-b-2 border-brand-accent pb-1 text-brand-accent font-bold transition">Home</a>
-                        <a href="../glossary/index.html" class="hover:text-brand-accent transition">Glossary</a>
-                        <a href="../about/index.html" class="hover:text-brand-accent transition">About</a>
-                        <a href="../cultural-exploration/index.html" class="hover:text-brand-accent transition">Cultural Exploration</a>
-                        <a href="../inclusive-stories/index.html" class="hover:text-brand-accent transition">Inclusive Stories</a>
+                        <li><a href="index.html" class="hover:text-brand-accent transition">Home</a></li>
+                        <li><a href="../glossary/index.html" class="hover:text-brand-accent transition">Glossary</a></li>
+                        <li><a href="../about/index.html" class="hover:text-brand-accent transition">About</a></li>
+                        <li><a href="../cultural-exploration/index.html" class="hover:text-brand-accent transition">Cultural Exploration</a></li>
+                        <li><a href="../inclusive-stories/index.html" class="hover:text-brand-accent transition">Inclusive Stories </a></li>
                     </ul>
                 </div>
                 <div class="md:col-span-4">
@@ -422,7 +443,6 @@
     });
 
     lucide.createIcons();
-
 </script>
 </body>
 </html>
