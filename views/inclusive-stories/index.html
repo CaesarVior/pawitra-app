@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inclusive Story - Pawitra</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -122,6 +123,272 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /*==== HEADER ====*/
+        .story-header {
+            padding: 60px 6% 40px;
+            margin-top: auto;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(12, 9, 6, 0.95),
+                    rgba(12, 9, 6, 0.75)
+                );
+
+            border-bottom: 1px solid rgba(201, 149, 60, 0.3);
+        }
+
+        /* bagian atas */
+
+        .story-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .story-actions button:hover {
+            background: #c9953c;
+            color: #100b06;
+        }
+
+
+        /* judul */
+
+        .header-title {
+            max-width: 800px;
+
+            margin: 50px auto 0;
+
+            text-align: center;
+        }
+
+        .story-category {
+            color: #c9953c;
+
+            font-size: 12px;
+            letter-spacing: 3px;
+        }
+
+        .header-title h1 {
+            margin-top: 12px;
+
+            color: #f5efe5;
+
+            font-family: Georgia, serif;
+            font-size: clamp(40px, 5vw, 64px);
+
+            font-weight: 400;
+
+            text-transform: capitalize;
+        }
+
+        .header-title p {
+            max-width: 550px;
+
+            margin: 15px auto 0;
+
+            color: #aaa197;
+
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+
+        /* ornamen */
+
+        .ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 12px;
+
+            margin-top: 25px;
+
+            color: #c9953c;
+        }
+
+        .ornament i {
+            width: 70px;
+            height: 1px;
+
+            background: linear-gradient(
+                to right,
+                transparent,
+                #c9953c
+            );
+        }
+
+        .ornament i:nth-child(4) {
+            background: linear-gradient(
+                to left,
+                transparent,
+                #c9953c
+            );
+        }
+
+        .header-warm-bg {
+            background-image: radial-gradient(#c2a878 1.2px, transparent 1.2px);
+            background-size: 32px 32px;
+            background-color: #EFECE6;
+        }
+
+        
+        /* MODAl */
+        .story-modal {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 999;
+
+            background: rgba(0, 0, 0, 0.75);
+
+            backdrop-filter: blur(8px);
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+        }
+
+        .story-reader {
+            position: relative;
+
+            width: min(1000px, 95vw);
+            max-height: 90vh;
+            overflow-y: auto;
+
+            display: grid;
+            grid-template-columns: 35% 65%;
+
+            background: #15100b;
+            border: 1px solid #a97832;
+            border-radius: 20px;
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.7);
+
+            animation: modalOpen 0.3s ease;
+        }
+
+        @keyframes modalOpen {
+
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+        }
+
+        .reader-image {
+            min-height: 500px;
+        }
+
+        .reader-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px 0 0 20px;
+        }
+
+        .reader-content {
+            padding: 40px;
+        }
+
+        .reader-content > span {
+            color: #c9953c;
+            font-size: 11px;
+            letter-spacing: 3px;
+        }
+
+        .reader-content h2 {
+            margin: 10px 0 25px;
+            color: #f5efe5;
+            font-family: Georgia, serif;
+            font-size: 42px;
+            font-weight: 400;
+        }
+
+        .reader-tabs {
+            display: flex;
+            border-bottom: 1px solid #3b2a18;
+            margin-bottom: 25px;
+        }
+
+        .reader-tabs button {
+            padding: 12px 15px;
+            background: transparent;
+            border: none;
+            color: #8f877c;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .reader-tabs button:hover,
+        .reader-tabs button.active {
+            color: #d4a44f;
+
+            border-bottom: 2px solid #d4a44f;
+        }
+
+        .close-button {
+            position: absolute;
+
+            top: 15px;
+            right: 15px;
+
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+            border: 1px solid #c9953c;
+
+            background: rgba(0, 0, 0, 0.6);
+            color: #d4a44f;
+
+            font-size: 25px;
+            cursor: pointer;
+
+            z-index: 10;
+            transition: 0.3s;
+        }
+
+        .close-button:hover {
+            background: #c9953c;
+            color: #15100b;
+        }
+
+        .reader-tools {
+            padding: 10px;
+        }
+
+        .reader-button{
+            display: flex;
+            top: 15px;
+            right: 15px;
+
+            border-radius: 10px;
+            border: 1px solid #c9953c;
+
+            background: rgba(0, 0, 0, 0.6);
+            color: #d4a44f;
+ 
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
     </style>
 </head>
 <body class="bg-pattern text-brand-dark font-sans antialiased flex flex-col min-h-screen relative">
@@ -152,7 +419,7 @@
                 <a href="../cultural-exploration/index.html" class="hover:text-brand-accent transition">Cultural Exploration</a>
                 <a href="index.html" class="border-b-2 border-brand-accent pb-1 text-brand-accent font-bold transition">Inclusive Stories</a>
             </div>
-            <div class="hidden lg:block">
+            <div class="hidden lg:block " style="visibility: hidden;">
                 <a href="#kamus" class="bg-brand-dark text-white px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide hover:bg-brand-accent transition">
                     Mulai Jelajah
                 </a>
@@ -168,15 +435,173 @@
                 <a href="../glossary/index.html" class="hover:text-brand-accent transition">Glossary</a>
                 <a href="../about/index.html" class="hover:text-brand-accent transition">About</a>
                 <a href="../cultural-exploration/index.html" class="hover:text-brand-accent transition">Cultural Exploration</a>
-                <a href="index.html" class="border-b-2 border-brand-accent pb-1 text-brand-accent font-bold transition">Inclusive Stories</a>
+                <a href="index.html" class="hover:text-brand-accent transition">Inclusive Stories</a>
             </div>
         </div>
     </nav>
 
 
-  
+    <!-- ==== HEADER ==== -->
+    <header class="story-header">
 
+        <div class="header-title">
+
+            <span class="story-category">
+                CERITA RAKYAT JAWA
+            </span>
+
+            <h1>Dengarkan. Lihat. Rasakan Ceritanya.</h1>
+
+            <p>
+                Nikmati kisah rakyat Jawa melalui narasi suara, teks ramah disleksia, dan peragaan BISINDO.
+            </p>
+
+            <div class="ornament">
+                <span>◆</span>
+                <i></i>
+                <span>✦</span>
+                <i></i>
+                <span>◆</span>
+            </div>
+
+        </div>
+
+    </header>
+
+  <section id="cerita" class="max-w-7xl mx-auto px-6 py-20 relative z-10 reveal">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div>
+                <p class="text-xs font-semibold tracking-widest uppercase text-brand-gold mb-2">Katalog Cerita Rakyat</p>
+                <h2 class="font-serif text-4xl font-bold">Lihat, dan Dengarkan Cerita Rakyat asal Jawa  </h2>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="storyGrid">
+
+            <div class="kamus-item bg-brand-card rounded-3xl p-4 card-hover cursor-pointer border border-gray-100 shadow-sm" onclick="openStory('timunMas')">
+                <div class="w-full aspect-square bg-gray-200 rounded-2xl mb-4 overflow-hidden relative group">
+                    <img src="cover-timunmas.png" alt="Timun" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" style="object-fit: fill;">
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="text-white text-xs bg-brand-accent px-4 py-2 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2">
+                            <span class="w-2 h-2 bg-white rounded-full animate-ping"></span> Baca Sekarang
+                        </span>
+                    </div>
+                </div>
+                <h3 class="font-serif text-xl font-bold term-title">Timun Mas</h3>
+                <p class="text-sm text-gray-500 mt-1 line-clamp-2">Kisah gadis pemberani yang melarikan diri dari kejaran raksasa.</p>
+            </div>
+            
+            <div class="kamus-item bg-brand-card rounded-3xl p-4 card-hover cursor-pointer border border-gray-100 shadow-sm">
+                <div class="w-full aspect-square bg-gray-200 rounded-2xl mb-4 overflow-hidden relative group">
+                    <img src="cover-roro.png" alt="Roro" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" style="object-fit: fill;">
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="text-white text-xs bg-brand-accent px-4 py-2 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2">
+                            <span class="w-2 h-2 bg-white rounded-full animate-ping"></span> Baca Sekarang
+                        </span>
+                    </div>
+                </div>
+                <h3 class="font-serif text-xl font-bold term-title">Roro Jonggrang</h3>
+                <p class="text-sm text-gray-500 mt-1 line-clamp-2">Kisah seorang putri dan Bandung Bondowoso yang berkaitan dengan legenda Candi Prambanan.</p>
+            </div>
+
+            <div class="kamus-item bg-brand-card rounded-3xl p-4 card-hover cursor-pointer border border-gray-100 shadow-sm">
+                <div class="w-full aspect-square bg-gray-200 rounded-2xl mb-4 overflow-hidden relative group">
+                    <img src="cover-kancil.png" alt="Kancil" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" style="object-fit: fill;">
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="text-white text-xs bg-brand-accent px-4 py-2 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2">
+                            <span class="w-2 h-2 bg-white rounded-full animate-ping"></span> Baca Sekarang
+                        </span>
+                    </div>
+                </div>
+                <h3 class="font-serif text-xl font-bold term-title">Si Kancil</h3>
+                <p class="text-sm text-gray-500 mt-1 line-clamp-2">Kisah seekor kancil yang dikenal cerdik dan selalu menemukan cara untuk keluar dari berbagai masalah.</p>
+            </div>
+
+            <div class="kamus-item bg-brand-card rounded-3xl p-4 card-hover cursor-pointer border border-gray-100 shadow-sm">
+                <div class="w-full aspect-square bg-gray-200 rounded-2xl mb-4 overflow-hidden relative group">
+                    <img src="cover-aji.png" alt="Aji" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" style="object-fit: fill;">
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span class="text-white text-xs bg-brand-accent px-4 py-2 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2">
+                            <span class="w-2 h-2 bg-white rounded-full animate-ping"></span> Baca Sekarang
+                        </span>
+                    </div>
+                </div>
+                <h3 class="font-serif text-xl font-bold term-title">Aji Saka</h3>
+                <p class="text-sm text-gray-500 mt-1 line-clamp-2">Legenda yang berkaitan dengan asal-usul aksara Jawa.</p>
+            </div>
+        </div>
+        <div id="noResult" class="hidden text-center py-10 text-gray-500">Istilah tidak ditemukan.</div>
+    </section>
+
+    <!-- MODAL -->
+    <div id="storyModal" class="story-modal">
+
+    <div class="story-reader">
+
+        <button class="close-button" onclick="closeStory()">
+            ×
+        </button>
+
+        <div class="reader-image">
+            <img id="storyImage" src="cover-timunmas.png">
+        </div>
+
+        <div class="reader-content">
+
+            <span id="storyCategory">
+                CERITA RAKYAT
+            </span>
+
+            <h2 id="storyTitle">
+                Timun Mas
+            </h2>
+
+            <div class="reader-tabs">
+
+                <button class="active">
+                    Indonesia
+                </button>
+
+                <button>
+                    Aksara Jawa
+                </button>
+
+                <button>
+                    Ramah Disleksia
+                </button>
+
+            </div>
+
+            <div class="story-text" id="storyText">
+
+                <p style="color: #F8F7F4;">
+                    Pada zaman dahulu, hiduplah seorang
+                    gadis bernama Timun Mas... 
+                    Ia tinggal bersama ibunya di sebuah
+                    desa yang damai.
+                </p>
+
+            </div>
+        </div>
+
+        <div class="reader-tools flex gap-3">
+
+            <button class="reader-button flex-1 flex items-center justify-center gap-2">
+                <i data-lucide="volume-2" class="w-4 h-4"></i>
+                <span>Dengarkan</span>
+            </button>
+
+            <button class="reader-button flex-1 flex items-center justify-center gap-2">
+                <i data-lucide="hand" class="w-4 h-4"></i>
+                <span>BISINDO</span>
+            </button>
+
+        </div>
+        
+    </div>
+</div>
     
+
     <!-- Footer Section (Ditambah class reveal) -->
     <footer class="bg-white border-t border-gray-200/60 pt-20 pb-10 relative z-10 reveal">
         <div class="max-w-7xl mx-auto px-6">
@@ -200,11 +625,11 @@
                 <div class="md:col-span-3">
                     <h4 class="text-xs font-bold tracking-widest uppercase text-brand-dark mb-6">Jelajahi Pawitra</h4>
                     <ul class="space-y-4 text-sm font-medium text-gray-500">
-                        <a href="../home/index.html" class="hover:text-brand-accent transition">Home</a>
-                        <a href="../glossary/index.html" class="hover:text-brand-accent transition">Glossary</a>
-                        <a href="../about/index.html" class="hover:text-brand-accent transition">About</a>
-                        <a href="../cultural-exploration/index.html" class="hover:text-brand-accent transition">Cultural Exploration</a>
-                        <a href="index.html" class="border-b-2 border-brand-accent pb-1 text-brand-accent font-bold transition">Inclusive Stories</a>
+                        <li><a href="../home/index.html" class="hover:text-brand-accent transition">Home</a></li>
+                        <li><a href="../glossary/index.html" class="hover:text-brand-accent transition">Glossary</a></li>
+                        <li><a href="../about/index.html" class="hover:text-brand-accent transition">About</a></li>
+                        <li><a href="../cultural-exploration/index.html" class="hover:text-brand-accent transition">Cultural Exploration</a></li>
+                        <li><a href="index.html" class="hover:text-brand-accent transition">Inclusive Stories </a></li>
                     </ul>
                 </div>
                 <div class="md:col-span-4">
@@ -311,6 +736,20 @@
         }, 900);
 
     });
+
+    function openStory(story) {
+    const modal = document.getElementById("storyModal");
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+    }
+
+    function closeStory() {
+    const modal = document.getElementById("storyModal");
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+    }
+
+    lucide.createIcons();
 
 </script>
 </body>
