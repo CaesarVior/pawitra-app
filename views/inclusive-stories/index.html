@@ -389,6 +389,51 @@
             align-items: center;
             gap: 10px;
         }
+        /* --- AKSESIBILITAS: MODE DISLEKSIA --- */
+        body.dyslexia-mode,
+        body.dyslexia-mode * {
+            font-family: 'Arial', sans-serif !important;
+            letter-spacing: 0.12em !important;
+            word-spacing: 0.3em !important;
+            line-height: 1.8 !important;
+        }
+
+        /* --- AKSESIBILITAS: MODE BUTA WARNA (COLORBLIND FRIENDLY / HIGH CONTRAST) --- */
+        body.colorblind-mode {
+            background-color: #0A192F !important; /* Latar biru tua gelap yang sangat kontras */
+            background-image: none !important;
+            color: #E6F1FF !important;
+        }
+        body.colorblind-mode [class*="bg-white"],
+        body.colorblind-mode [class*="bg-[#"],
+        body.colorblind-mode [class*="bg-brand-bg"] {
+            background-color: #112240 !important;
+            border-color: #64FFDA !important;
+        }
+        body.colorblind-mode p,
+        body.colorblind-mode li,
+        body.colorblind-mode span:not(.text-brand-gold):not(.text-brand-accent) {
+            color: #CCD6F6 !important;            /* Teks putih kebiruan terang */
+        }
+        body.colorblind-mode h1, 
+        body.colorblind-mode h2, 
+        body.colorblind-mode h3, 
+        body.colorblind-mode h4,
+        body.colorblind-mode strong {
+            color: #64FFDA !important;            /* Judul berubah menjadi Cyan Cerah agar mudah dibaca */
+        }
+        body.colorblind-mode nav {
+            background-color: rgba(10, 25, 47, 0.95) !important;
+            border-bottom-color: #64FFDA !important;
+        }
+        body.colorblind-mode .bg-brand-dark {
+            background-color: #1D3557 !important;
+            border: 2px solid #FFD166 !important;  /* Border kuning emas terang */
+        }
+        body.colorblind-mode .text-brand-gold,
+        body.colorblind-mode .text-brand-dark {
+            color: #FFD166 !important;            /* Aksen warna kuning emas mencolok */
+        }
     </style>
 </head>
 <body class="bg-pattern text-brand-dark font-sans antialiased flex flex-col min-h-screen relative">
@@ -645,7 +690,39 @@
             </div>
         </div>
     </footer>
+    <!-- FLOATING ACCESSIBILITY BUTTON -->
+    <div class="fixed bottom-6 right-6 z-[100] flex flex-col items-end">
+        <!-- Menu Popup -->
+        <div id="a11yMenu" class="hidden mb-4 bg-white rounded-2xl shadow-2xl p-5 border border-brand-gold/30 w-64 transform transition-all duration-300 origin-bottom-right">
+            <h4 class="text-sm font-bold font-serif mb-4 text-brand-dark border-b border-gray-100 pb-2 flex items-center gap-2">
+                <svg class="w-4 h-4 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                Aksesibilitas
+            </h4>
+            
+            <!-- Toggle Mode Disleksia -->
+            <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-semibold text-gray-700">Mode Disleksia</span>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="dyslexiaToggle" class="sr-only peer">
+                    <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-accent"></div>
+                </label>
+            </div>
+            
+            <!-- Toggle Mode Buta Warna -->
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold text-gray-700">Mode Buta Warna</span>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="colorblindToggle" class="sr-only peer">
+                    <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-accent"></div>
+                </label>
+            </div>
+        </div>
 
+        <!-- Tombol Utama (FAB) -->
+        <button id="a11yBtn" class="w-14 h-14 bg-brand-dark text-brand-gold rounded-full shadow-[0_10px_25px_rgba(0,0,0,0.3)] flex items-center justify-center hover:scale-105 hover:bg-brand-accent hover:text-white transition-all duration-300 focus:outline-none ring-4 ring-white/50 group">
+            <svg class="w-7 h-7 group-hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+        </button>
+    </div>
 <script>
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -750,7 +827,34 @@
     }
 
     lucide.createIcons();
+                    // Logika Aksesibilitas (Floating Button)
+        const a11yBtn = document.getElementById('a11yBtn');
+        const a11yMenu = document.getElementById('a11yMenu');
+        const dyslexiaToggle = document.getElementById('dyslexiaToggle');
+        const colorblindToggle = document.getElementById('colorblindToggle');
 
+        // Buka/Tutup Menu
+        a11yBtn.addEventListener('click', () => {
+            a11yMenu.classList.toggle('hidden');
+        });
+
+        // Toggle Disleksia
+        dyslexiaToggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                document.body.classList.add('dyslexia-mode');
+            } else {
+                document.body.classList.remove('dyslexia-mode');
+            }
+        });
+
+        // Toggle Mode Buta Warna
+        colorblindToggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                document.body.classList.add('colorblind-mode');
+            } else {
+                document.body.classList.remove('colorblind-mode');
+            }
+        });
 </script>
 </body>
 </html>
