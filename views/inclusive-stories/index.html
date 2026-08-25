@@ -296,7 +296,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 20px 0 0 20px;
+            border-radius: 20px;
         }
 
         .reader-content {
@@ -370,10 +370,17 @@
             padding: 10px;
         }
 
-        .reader-button{
+        .reader-left {
             display: flex;
+            flex-direction: column;
+        }
+
+        .reader-button{
+            display: inline-flex;
             top: 15px;
             right: 15px;
+            padding: 5px;
+            margin: 7px;
 
             border-radius: 10px;
             border: 1px solid #c9953c;
@@ -389,7 +396,19 @@
             align-items: center;
             gap: 10px;
         }
-    </style>
+
+        .dyslexia-text {
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            line-height: 2;
+            letter-spacing: 0.5px;
+            word-spacing: 3px;
+        }
+
+        .dyslexia-text p {
+            margin-bottom: 20px;
+        }
+</style>
 </head>
 <body class="bg-pattern text-brand-dark font-sans antialiased flex flex-col min-h-screen relative">
     <!-- LUXURY LOADING SCREEN -->
@@ -491,7 +510,7 @@
                 <p class="text-sm text-gray-500 mt-1 line-clamp-2">Kisah gadis pemberani yang melarikan diri dari kejaran raksasa.</p>
             </div>
             
-            <div class="kamus-item bg-brand-card rounded-3xl p-4 card-hover cursor-pointer border border-gray-100 shadow-sm">
+            <div class="kamus-item bg-brand-card rounded-3xl p-4 card-hover cursor-pointer border border-gray-100 shadow-sm" onclick="openStory('roroJonggrang')">
                 <div class="w-full aspect-square bg-gray-200 rounded-2xl mb-4 overflow-hidden relative group">
                     <img src="cover-roro.png" alt="Roro" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" style="object-fit: fill;">
                     <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -504,7 +523,7 @@
                 <p class="text-sm text-gray-500 mt-1 line-clamp-2">Kisah seorang putri dan Bandung Bondowoso yang berkaitan dengan legenda Candi Prambanan.</p>
             </div>
 
-            <div class="kamus-item bg-brand-card rounded-3xl p-4 card-hover cursor-pointer border border-gray-100 shadow-sm">
+            <div class="kamus-item bg-brand-card rounded-3xl p-4 card-hover cursor-pointer border border-gray-100 shadow-sm" onclick="openStory('siKancil')">
                 <div class="w-full aspect-square bg-gray-200 rounded-2xl mb-4 overflow-hidden relative group">
                     <img src="cover-kancil.png" alt="Kancil" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" style="object-fit: fill;">
                     <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -517,7 +536,7 @@
                 <p class="text-sm text-gray-500 mt-1 line-clamp-2">Kisah seekor kancil yang dikenal cerdik dan selalu menemukan cara untuk keluar dari berbagai masalah.</p>
             </div>
 
-            <div class="kamus-item bg-brand-card rounded-3xl p-4 card-hover cursor-pointer border border-gray-100 shadow-sm">
+            <div class="kamus-item bg-brand-card rounded-3xl p-4 card-hover cursor-pointer border border-gray-100 shadow-sm" onclick="openStory('ajiSaka')">
                 <div class="w-full aspect-square bg-gray-200 rounded-2xl mb-4 overflow-hidden relative group">
                     <img src="cover-aji.png" alt="Aji" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" style="object-fit: fill;">
                     <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -535,71 +554,97 @@
 
     <!-- MODAL -->
     <div id="storyModal" class="story-modal">
+        <div class="story-reader">
+            <button
+                class="close-button"
+                onclick="closeStory()"
+            >
+                ×
+            </button>
 
-    <div class="story-reader">
+            <div class="reader-left">
+                <div class="reader-image">
 
-        <button class="close-button" onclick="closeStory()">
-            ×
-        </button>
+                    <img
+                        id="storyImage"
+                        src=""
+                        alt=""
+                    >
 
-        <div class="reader-image">
-            <img id="storyImage" src="cover-timunmas.png">
-        </div>
+                </div>
 
-        <div class="reader-content">
+                
+                <div class="reader-tools">
 
-            <span id="storyCategory">
-                CERITA RAKYAT
-            </span>
+                    <button class="reader-button">
+                        <i
+                            data-lucide="volume-2"
+                            class="w-4 h-4"
+                        ></i>
 
-            <h2 id="storyTitle">
-                Timun Mas
-            </h2>
+                        <span>Dengarkan</span>
+                    </button>
+
+
+                    <button class="reader-button">
+
+                        <i
+                            data-lucide="hand"
+                            class="w-4 h-4"
+                        ></i>
+
+                        <span>BISINDO</span>
+
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="reader-content">
+
+                <span id="storyCategory">
+                    CERITA RAKYAT JAWA
+                </span>
+
+                <h2 id="storyTitle">
+                    Timun Mas
+                </h2>
+
 
             <div class="reader-tabs">
 
-                <button class="active">
+                <button
+                    class="active"
+                    onclick="showIndonesia(this)"
+                >
                     Indonesia
                 </button>
 
-                <button>
+                <button
+                    onclick="showAksaraJawa(this)"
+                >
                     Aksara Jawa
                 </button>
 
-                <button>
+                <button
+                    onclick="showDyslexia(this)"
+                >
                     Ramah Disleksia
                 </button>
 
             </div>
 
-            <div class="story-text" id="storyText">
 
-                <p style="color: #F8F7F4;">
-                    Pada zaman dahulu, hiduplah seorang
-                    gadis bernama Timun Mas... 
-                    Ia tinggal bersama ibunya di sebuah
-                    desa yang damai.
-                </p>
-
+                <div
+                    class="story-text"
+                    id="storyText"
+                    style="color: #EFECE6;"
+                >
+                    <!-- Isi cerita akan dimasukkan JavaScript -->
+                </div>
             </div>
         </div>
-
-        <div class="reader-tools flex gap-3">
-
-            <button class="reader-button flex-1 flex items-center justify-center gap-2">
-                <i data-lucide="volume-2" class="w-4 h-4"></i>
-                <span>Dengarkan</span>
-            </button>
-
-            <button class="reader-button flex-1 flex items-center justify-center gap-2">
-                <i data-lucide="hand" class="w-4 h-4"></i>
-                <span>BISINDO</span>
-            </button>
-
-        </div>
-        
     </div>
-</div>
     
 
     <!-- Footer Section (Ditambah class reveal) -->
@@ -737,16 +782,201 @@
 
     });
 
+    let currentStory = "";
+    
     function openStory(story) {
-    const modal = document.getElementById("storyModal");
-    modal.style.display = "flex";
-    document.body.style.overflow = "hidden";
+
+        currentStory = story;
+
+        const modal = document.getElementById("storyModal");
+        const data = stories[story];
+
+        if (!data) return;
+
+        document.getElementById("storyTitle").textContent =
+            data.title;
+
+        document.getElementById("storyCategory").textContent =
+            data.category;
+
+        document.getElementById("storyImage").src =
+            data.image;
+
+        const storyText = document.getElementById("storyText");
+
+        storyText.innerHTML = data.indonesia;
+        storyText.classList.remove("dyslexia-text");
+
+        // Reset tab
+        const tabs = document.querySelectorAll(".reader-tabs button");
+
+        tabs.forEach((tab, index) => {
+            tab.classList.toggle("active", index === 0);
+        });
+
+        modal.style.display = "flex";
+
+        document.body.style.overflow = "hidden";
     }
 
     function closeStory() {
     const modal = document.getElementById("storyModal");
     modal.style.display = "none";
     document.body.style.overflow = "auto";
+    }
+
+    const stories = {
+
+        timunMas: {
+            title: "Timun Mas",
+            category: "CERITA RAKYAT JAWA",
+            description: "Kisah gadis pemberani yang melarikan diri dari kejaran raksasa.",
+            image: "cover-timunmas.png",
+
+            indonesia: `
+                <p>
+                    Pada zaman dahulu, hiduplah seorang gadis
+                    bernama Timun Mas bersama ibunya.
+                </p>
+
+                <p>
+                    Timun Mas dikenal sebagai gadis yang
+                    pemberani dan baik hati.
+                </p>
+            `,
+
+            aksaraJawa: `
+                <p>
+                    ꦥꦢ ꦗꦩꦤ꧀ ꦢꦲꦸꦭꦸ꧈
+                </p>
+            `,
+
+            audio: "audio/timun-mas.mp3",
+            bisindo: "video/timun-mas-bisindo.mp4"
+        },
+
+
+        roroJonggrang: {
+            title: "Roro Jonggrang",
+            category: "LEGENDA JAWA",
+            description: "Kisah seorang putri dan legenda Candi Prambanan.",
+
+            image: "cover-roro.png",
+
+            indonesia: `
+                <p>
+                    Pada zaman dahulu, hiduplah seorang putri
+                    bernama Roro Jonggrang.
+                </p>
+            `,
+
+            aksaraJawa: `
+                <p>
+                    ꦫꦺꦴꦫꦺꦴ ꦗꦺꦴꦁꦒꦿꦁ
+                </p>
+            `,
+
+            audio: "audio/roro-jonggrang.mp3",
+            bisindo: "video/roro-jonggrang-bisindo.mp4"
+        },
+
+
+        siKancil: {
+            title: "Si Kancil",
+            category: "DONGENG NUSANTARA",
+            description: "Kisah kancil yang cerdik menghadapi berbagai masalah.",
+
+            image: "cover-kancil.png",
+
+            indonesia: `
+                <p>
+                    Pada suatu hari, Si Kancil berjalan
+                    menyusuri hutan.
+                </p>
+            `,
+
+            aksaraJawa: `
+                <p>
+                    ꦱꦶ ꦏꦚ꧀ꦕꦶꦭ꧀
+                </p>
+            `,
+
+            audio: "audio/si-kancil.mp3",
+            bisindo: "video/si-kancil-bisindo.mp4"
+        },
+
+
+        ajiSaka: {
+            title: "Aji Saka",
+            category: "LEGENDA JAWA",
+            description: "Kisah yang berkaitan dengan legenda Aksara Jawa.",
+
+            image: "cover-aji.png",
+
+            indonesia: `
+                <p>
+                    Aji Saka merupakan tokoh yang dikenal
+                    dalam legenda masyarakat Jawa.
+                </p>
+            `,
+
+            aksaraJawa: `
+                <p>
+                    ꦄꦗꦶ ꦱꦏ
+                </p>
+            `,
+
+            audio: "audio/aji-saka.mp3",
+            bisindo: "video/aji-saka-bisindo.mp4"
+        }
+
+    };
+
+    function showIndonesia(button) {
+
+        const data = stories[currentStory];
+
+        const storyText = document.getElementById("storyText");
+
+        storyText.innerHTML = data.indonesia;
+        storyText.classList.remove("dyslexia-text");
+
+        setActiveTab(button);
+    }
+
+    function showAksaraJawa(button) {
+
+        const data = stories[currentStory];
+
+        const storyText = document.getElementById("storyText");
+
+        storyText.innerHTML = data.aksaraJawa;
+        storyText.classList.remove("dyslexia-text");
+
+        setActiveTab(button);
+    }
+
+    function showDyslexia(button) {
+
+        const data = stories[currentStory];
+
+        const storyText = document.getElementById("storyText");
+
+        storyText.innerHTML = data.indonesia;
+        storyText.classList.add("dyslexia-text");
+
+        setActiveTab(button);
+    }
+
+    function setActiveTab(button) {
+
+        const buttons = document.querySelectorAll(".reader-tabs button");
+
+        buttons.forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
     }
 
     lucide.createIcons();
