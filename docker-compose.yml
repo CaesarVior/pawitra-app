@@ -1,0 +1,14 @@
+services:
+  pawitra-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pawitra_container
+    restart: always
+    ports:
+      - "8011:80"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8011/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
