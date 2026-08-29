@@ -6,6 +6,7 @@ pipeline {
         CONTAINER_NAME = "pawitra_container"
         IMAGE_TAG = "pawitra-app:${BUILD_NUMBER}"
         LATEST_TAG = "pawitra-app:latest"
+        APP_PORT = "8011"
     }
 
     stages {
@@ -17,8 +18,8 @@ pipeline {
 
         stage('Lint & Validate') {
             steps {
-                echo "Checking required files..."
-                sh 'test -f index.html || (echo "index.html not found!" && exit 1)'
+                echo "Checking required files and directories..."
+                sh 'test -f views/home/index.html || (echo "views/home/index.html not found!" && exit 1)'
                 sh 'test -f Dockerfile || (echo "Dockerfile not found!" && exit 1)'
             }
         }
@@ -32,7 +33,7 @@ pipeline {
 
         stage('Deploy Container') {
             steps {
-                echo "Deploying ${env.CONTAINER_NAME} using Docker Compose..."
+                echo "Deploying ${env.CONTAINER_NAME} on port ${env.APP_PORT}..."
                 sh 'docker compose down || true'
                 sh 'docker compose up -d --build'
             }
@@ -40,9 +41,9 @@ pipeline {
 
         stage('Health Check') {
             steps {
-                echo "Checking container health..."
+                echo "Checking application health on port ${env.APP_PORT}..."
                 sleep 5
-                sh "docker ps | grep ${env.CONTAINER_NAME}"
+                sh "curl -f http://localhost:${env.APP_PORT} || exit 1"
             }
         }
     }
@@ -53,10 +54,10 @@ pipeline {
             sh 'docker image prune -f'
         }
         success {
-            echo "Deployment successfully completed for ${env.APP_NAME}!"
+            echo "Deployment successful! Access app at http://localhost:${env.APP_PORT}"
         }
         failure {
-            echo "Deployment failed! Please check logs."
+            echo "Deployment failed! Check Jenkins console output for details."
         }
     }
 }
