@@ -1,112 +1,107 @@
-    <!DOCTYPE html>
-    <html lang="id">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Jelajah Budaya - Pawitra</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        fontFamily: {
-                            serif: ['"Playfair Display"', 'serif'],
-                            sans: ['Inter', 'sans-serif'],
-                        },
-                        colors: {
-                            brand: {
-                                bg: '#F8F7F4', // Background utama website kembali terang bersih
-                                dark: '#2C3029', 
-                                accent: '#4C5946', 
-                                gold: '#d4af37',
-                                card: '#FFFFFF'
-                            }
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jelajah Budaya - Pawitra</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            bg: '#F8F7F4', 
+                            dark: '#2C3029', 
+                            accent: '#4C5946', 
+                            gold: '#d4af37',
+                            card: '#FFFFFF'
                         }
                     }
                 }
             }
-        </script>
-        <style>
-            @keyframes ping-slow {
-                75%, 100% { transform: scale(1.8); opacity: 0; }
-            }
-            .animate-ping-slow { animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
-            
-            .fade-in { animation: fadeIn 0.5s ease-in-out forwards; }
-            @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        }
+    </script>
+    <style>
+        @keyframes ping-slow {
+            75%, 100% { transform: scale(1.8); opacity: 0; }
+        }
+        .animate-ping-slow { animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
+        
+        .fade-in { animation: fadeIn 0.5s ease-in-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-            @keyframes float {
-                0% { transform: translateY(0px); }
-                50% { transform: translateY(-15px); }
-                100% { transform: translateY(0px); }
-            }
-            .animate-float { animation: float 4s ease-in-out infinite; }
-            
-            @keyframes spinSlow {
-                from { transform: rotate(0deg); }
-                to { transform: rotate(360deg); }
-            }
-            .animate-spin-slow { animation: spinSlow 12s linear infinite; }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+        
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow { animation: spinSlow 12s linear infinite; }
 
-            @keyframes marquee {
-                0% { transform: translateX(0); }
-                100% { transform: translateX(-50%); }
-            }
-            @keyframes marquee-reverse {
-                0% { transform: translateX(-50%); }
-                100% { transform: translateX(0); }
-            }
-            .animate-marquee { display: inline-block; white-space: nowrap; animation: marquee 30s linear infinite; }
-            .animate-marquee-reverse { display: inline-block; white-space: nowrap; animation: marquee-reverse 35s linear infinite; }
+        /* --- ANIMASI MARQUEE DIPERCEPAT & SEAMLESS --- */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes marquee-reverse {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0%); }
+        }
+        .animate-marquee { display: inline-flex; white-space: nowrap; animation: marquee 16s linear infinite; }
+        .animate-marquee-reverse { display: inline-flex; white-space: nowrap; animation: marquee-reverse 18s linear infinite; }
 
-            .reveal {
-                opacity: 0;
-                transform: translateY(40px);
-                transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-            .reveal.active {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-            #loader {
-                position: fixed;
-                inset: 0;
-                background-color: #1a1c18;
-                z-index: 9999;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                transition: opacity 0.8s ease, visibility 0.8s ease;
-            }
-            #loader.fade-out {
-                opacity: 0;
-                visibility: hidden;
-            }
-            @keyframes lineGrow {
-                0% { width: 0%; }
-                100% { width: 100%; }
-            }
-            .loader-line { 
-                animation: lineGrow 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards; 
-            }
+        #loader {
+            position: fixed;
+            inset: 0;
+            background-color: #1a1c18;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #loader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
 
-            /* Background Pattern Standar untuk Body */
-            .bg-pattern {
-                background-image: radial-gradient(#d4af37 1px, transparent 1px);
-                background-size: 30px 30px;
-                background-color: #F8F7F4;
-            }
+        /* Background Pattern Standar untuk Body */
+        .bg-pattern {
+            background-image: radial-gradient(#d4af37 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-color: #F8F7F4;
+        }
 
-            /* Background Khusus Header (Cokelat Hangat dengan Pola Lembut) */
-            .header-warm-bg {
-                background-image: radial-gradient(#c2a878 1.2px, transparent 1.2px);
-                background-size: 32px 32px;
-                background-color: #EFECE6; /* Warna cokelat muda hangat khusus header */
-            }
-                    /* --- AKSESIBILITAS: MODE DISLEKSIA --- */
+        /* Background Khusus Header */
+        .header-warm-bg {
+            background-image: radial-gradient(#c2a878 1.2px, transparent 1.2px);
+            background-size: 32px 32px;
+            background-color: #EFECE6; 
+        }
+
+        /* --- AKSESIBILITAS: MODE DISLEKSIA --- */
         body.dyslexia-mode,
         body.dyslexia-mode * {
             font-family: 'Arial', sans-serif !important;
@@ -117,315 +112,327 @@
 
         /* --- AKSESIBILITAS: MODE BUTA WARNA (COLORBLIND FRIENDLY / HIGH CONTRAST) --- */
         body.colorblind-mode {
-            background-color: #0A192F !important; /* Latar biru tua gelap yang sangat kontras */
+            background-color: #0A192F !important;
             background-image: none !important;
             color: #E6F1FF !important;
         }
         body.colorblind-mode [class*="bg-white"],
         body.colorblind-mode [class*="bg-[#"],
-        body.colorblind-mode [class*="bg-brand-bg"] {
+        body.colorblind-mode [class*="bg-brand-bg"],
+        body.colorblind-mode .header-warm-bg {
             background-color: #112240 !important;
             border-color: #64FFDA !important;
+            background-image: none !important;
         }
         body.colorblind-mode p,
         body.colorblind-mode li,
         body.colorblind-mode span:not(.text-brand-gold):not(.text-brand-accent) {
-            color: #CCD6F6 !important;            /* Teks putih kebiruan terang */
+            color: #CCD6F6 !important;            
         }
         body.colorblind-mode h1, 
         body.colorblind-mode h2, 
         body.colorblind-mode h3, 
         body.colorblind-mode h4,
         body.colorblind-mode strong {
-            color: #64FFDA !important;            /* Judul berubah menjadi Cyan Cerah agar mudah dibaca */
+            color: #64FFDA !important;            
         }
-        body.colorblind-mode nav {
+        body.colorblind-mode nav,
+        body.colorblind-mode #mobileMenu {
             background-color: rgba(10, 25, 47, 0.95) !important;
             border-bottom-color: #64FFDA !important;
         }
+        body.colorblind-mode nav a,
+        body.colorblind-mode #mobileMenu a,
+        body.colorblind-mode nav button,
+        body.colorblind-mode nav span {
+            color: #E6F1FF !important;
+        }
+        body.colorblind-mode nav a:hover,
+        body.colorblind-mode #mobileMenu a:hover,
+        body.colorblind-mode nav a.text-brand-accent,
+        body.colorblind-mode #mobileMenu a.text-brand-accent {
+            color: #FFD166 !important;
+            border-bottom-color: #FFD166 !important;
+        }
         body.colorblind-mode .bg-brand-dark {
             background-color: #1D3557 !important;
-            border: 2px solid #FFD166 !important;  /* Border kuning emas terang */
+            border: 2px solid #FFD166 !important;  
         }
         body.colorblind-mode .text-brand-gold,
         body.colorblind-mode .text-brand-dark {
-            color: #FFD166 !important;            /* Aksen warna kuning emas mencolok */
+            color: #FFD166 !important;            
         }
-        </style>
-    </head>
-    <body class="bg-pattern text-brand-dark font-sans antialiased flex flex-col min-h-screen relative">
+    </style>
+</head>
+<body class="bg-pattern text-brand-dark font-sans antialiased flex flex-col min-h-screen relative">
 
-        <!-- LUXURY LOADING SCREEN -->
-        <div id="loader">
-            <div class="text-center space-y-4 px-6">
-                <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#d4af37] tracking-wider">Pawitra<span class="text-white">.</span></h1>
-                <p class="text-xs text-gray-400 uppercase tracking-widest font-light">Menyiapkan Ruang Eksplorasi...</p>
-                <div class="w-48 h-[2px] bg-white/10 mx-auto rounded-full overflow-hidden mt-6">
-                    <div id="loader-progress" class="h-full bg-[#d4af37] w-0 transition-all duration-1000"></div>
-                </div>
+    <div id="loader">
+        <div class="text-center space-y-4 px-6">
+            <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#d4af37] tracking-wider">Pawitra<span class="text-white">.</span></h1>
+            <p class="translate-text text-xs text-gray-400 uppercase tracking-widest font-light" data-id="Menyiapkan Ruang Eksplorasi..." data-jv="Nyiyapake Ruang Eksplorasi...">Menyiapkan Ruang Eksplorasi...</p>
+            <div class="w-48 h-[2px] bg-white/10 mx-auto rounded-full overflow-hidden mt-6">
+                <div id="loader-progress" class="h-full bg-[#d4af37] w-0 transition-all duration-1000"></div>
             </div>
         </div>
+    </div>
 
-        <!-- Navbar -->
-        <nav class="fixed top-0 left-0 w-full z-50 bg-[#EFECE6]/90 backdrop-blur-md border-b border-gray-300/40">
-            <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative">
-                <div class="flex items-center gap-2">
-                    <span class="font-serif text-2xl font-bold tracking-wide">Pawitra<span class="text-brand-accent">.</span></span>
-                </div>
-                <div class="hidden lg:flex items-center space-x-8 text-sm font-medium text-gray-700">
-                    <a href="../home/index.html" class="hover:text-brand-accent transition">Home</a>
-                    <a href="../glossary/index.html" class="hover:text-brand-accent transition">Glossary</a>
-                    <a href="../about/index.html" class="hover:text-brand-accent transition">About</a>
-                    <a href="index.html" class="border-b-2 border-brand-accent pb-1 text-brand-accent font-bold transition">Cultural Exploration</a>
-                    <a href="../inclusive-stories/index.html" class="hover:text-brand-accent transition">Inclusive Stories</a>
-                </div>
-                <div class="hidden lg:block">
-                    <a href="#eksplorasi" class="bg-brand-dark text-white px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide hover:bg-brand-accent transition">Mulai Interaksi</a>
-                </div>
+    <nav class="fixed top-0 left-0 w-full z-50 bg-brand-bg/90 backdrop-blur-md border-b border-gray-200/50 transition-colors">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative">
+            <div class="flex items-center gap-2">
+                <span class="font-serif text-2xl font-bold tracking-wide text-brand-dark">Pawitra<span class="text-brand-accent">.</span></span>
             </div>
-        </nav>
-
-        <!-- Header Section (Fullscreen dengan Background Cokelat Hangat) -->
-        <header class="min-h-screen flex flex-col justify-center items-center relative overflow-hidden pt-20 pb-16 header-warm-bg border-b border-gray-300/40">
-            <div class="max-w-5xl mx-auto px-6 text-center relative z-10 reveal">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-gold/50 bg-brand-gold/10 text-brand-gold text-xs font-bold tracking-widest uppercase mb-6 shadow-sm animate-float">
-                    <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-brand-gold"></span></span>
-                    Eksplorasi Audio Visual
-                </div>
-                
-                <h1 class="font-serif text-5xl md:text-8xl font-black text-brand-dark mb-6 tracking-tight relative inline-block">
-                    Suara dari Masa Lalu<span class="text-brand-gold">.</span>
-                    <svg class="absolute -top-6 -right-10 w-12 h-12 text-brand-gold/60 animate-spin-slow" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0l2.5 9.5L24 12l-9.5 2.5L12 24l-2.5-9.5L0 12l9.5-2.5z"/></svg>
-                </h1>
-                
-                <p class="text-gray-700 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed mb-10 font-light">
-                    Setiap ketukan membawa cerita. Kenali harmoni Gamelan Jawa, pelajari peran setiap instrumen, dan dengarkan bagaimana mereka bersatu menciptakan kedamaian.
-                </p>
-
-                <a href="#eksplorasi" class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-brand-dark text-white hover:bg-brand-accent transition shadow-lg animate-bounce">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
-                </a>
+            <div class="hidden lg:flex items-center space-x-8 text-sm font-medium text-gray-700">
+                <a href="../home/" class="translate-text hover:text-brand-accent transition" data-id="Beranda" data-jv="Omah">Beranda</a>
+                <a href="../glossary/" class="translate-text hover:text-brand-accent transition" data-id="Glosarium" data-jv="Bausastra">Glosarium</a>
+                <a href="../about/" class="translate-text hover:text-brand-accent transition" data-id="Tentang Kami" data-jv="Babagan">Tentang Kami</a>
+                <a href="../cultural-exploration" class="translate-text border-b-2 border-brand-accent pb-1 text-brand-accent font-bold transition" data-id="Eksplorasi Budaya" data-jv="Jlajah Budaya">Eksplorasi Budaya</a>
+                <a href="../inclusive-stories" class="translate-text hover:text-brand-accent transition" data-id="Cerita Rakyat" data-jv="Crita Inklusif">Cerita Rakyat</a>
             </div>
-        </header>
-
-        <!-- Marquee Section -->
-        <div class="space-y-2 py-4 bg-brand-dark border-y-4 border-brand-gold overflow-hidden relative shadow-inner">
-            <div class="animate-marquee whitespace-nowrap text-brand-gold text-xs md:text-sm font-bold tracking-widest uppercase">
-                <span>✦ TAHUKAH KAMU? Gamelan berasal dari kata 'Gamel' yang berarti memukul atau menabuh.</span>
-                <span class="mx-8">✦</span>
-                <span>Dipercaya telah ada sejak abad ke-8 masehi di tanah Jawa.</span>
-                <span class="mx-8">✦</span>
-                <span>Gamelan Ageng memiliki lebih dari 20 instrumen berbeda.</span>
-                <span class="mx-8">✦</span>
-                <span>Unesco menetapkan Gamelan sebagai Warisan Budaya Takbenda pada 2021.</span>
-                <span class="mx-8">✦</span>
-                <span>TAHUKAH KAMU? Gamelan berasal dari kata 'Gamel' yang berarti memukul atau menabuh.</span>
-                <span class="mx-8">✦</span>
-                <span>Dipercaya telah ada sejak abad ke-8 masehi di tanah Jawa.</span>
-                <span class="mx-8">✦</span>
-                <span>Gamelan Ageng memiliki lebih dari 20 instrumen berbeda.</span>
-                <span class="mx-8">✦</span>
-                <span>Unesco menetapkan Gamelan sebagai Warisan Budaya Takbenda pada 2021.</span>
-                <span class="mx-8">✦</span>
+            <div class="hidden lg:block">
+                <a href="#eksplorasi" class="translate-text bg-brand-dark text-white px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide hover:bg-brand-accent transition" data-id="Mulai Belajar" data-jv="Ayo Sinau">Mulai Belajar</a>
             </div>
-
-            <div class="animate-marquee-reverse whitespace-nowrap text-white/80 text-xs md:text-sm font-medium tracking-widest uppercase">
-                <span>🎵 Laras Slendro (5 Nada) & Laras Pelog (7 Nada) 🎵</span>
-                <span class="mx-8">•</span>
-                <span>Harmoni Karawitan Jawa Klasik</span>
-                <span class="mx-8">•</span>
-                <span>Simbol Keselarasan Alam dan Jiwa Manusia</span>
-                <span class="mx-8">•</span>
-                <span>Warisan Luhur Nusantara untuk Dunia</span>
-                <span class="mx-8">•</span>
-                <span>Laras Slendro (5 Nada) & Laras Pelog (7 Nada)</span>
-                <span class="mx-8">•</span>
-                <span>Harmoni Karawitan Jawa Klasik</span>
-                <span class="mx-8">•</span>
-                <span>Simbol Keselarasan Alam dan Jiwa Manusia</span>
-                <span class="mx-8">•</span>
-                <span>Warisan Luhur Nusantara untuk Dunia</span>
-                <span class="mx-8">•</span>
+            <button id="mobileMenuBtn" class="lg:hidden text-brand-dark focus:outline-none hover:text-brand-accent transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <div id="mobileMenu" class="hidden lg:hidden px-6 pb-6 pt-2 bg-brand-bg border-t border-gray-200/60 mt-4 absolute w-full transition-colors">
+            <div class="flex flex-col space-y-4 text-sm font-medium text-gray-700">
+                <a href="../home/" class="translate-text hover:text-brand-accent" data-id="Beranda" data-jv="Omah">Beranda</a>
+                <a href="../glossary/" class="translate-text hover:text-brand-accent" data-id="Glosarium" data-jv="Bausastra">Glosarium</a>
+                <a href="../about/" class="translate-text hover:text-brand-accent" data-id="Tentang Kami" data-jv="Babagan">Tentang Kami</a>
+                <a href="../cultural-exploration" class="translate-text text-brand-accent font-bold" data-id="Eksplorasi Budaya" data-jv="Jlajah Budaya">Eksplorasi Budaya</a>
+                <a href="../inclusive-stories" class="translate-text hover:text-brand-accent" data-id="Cerita Rakyat" data-jv="Crita Inklusif">Cerita Rakyat</a>
             </div>
         </div>
+    </nav>
 
-        <!-- Interactive Workspace Section -->
-        <section id="eksplorasi" class="max-w-7xl mx-auto px-6 py-24 w-full relative">
-            <div class="text-center mb-12 reveal">
-                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-dark">Ruang Interaktif</h2>
-                <div class="w-16 h-1 bg-brand-gold mx-auto mt-4 rounded-full"></div>
+    <header class="min-h-screen flex flex-col justify-center items-center relative overflow-hidden pt-20 pb-16 header-warm-bg border-b border-gray-300/40">
+        <div class="max-w-5xl mx-auto px-6 text-center relative z-10 reveal">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-gold/50 bg-brand-gold/10 text-brand-gold text-xs font-bold tracking-widest uppercase mb-6 shadow-sm animate-float">
+                <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-brand-gold"></span></span>
+                <span class="translate-text" data-id="Eksplorasi Audio Visual" data-jv="Eksplorasi Audio Visual">Eksplorasi Audio Visual</span>
+            </div>
+            
+            <h1 class="translate-text font-serif text-5xl md:text-8xl font-black text-brand-dark mb-6 tracking-tight relative inline-block"
+                data-id="Suara dari Masa Lalu<span class='text-brand-gold'>.</span>"
+                data-jv="Swara saka Biyen<span class='text-brand-gold'>.</span>">
+                Suara dari Masa Lalu<span class="text-brand-gold">.</span>
+            </h1>
+            
+            <p class="translate-text text-gray-700 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed mb-10 font-light"
+               data-id="Setiap ketukan membawa cerita. Kenali harmoni Gamelan Jawa, pelajari peran setiap instrumen, dan dengarkan bagaimana mereka bersatu menciptakan kedamaian."
+               data-jv="Saben tetukan nggawa crita. Kenali harmoni Gamelan Jawa, sinau peran saben piranti, lan rungokake kepiye padha manunggal nggawe katentreman.">
+                Setiap ketukan membawa cerita. Kenali harmoni Gamelan Jawa, pelajari peran setiap instrumen, dan dengarkan bagaimana mereka bersatu menciptakan kedamaian.
+            </p>
+
+            <a href="#eksplorasi" class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-brand-dark text-white hover:bg-brand-accent transition shadow-lg animate-bounce">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="space-y-2 py-4 bg-brand-dark border-y-4 border-brand-gold overflow-hidden relative shadow-inner flex">
+        <div class="animate-marquee text-brand-gold text-xs md:text-sm font-bold tracking-widest uppercase shrink-0">
+            <span class="mx-6">✦ TAHUKAH KAMU? Gamelan berasal dari kata 'Gamel' yang berarti memukul atau menabuh.</span>
+            <span class="mx-6">✦ Dipercaya telah ada sejak abad ke-8 masehi di tanah Jawa.</span>
+            <span class="mx-6">✦ Gamelan Ageng memiliki lebih dari 20 instrumen berbeda.</span>
+            <span class="mx-6">✦ Unesco menetapkan Gamelan sebagai Warisan Budaya Takbenda pada 2021.</span>
+        </div>
+        <div class="animate-marquee text-brand-gold text-xs md:text-sm font-bold tracking-widest uppercase shrink-0" aria-hidden="true">
+            <span class="mx-6">✦ TAHUKAH KAMU? Gamelan berasal dari kata 'Gamel' yang berarti memukul atau menabuh.</span>
+            <span class="mx-6">✦ Dipercaya telah ada sejak abad ke-8 masehi di tanah Jawa.</span>
+            <span class="mx-6">✦ Gamelan Ageng memiliki lebih dari 20 instrumen berbeda.</span>
+            <span class="mx-6">✦ Unesco menetapkan Gamelan sebagai Warisan Budaya Takbenda pada 2021.</span>
+        </div>
+    </div>
+
+    <div class="space-y-2 py-4 bg-brand-dark border-y-4 border-brand-gold overflow-hidden relative shadow-inner flex">
+        <div class="animate-marquee-reverse text-white/80 text-xs md:text-sm font-medium tracking-widest uppercase shrink-0">
+            <span class="mx-6">🎵 Laras Slendro (5 Nada) & Laras Pelog (7 Nada)</span>
+            <span class="mx-6">• Harmoni Karawitan Jawa Klasik</span>
+            <span class="mx-6">• Simbol Keselarasan Alam dan Jiwa Manusia</span>
+            <span class="mx-6">• Warisan Luhur Nusantara untuk Dunia</span>
+        </div>
+        <div class="animate-marquee-reverse text-white/80 text-xs md:text-sm font-medium tracking-widest uppercase shrink-0" aria-hidden="true">
+            <span class="mx-6">🎵 Laras Slendro (5 Nada) & Laras Pelog (7 Nada)</span>
+            <span class="mx-6">• Harmoni Karawitan Jawa Klasik</span>
+            <span class="mx-6">• Simbol Keselarasan Alam dan Jiwa Manusia</span>
+            <span class="mx-6">• Warisan Luhur Nusantara untuk Dunia</span>
+        </div>
+    </div>
+
+    <section id="eksplorasi" class="max-w-7xl mx-auto px-6 py-24 w-full relative">
+        <div class="text-center mb-12 reveal">
+            <h2 class="translate-text font-serif text-3xl md:text-4xl font-bold text-brand-dark" data-id="Ruang Interaktif" data-jv="Ruang Interaktif">Ruang Interaktif</h2>
+            <div class="w-16 h-1 bg-brand-gold mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8 items-start relative z-10 reveal">
+            <div class="w-full lg:w-2/3 relative bg-[#1a1c18] rounded-[2rem] overflow-hidden shadow-2xl border-4 border-[#2C3029] aspect-video group">
+                <img src="https://images.unsplash.com/photo-1596489381525-47e155c1b9b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Set Gamelan" class="w-full h-full object-cover opacity-60 transition duration-700 group-hover:scale-105 group-hover:opacity-80">
+                
+                <div class="absolute top-4 left-4 bg-black/70 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-xs font-semibold border border-white/20 shadow-lg flex items-center gap-2">
+                    <span class="relative flex h-3 w-3"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-brand-gold"></span></span>
+                    <span class="translate-text" data-id="Klik instrumen yang menyala" data-jv="Klik piranti sing murup">Klik instrumen yang menyala</span>
+                </div>
+
+                <button onclick="showInfo('gong')" class="absolute top-[20%] left-[70%] group focus:outline-none">
+                    <div class="relative w-10 h-10">
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75 animate-ping-slow"></span>
+                        <span class="relative inline-flex rounded-full h-10 w-10 bg-brand-gold border-2 border-white items-center justify-center shadow-lg transition duration-300 group-hover:scale-125 group-hover:bg-white group-hover:border-brand-gold">
+                            <span class="w-3 h-3 bg-brand-dark rounded-full group-hover:bg-brand-gold"></span>
+                        </span>
+                    </div>
+                </button>
+                <button onclick="showInfo('bonang')" class="absolute top-[60%] left-[30%] group focus:outline-none">
+                    <div class="relative w-10 h-10">
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75 animate-ping-slow" style="animation-delay: 0.5s;"></span>
+                        <span class="relative inline-flex rounded-full h-10 w-10 bg-brand-gold border-2 border-white items-center justify-center shadow-lg transition duration-300 group-hover:scale-125 group-hover:bg-white group-hover:border-brand-gold">
+                            <span class="w-3 h-3 bg-brand-dark rounded-full group-hover:bg-brand-gold"></span>
+                        </span>
+                    </div>
+                </button>
+                <button onclick="showInfo('saron')" class="absolute top-[75%] left-[60%] group focus:outline-none">
+                    <div class="relative w-10 h-10">
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75 animate-ping-slow" style="animation-delay: 1s;"></span>
+                        <span class="relative inline-flex rounded-full h-10 w-10 bg-brand-gold border-2 border-white items-center justify-center shadow-lg transition duration-300 group-hover:scale-125 group-hover:bg-white group-hover:border-brand-gold">
+                            <span class="w-3 h-3 bg-brand-dark rounded-full group-hover:bg-brand-gold"></span>
+                        </span>
+                    </div>
+                </button>
+                <button onclick="showInfo('kendang')" class="absolute top-[40%] left-[15%] group focus:outline-none">
+                    <div class="relative w-10 h-10">
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75 animate-ping-slow" style="animation-delay: 1.5s;"></span>
+                        <span class="relative inline-flex rounded-full h-10 w-10 bg-brand-gold border-2 border-white items-center justify-center shadow-lg transition duration-300 group-hover:scale-125 group-hover:bg-white group-hover:border-brand-gold">
+                            <span class="w-3 h-3 bg-brand-dark rounded-full group-hover:bg-brand-gold"></span>
+                        </span>
+                    </div>
+                </button>
             </div>
 
-            <div class="flex flex-col lg:flex-row gap-8 items-start relative z-10 reveal">
-                <div class="w-full lg:w-2/3 relative bg-[#1a1c18] rounded-[2rem] overflow-hidden shadow-2xl border-4 border-[#2C3029] aspect-video group">
-                    <img src="https://images.unsplash.com/photo-1596489381525-47e155c1b9b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Set Gamelan" class="w-full h-full object-cover opacity-60 transition duration-700 group-hover:scale-105 group-hover:opacity-80">
+            <div class="w-full lg:w-1/3 bg-white/90 backdrop-blur-md rounded-[2rem] p-8 shadow-2xl border border-white min-h-[450px] flex flex-col relative overflow-hidden transition-colors">
+                <div class="absolute -bottom-10 -right-10 text-9xl text-gray-100 opacity-60 font-serif" id="bg-letter">♪</div>
+
+                <div id="empty-state" class="flex-grow flex flex-col items-center justify-center text-center opacity-100 transition-opacity duration-300">
+                    <div class="w-20 h-20 bg-brand-bg rounded-full flex items-center justify-center mb-6 shadow-inner">
+                        <svg class="w-10 h-10 text-brand-gold animate-float" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
+                    </div>
+                    <h3 class="translate-text font-serif text-2xl font-bold text-gray-800" data-id="Pilih Instrumen" data-jv="Pilih Piranti">Pilih Instrumen</h3>
+                    <p class="translate-text text-sm text-gray-500 mt-3 leading-relaxed" data-id="Ketuk salah satu titik yang bersinar di sebelah kiri untuk melihat bentuk fisik, mempelajari fungsi, dan mendengarkan suaranya." data-jv="Demok salah siji titik sing murup ing sisih kiwa kanggo ndeleng wujud fisik, sinau fungsi, lan rungokake swarane.">Ketuk salah satu titik yang bersinar di sebelah kiri untuk melihat bentuk fisik, mempelajari fungsi, dan mendengarkan suaranya.</p>
+                </div>
+
+                <div id="info-state" class="hidden flex-col h-full fade-in relative z-10">
+                    <span id="info-category" class="text-[10px] font-bold tracking-widest uppercase text-brand-dark bg-brand-gold px-4 py-1.5 rounded-full w-max mb-4 shadow-sm">Alat Pukul</span>
+                    <h2 id="info-title" class="font-serif text-4xl font-bold text-brand-dark mb-3">Gong</h2>
+                    <p id="info-desc" class="text-sm text-gray-600 leading-relaxed flex-grow">Penjelasan instrumen akan muncul di sini.</p>
                     
-                    <div class="absolute top-4 left-4 bg-black/70 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-xs font-semibold border border-white/20 shadow-lg flex items-center gap-2">
-                        <span class="relative flex h-3 w-3"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-brand-gold"></span></span>
-                        Klik instrumen yang menyala
-                    </div>
-
-                    <button onclick="showInfo('gong')" class="absolute top-[20%] left-[70%] group focus:outline-none">
-                        <div class="relative w-10 h-10">
-                            <span class="absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75 animate-ping-slow"></span>
-                            <span class="relative inline-flex rounded-full h-10 w-10 bg-brand-gold border-2 border-white items-center justify-center shadow-lg transition duration-300 group-hover:scale-125 group-hover:bg-white group-hover:border-brand-gold">
-                                <span class="w-3 h-3 bg-brand-dark rounded-full group-hover:bg-brand-gold"></span>
-                            </span>
-                        </div>
-                    </button>
-                    <button onclick="showInfo('bonang')" class="absolute top-[60%] left-[30%] group focus:outline-none">
-                        <div class="relative w-10 h-10">
-                            <span class="absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75 animate-ping-slow" style="animation-delay: 0.5s;"></span>
-                            <span class="relative inline-flex rounded-full h-10 w-10 bg-brand-gold border-2 border-white items-center justify-center shadow-lg transition duration-300 group-hover:scale-125 group-hover:bg-white group-hover:border-brand-gold">
-                                <span class="w-3 h-3 bg-brand-dark rounded-full group-hover:bg-brand-gold"></span>
-                            </span>
-                        </div>
-                    </button>
-                    <button onclick="showInfo('saron')" class="absolute top-[75%] left-[60%] group focus:outline-none">
-                        <div class="relative w-10 h-10">
-                            <span class="absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75 animate-ping-slow" style="animation-delay: 1s;"></span>
-                            <span class="relative inline-flex rounded-full h-10 w-10 bg-brand-gold border-2 border-white items-center justify-center shadow-lg transition duration-300 group-hover:scale-125 group-hover:bg-white group-hover:border-brand-gold">
-                                <span class="w-3 h-3 bg-brand-dark rounded-full group-hover:bg-brand-gold"></span>
-                            </span>
-                        </div>
-                    </button>
-                    <button onclick="showInfo('kendang')" class="absolute top-[40%] left-[15%] group focus:outline-none">
-                        <div class="relative w-10 h-10">
-                            <span class="absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75 animate-ping-slow" style="animation-delay: 1.5s;"></span>
-                            <span class="relative inline-flex rounded-full h-10 w-10 bg-brand-gold border-2 border-white items-center justify-center shadow-lg transition duration-300 group-hover:scale-125 group-hover:bg-white group-hover:border-brand-gold">
-                                <span class="w-3 h-3 bg-brand-dark rounded-full group-hover:bg-brand-gold"></span>
-                            </span>
-                        </div>
-                    </button>
-                </div>
-
-                <div class="w-full lg:w-1/3 bg-white/90 backdrop-blur-md rounded-[2rem] p-8 shadow-2xl border border-white min-h-[450px] flex flex-col relative overflow-hidden">
-                    <div class="absolute -bottom-10 -right-10 text-9xl text-gray-100 opacity-60 font-serif" id="bg-letter">♪</div>
-
-                    <div id="empty-state" class="flex-grow flex flex-col items-center justify-center text-center opacity-100 transition-opacity duration-300">
-                        <div class="w-20 h-20 bg-brand-bg rounded-full flex items-center justify-center mb-6 shadow-inner">
-                            <svg class="w-10 h-10 text-brand-gold animate-float" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
-                        </div>
-                        <h3 class="font-serif text-2xl font-bold text-gray-800">Pilih Instrumen</h3>
-                        <p class="text-sm text-gray-500 mt-3 leading-relaxed">Ketuk salah satu titik yang bersinar di sebelah kiri untuk melihat bentuk fisik, mempelajari fungsi, dan mendengarkan suaranya.</p>
-                    </div>
-
-                    <div id="info-state" class="hidden flex-col h-full fade-in relative z-10">
-                        <span id="info-category" class="text-[10px] font-bold tracking-widest uppercase text-brand-dark bg-brand-gold px-4 py-1.5 rounded-full w-max mb-4 shadow-sm">Alat Pukul</span>
-                        <h2 id="info-title" class="font-serif text-4xl font-bold text-brand-dark mb-3">Gong</h2>
-                        <p id="info-desc" class="text-sm text-gray-600 leading-relaxed flex-grow">Penjelasan instrumen akan muncul di sini.</p>
-                        
-                        <div class="mt-8 bg-brand-dark p-5 rounded-2xl border border-brand-accent shadow-lg text-white">
-                            <p class="text-[10px] font-bold tracking-widest uppercase text-brand-gold mb-4">Putar Suara</p>
-                            <audio id="audio-player" src=""></audio>
-                            <div class="flex items-center gap-4">
-                                <button onclick="togglePlay()" id="play-btn" class="w-14 h-14 flex-shrink-0 bg-brand-gold text-brand-dark rounded-full flex items-center justify-center hover:scale-105 transition transform shadow-md focus:outline-none">
-                                    <svg id="icon-play" class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/></svg>
-                                    <svg id="icon-pause" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
-                                </button>
-                                <div class="flex-grow">
-                                    <div class="w-full bg-white/20 rounded-full h-2">
-                                        <div id="audio-progress" class="bg-brand-gold h-2 rounded-full relative" style="width: 0%">
-                                            <div class="absolute -right-2 -top-1 w-4 h-4 bg-white rounded-full shadow"></div>
-                                        </div>
+                    <div class="mt-8 bg-brand-dark p-5 rounded-2xl border border-brand-accent shadow-lg text-white">
+                        <p class="translate-text text-[10px] font-bold tracking-widest uppercase text-brand-gold mb-4" data-id="Putar Suara" data-jv="Puter Swara">Putar Suara</p>
+                        <audio id="audio-player" src=""></audio>
+                        <div class="flex items-center gap-4">
+                            <button onclick="togglePlay()" id="play-btn" class="w-14 h-14 flex-shrink-0 bg-brand-gold text-brand-dark rounded-full flex items-center justify-center hover:scale-105 transition transform shadow-md focus:outline-none">
+                                <svg id="icon-play" class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/></svg>
+                                <svg id="icon-pause" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                            </button>
+                            <div class="flex-grow">
+                                <div class="w-full bg-white/20 rounded-full h-2">
+                                    <div id="audio-progress" class="bg-brand-gold h-2 rounded-full relative" style="width: 0%">
+                                        <div class="absolute -right-2 -top-1 w-4 h-4 bg-white rounded-full shadow"></div>
                                     </div>
-                                    <div class="flex justify-between mt-2 text-xs text-white/60 font-medium">
-                                        <span id="time-current">0:00</span>
-                                        <span id="time-total">Tutup Audio</span>
-                                    </div>
+                                </div>
+                                <div class="flex justify-between mt-2 text-xs text-white/60 font-medium">
+                                    <span id="time-current">0:00</span>
+                                    <span class="translate-text" data-id="Tutup Audio" data-jv="Tutup Swara" id="time-total">Tutup Audio</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Section Filosofi Card -->
-        <section class="max-w-7xl mx-auto px-6 py-16 mb-10 border-t border-brand-gold/20 reveal">
-            <div class="text-center mb-12">
-                <h2 class="font-serif text-3xl font-bold text-brand-dark mb-4">Filosofi di Balik Nada</h2>
-                <p class="text-gray-600 text-sm max-w-xl mx-auto">Gamelan bukan sekadar alat musik, melainkan cerminan dari nilai-nilai kehidupan masyarakat Jawa yang menjunjung tinggi harmoni.</p>
+    <section class="max-w-7xl mx-auto px-6 py-16 mb-10 border-t border-brand-gold/20 reveal">
+        <div class="text-center mb-12">
+            <h2 class="translate-text font-serif text-3xl font-bold text-brand-dark mb-4" data-id="Filosofi di Balik Nada" data-jv="Filosofi ing Saben Nada">Filosofi di Balik Nada</h2>
+            <p class="translate-text text-gray-600 text-sm max-w-xl mx-auto" data-id="Gamelan bukan sekadar alat musik, melainkan cerminan dari nilai-nilai kehidupan masyarakat Jawa yang menjunjung tinggi harmoni." data-jv="Gamelan dudu mung piranti musik, nanging minangka kaca tetembungan nilai urip masyarakat Jawa sing ngajeni harmoni.">Gamelan bukan sekadar alat musik, melainkan cerminan dari nilai-nilai kehidupan masyarakat Jawa yang menjunjung tinggi harmoni.</p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition duration-300 border border-gray-100 group transition-colors">
+                <div class="w-12 h-12 bg-brand-bg rounded-xl flex items-center justify-center text-brand-accent mb-6 group-hover:bg-brand-accent group-hover:text-white transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                </div>
+                <h3 class="translate-text font-serif text-xl font-bold mb-3" data-id="Gotong Royong" data-jv="Gotong Royong">Gotong Royong</h3>
+                <p class="translate-text text-sm text-gray-500 leading-relaxed" data-id="Pemain gamelan harus saling mendengarkan dan menahan ego. Tidak ada instrumen yang menonjol sendiri; semua bekerja sama membentuk harmoni." data-jv="Pemain gamelan kudu saling rungokake lan nahan ego. Ora ana piranti sing monjol dhewe; kabeh kerja bareng mbentuk harmoni.">Pemain gamelan harus saling mendengarkan dan menahan ego. Tidak ada instrumen yang menonjol sendiri; semua bekerja sama membentuk harmoni.</p>
+            </div>
+            <div class="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition duration-300 border border-gray-100 group transition-colors">
+                <div class="w-12 h-12 bg-brand-bg rounded-xl flex items-center justify-center text-brand-accent mb-6 group-hover:bg-brand-accent group-hover:text-white transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
+                </div>
+                <h3 class="translate-text font-serif text-xl font-bold mb-3" data-id="Keseimbangan" data-jv="Keseimbangan">Keseimbangan</h3>
+                <p class="translate-text text-sm text-gray-500 leading-relaxed" data-id="Penggunaan nada slendro dan pelog merepresentasikan dua kutub yang saling melengkapi, menggambarkan keseimbangan makrokosmos dan mikrokosmos." data-jv="Panggunaan nada slendro lan pelog nggambarake rong kutub sing saling nglengkapi, nggambarake keseimbangan alam semesta lan jiwa manungsa.">Penggunaan nada slendro dan pelog merepresentasikan dua kutub yang saling melengkapi, menggambarkan keseimbangan makrokosmos dan mikrokosmos.</p>
+            </div>
+            <div class="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition duration-300 border border-gray-100 group transition-colors">
+                <div class="w-12 h-12 bg-brand-bg rounded-xl flex items-center justify-center text-brand-accent mb-6 group-hover:bg-brand-accent group-hover:text-white transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                </div>
+                <h3 class="translate-text font-serif text-xl font-bold mb-3" data-id="Spiritualitas" data-jv="Spiritualitas">Spiritualitas</h3>
+                <p class="translate-text text-sm text-gray-500 leading-relaxed" data-id="Gamelan sering dianggap sakral. Dahulu, Gamelan ditabuh sebagai sarana komunikasi spiritual dengan Sang Pencipta dan leluhur." data-jv="Gamelan asring dianggap sakral. Biyen, Gamelan ditabuh minangka sarana komunikasi spiritual karo Gusti Pangeran lan para leluhur.">Gamelan sering dianggap sakral. Dahulu, Gamelan ditabuh sebagai sarana komunikasi spiritual dengan Sang Pencipta dan leluhur.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white border-t border-gray-200/60 pt-20 pb-10 relative z-10 reveal transition-colors">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="bg-brand-bg rounded-[2rem] p-8 md:p-12 mb-16 flex flex-col md:flex-row items-center justify-between gap-8 border border-gray-100 shadow-sm relative overflow-hidden transition-colors">
+                <div class="absolute right-0 top-0 w-32 h-32 bg-brand-gold/10 rounded-full blur-2xl animate-pulse"></div>
+                <div class="max-w-md relative z-10">
+                    <h3 class="translate-text font-serif text-3xl font-bold text-brand-dark mb-2" data-id="Tetap Terhubung." data-jv="Tetep Nyambung.">Tetap Terhubung.</h3>
+                    <p class="translate-text text-gray-600 text-sm leading-relaxed" data-id="Dapatkan pembaruan terbaru mengenai kosa kata budaya langsung di kotak masukmu." data-jv="Entuk warta anyar babagan kosa kata budaya langsung menyang kothak mlebumu.">Dapatkan pembaruan terbaru mengenai kosa kata budaya langsung di kotak masukmu.</p>
+                </div>
+                <div class="w-full md:w-auto flex-1 max-w-md relative z-10">
+                    <input type="email" placeholder="Alamat email Anda..." class="translate-text w-full pl-6 pr-32 py-4 rounded-full border border-gray-200 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition text-sm" data-id="Alamat email Anda..." data-jv="Alamat email panjenengan...">
+                    <button class="translate-text absolute right-2 top-2 bottom-2 bg-brand-dark text-brand-gold px-6 rounded-full text-xs font-bold hover:bg-brand-accent hover:text-white transition" data-id="Subscribe &rarr;" data-jv="Langganan &rarr;">Subscribe &rarr;</button>
+                </div>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition duration-300 border border-gray-100 group">
-                    <div class="w-12 h-12 bg-brand-bg rounded-xl flex items-center justify-center text-brand-accent mb-6 group-hover:bg-brand-accent group-hover:text-white transition">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold mb-3">Gotong Royong</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Pemain gamelan harus saling mendengarkan dan menahan ego. Tidak ada instrumen yang menonjol sendiri; semua bekerja sama membentuk harmoni.</p>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+                <div class="md:col-span-5 space-y-6">
+                    <a href="../home/" class="inline-block"><h2 class="font-serif text-3xl font-bold text-brand-dark tracking-wide">Pawitra<span class="text-brand-accent">.</span></h2></a>
+                    <p class="translate-text text-gray-500 text-sm leading-relaxed max-w-sm" data-id="Menjembatani nilai-nilai luhur budaya Jawa dengan ruang yang inklusif untuk semua." data-jv="Dadi kreteg kanggo nilai-nilai luhur budaya Jawa kanthi papan sing inklusif kanggo kabeh.">Menjembatani nilai-nilai luhur budaya Jawa dengan ruang yang inklusif untuk semua.</p>
                 </div>
-                <div class="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition duration-300 border border-gray-100 group">
-                    <div class="w-12 h-12 bg-brand-bg rounded-xl flex items-center justify-center text-brand-accent mb-6 group-hover:bg-brand-accent group-hover:text-white transition">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold mb-3">Keseimbangan</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Penggunaan nada slendro dan pelog merepresentasikan dua kutub yang saling melengkapi, menggambarkan keseimbangan makrokosmos dan mikrokosmos.</p>
+                <div class="md:col-span-3">
+                    <h4 class="translate-text text-xs font-bold tracking-widest uppercase text-brand-dark mb-6" data-id="Jelajahi Pawitra" data-jv="Jelajah Pawitra">Jelajahi Pawitra</h4>
+                    <ul class="space-y-4 text-sm font-medium text-gray-500">
+                        <li><a href="../home/" class="translate-text hover:text-brand-accent transition" data-id="Beranda" data-jv="Omah">Beranda</a></li>
+                        <li><a href="../glossary/" class="translate-text hover:text-brand-accent transition" data-id="Glosarium" data-jv="Bausastra">Glosarium</a></li>
+                        <li><a href="../about/" class="translate-text hover:text-brand-accent transition" data-id="Tentang Kami" data-jv="Babagan">Tentang Kami</a></li>
+                        <li><a href="../cultural-exploration/" class="translate-text hover:text-brand-accent transition" data-id="Eksplorasi Budaya" data-jv="Jlajah Budaya">Eksplorasi Budaya</a></li>
+                        <li><a href="../inclusive-stories/" class="translate-text hover:text-brand-accent transition" data-id="Cerita Rakyat" data-jv="Crita Inklusif">Cerita Rakyat</a></li>
+                    </ul>
                 </div>
-                <div class="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition duration-300 border border-gray-100 group">
-                    <div class="w-12 h-12 bg-brand-bg rounded-xl flex items-center justify-center text-brand-accent mb-6 group-hover:bg-brand-accent group-hover:text-white transition">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold mb-3">Spiritualitas</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Gamelan sering dianggap sakral. Dahulu, Gamelan ditabuh sebagai sarana komunikasi spiritual dengan Sang Pencipta dan leluhur.</p>
+                <div class="md:col-span-4">
+                    <h4 class="translate-text text-xs font-bold tracking-widest uppercase text-brand-dark mb-6" data-id="Hubungi Kami" data-jv="Hubungi Kita">Hubungi Kami</h4>
+                    <ul class="space-y-4 text-sm text-gray-500">
+                        <li class="flex items-start gap-3"><span class="text-brand-accent mt-0.5">📍</span><span>Sawojajar, Kota Malang<br>Jawa Timur, Indonesia</span></li>
+                        <li class="flex items-center gap-3"><span class="text-brand-accent">✉️</span><a href="mailto:halo@pawitra.id" class="hover:text-brand-accent transition">halo@pawitra.id</a></li>
+                    </ul>
                 </div>
             </div>
-        </section>
+            <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="translate-text text-xs text-gray-400 font-medium" data-id="&copy; 2026 Pawitra App. Dibuat dengan 💚 untuk Budaya." data-jv="&copy; 2026 Pawitra App. Digawe kanthi 💚 kanggo Budaya.">&copy; 2026 Pawitra App. Dibuat dengan 💚 untuk Budaya.</p>
+            </div>
+        </div>
+    </footer>
 
-    <!-- Footer Section -->
-        <footer class="bg-white border-t border-gray-200/60 pt-20 pb-10 relative z-10">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="bg-brand-bg rounded-[2rem] p-8 md:p-12 mb-16 flex flex-col md:flex-row items-center justify-between gap-8 border border-gray-100 shadow-sm relative overflow-hidden">
-                    <div class="absolute right-0 top-0 w-32 h-32 bg-brand-gold/10 rounded-full blur-2xl animate-pulse"></div>
-                    <div class="max-w-md relative z-10">
-                        <h3 class="font-serif text-3xl font-bold text-brand-dark mb-2">Tetap Terhubung.</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">Dapatkan pembaruan terbaru mengenai kosa kata budaya langsung di kotak masukmu.</p>
-                    </div>
-                    <div class="w-full md:w-auto flex-1 max-w-md relative z-10">
-                        <input type="email" placeholder="Alamat email Anda..." class="w-full pl-6 pr-32 py-4 rounded-full border border-gray-200 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition text-sm">
-                        <button class="absolute right-2 top-2 bottom-2 bg-brand-dark text-brand-gold px-6 rounded-full text-xs font-bold hover:bg-brand-accent hover:text-white transition">Subscribe &rarr;</button>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
-                    <div class="md:col-span-5 space-y-6">
-                        <a href="../home/index.html" class="inline-block"><h2 class="font-serif text-3xl font-bold text-brand-dark tracking-wide">Pawitra<span class="text-brand-accent">.</span></h2></a>
-                        <p class="text-gray-500 text-sm leading-relaxed max-w-sm">Menjembatani nilai-nilai luhur budaya Jawa dengan ruang yang inklusif untuk semua.</p>
-                    </div>
-                    <div class="md:col-span-3">
-                        <h4 class="text-xs font-bold tracking-widest uppercase text-brand-dark mb-6">Jelajahi Pawitra</h4>
-                        <ul class="space-y-4 text-sm font-medium text-gray-500">
-                            <li><a href="../home/index.html" class="hover:text-brand-accent transition">Home</a></li>
-                            <li><a href="index.html" class="hover:text-brand-accent transition">Glossary</a></li>
-                            <li><a href="../about/index.html" class="hover:text-brand-accent transition">About</a></li>
-                            <li><a href="../cultural-exploration/index.html" class="hover:text-brand-accent transition">Cultural Exploration</a></li>
-                            <li><a href="../inclusive-stories/index.html" class="hover:text-brand-accent transition">Inclusive Stories </a></li>
-                        </ul>
-                    </div>
-                    <div class="md:col-span-4">
-                        <h4 class="text-xs font-bold tracking-widest uppercase text-brand-dark mb-6">Hubungi Kami</h4>
-                        <ul class="space-y-4 text-sm text-gray-500">
-                            <li class="flex items-start gap-3"><span class="text-brand-accent mt-0.5">📍</span><span>Sawojajar, Kota Malang<br>Jawa Timur, Indonesia</span></li>
-                            <li class="flex items-center gap-3"><span class="text-brand-accent">✉️</span><a href="mailto:halo@pawitra.id" class="hover:text-brand-accent transition">halo@pawitra.id</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p class="text-xs text-gray-400 font-medium">&copy; 2026 Pawitra App. Dibuat dengan 💚 untuk Budaya.</p>
-                </div>
-            </div>
-        </footer>
-    <!-- FLOATING ACCESSIBILITY BUTTON -->
     <div class="fixed bottom-6 right-6 z-[100] flex flex-col items-end">
-        <!-- Menu Popup -->
         <div id="a11yMenu" class="hidden mb-4 bg-white rounded-2xl shadow-2xl p-5 border border-brand-gold/30 w-64 transform transition-all duration-300 origin-bottom-right">
             <h4 class="text-sm font-bold font-serif mb-4 text-brand-dark border-b border-gray-100 pb-2 flex items-center gap-2">
                 <svg class="w-4 h-4 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                 Aksesibilitas
             </h4>
             
-            <!-- Toggle Mode Disleksia -->
             <div class="flex items-center justify-between mb-4">
                 <span class="text-xs font-semibold text-gray-700">Mode Disleksia</span>
                 <label class="relative inline-flex items-center cursor-pointer">
@@ -434,180 +441,227 @@
                 </label>
             </div>
             
-            <!-- Toggle Mode Buta Warna -->
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between mb-4">
                 <span class="text-xs font-semibold text-gray-700">Mode Buta Warna</span>
                 <label class="relative inline-flex items-center cursor-pointer">
                     <input type="checkbox" id="colorblindToggle" class="sr-only peer">
                     <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-accent"></div>
                 </label>
             </div>
+
+            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                <span class="text-xs font-semibold text-gray-700">Bahasa Jawa</span>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="javaneseToggle" class="sr-only peer">
+                    <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-accent"></div>
+                </label>
+            </div>
         </div>
 
-        <!-- Tombol Utama (FAB) -->
         <button id="a11yBtn" class="w-14 h-14 bg-brand-dark text-brand-gold rounded-full shadow-[0_10px_25px_rgba(0,0,0,0.3)] flex items-center justify-center hover:scale-105 hover:bg-brand-accent hover:text-white transition-all duration-300 focus:outline-none ring-4 ring-white/50 group">
             <svg class="w-7 h-7 group-hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
         </button>
     </div>
 
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
 
-        <!-- Script JavaScript -->
-        <script>
-            window.addEventListener("load", function() {
-                const loader = document.getElementById("loader");
-                const progressBar = document.getElementById("loader-progress");
-                
-                setTimeout(() => {
-                    progressBar.style.width = "100%";
-                }, 100);
+        window.addEventListener("load", function() {
+            const loader = document.getElementById("loader");
+            const progressBar = document.getElementById("loader-progress");
+            
+            setTimeout(() => {
+                progressBar.style.width = "100%";
+            }, 100);
 
-                setTimeout(() => {
-                    loader.classList.add("fade-out");
-                }, 900);
-            });
+            setTimeout(() => {
+                loader.classList.add("fade-out");
+            }, 900);
+        });
 
-            document.addEventListener("DOMContentLoaded", function() {
-                const observerOptions = {
-                    root: null,
-                    rootMargin: '0px',
-                    threshold: 0.15
-                };
-
-                const observer = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('active');
-                        }
-                    });
-                }, observerOptions);
-
-                document.querySelectorAll('.reveal').forEach(element => {
-                    observer.observe(element);
-                });
-            });
-
-            const instrumentsData = {
-                gong: {
-                    title: "Gong",
-                    category: "Penanda Waktu",
-                    desc: "Gong adalah instrumen terbesar dalam gamelan yang terbuat dari perunggu. Berfungsi sebagai penanda akhir dari sebuah siklus gending. Bunyinya yang menggema dipercaya melambangkan kedamaian alam semesta.",
-                    audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
-                },
-                bonang: {
-                    title: "Bonang",
-                    category: "Alat Pukul Melodis",
-                    desc: "Bonang terdiri dari deretan pot perunggu kecil yang diletakkan di atas rak kayu. Instrumen ini berfungsi sebagai penuntun melodi utama atau memberikan pola ritmis yang mengikat instrumen lainnya.",
-                    audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-                },
-                saron: {
-                    title: "Saron",
-                    category: "Alat Pukul Bilah",
-                    desc: "Saron adalah instrumen berbilah logam yang dipukul menggunakan tabuh dari kayu. Saron memegang peran penting dalam memainkan balungan (kerangka melodi dasar) dari sebuah gending Jawa.",
-                    audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
-                },
-                kendang: {
-                    title: "Kendang",
-                    category: "Alat Tabuh (Pemimpin)",
-                    desc: "Kendang mengatur tempo, cepat-lambatnya permainan, serta memberikan tanda perpindahan bagian dalam lagu. Instrumen ini ibarat nyawa yang memimpin alur sebuah pertunjukan gamelan.",
-                    audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
-                }
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
             };
 
-            const audioPlayer = document.getElementById('audio-player');
-            const playBtn = document.getElementById('play-btn');
-            const iconPlay = document.getElementById('icon-play');
-            const iconPause = document.getElementById('icon-pause');
-            const progressBar = document.getElementById('audio-progress');
-            const timeCurrent = document.getElementById('time-current');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
 
-            let isPlaying = false;
+            document.querySelectorAll('.reveal').forEach(element => {
+                observer.observe(element);
+            });
+        });
 
-            function showInfo(instrumentKey) {
-                const data = instrumentsData[instrumentKey];
-                
-                document.getElementById('empty-state').classList.add('hidden');
-                const infoState = document.getElementById('info-state');
-                infoState.classList.remove('hidden');
-                
-                infoState.classList.remove('fade-in');
-                void infoState.offsetWidth; 
-                infoState.classList.add('fade-in');
-
-                document.getElementById('info-title').innerText = data.title;
-                document.getElementById('info-category').innerText = data.category;
-                document.getElementById('info-desc').innerText = data.desc;
-                document.getElementById('bg-letter').innerText = data.title.charAt(0);
-
-                audioPlayer.src = data.audio;
-                resetAudioUI();
+        const instrumentsData = {
+            gong: {
+                title: "Gong",
+                category: "Penanda Waktu",
+                desc: "Gong adalah instrumen terbesar dalam gamelan yang terbuat dari perunggu. Berfungsi sebagai penanda akhir dari sebuah siklus gending. Bunyinya yang menggema dipercaya melambangkan kedamaian alam semesta.",
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
+            },
+            bonang: {
+                title: "Bonang",
+                category: "Alat Pukul Melodis",
+                desc: "Bonang terdiri dari deretan pot perunggu kecil yang diletakkan di atas rak kayu. Instrumen ini berfungsi sebagai penuntun melodi utama atau memberikan pola ritmis yang mengikat instrumen lainnya.",
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+            },
+            saron: {
+                title: "Saron",
+                category: "Alat Pukul Bilah",
+                desc: "Saron adalah instrumen berbilah logam yang dipukul menggunakan tabuh dari kayu. Saron memegang peran penting dalam memainkan balungan (kerangka melodi dasar) dari sebuah gending Jawa.",
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+            },
+            kendang: {
+                title: "Kendang",
+                category: "Alat Tabuh (Pemimpin)",
+                desc: "Kendang mengatur tempo, cepat-lambatnya permainan, serta memberikan tanda perpindahan bagian dalam lagu. Instrumen ini ibarat nyawa yang memimpin alur sebuah pertunjukan gamelan.",
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
             }
+        };
 
-            function togglePlay() {
-                if (audioPlayer.src === "" || audioPlayer.src.includes(window.location.href)) return;
+        const audioPlayer = document.getElementById('audio-player');
+        const playBtn = document.getElementById('play-btn');
+        const iconPlay = document.getElementById('icon-play');
+        const iconPause = document.getElementById('icon-pause');
+        const progressBar = document.getElementById('audio-progress');
+        const timeCurrent = document.getElementById('time-current');
 
-                if (isPlaying) {
-                    audioPlayer.pause();
-                    iconPlay.classList.remove('hidden');
-                    iconPause.classList.add('hidden');
-                } else {
-                    audioPlayer.play();
-                    iconPlay.classList.add('hidden');
-                    iconPause.classList.remove('hidden');
-                }
-                isPlaying = !isPlaying;
-            }
+        let isPlaying = false;
 
-            function resetAudioUI() {
+        function showInfo(instrumentKey) {
+            const data = instrumentsData[instrumentKey];
+            
+            document.getElementById('empty-state').classList.add('hidden');
+            const infoState = document.getElementById('info-state');
+            infoState.classList.remove('hidden');
+            
+            infoState.classList.remove('fade-in');
+            void infoState.offsetWidth; 
+            infoState.classList.add('fade-in');
+
+            document.getElementById('info-title').innerText = data.title;
+            document.getElementById('info-category').innerText = data.category;
+            document.getElementById('info-desc').innerText = data.desc;
+            document.getElementById('bg-letter').innerText = data.title.charAt(0);
+
+            audioPlayer.src = data.audio;
+            resetAudioUI();
+        }
+
+        function togglePlay() {
+            if (audioPlayer.src === "" || audioPlayer.src.includes(window.location.href)) return;
+
+            if (isPlaying) {
                 audioPlayer.pause();
-                isPlaying = false;
                 iconPlay.classList.remove('hidden');
                 iconPause.classList.add('hidden');
-                progressBar.style.width = '0%';
-                timeCurrent.innerText = "0:00";
+            } else {
+                audioPlayer.play();
+                iconPlay.classList.add('hidden');
+                iconPause.classList.remove('hidden');
             }
+            isPlaying = !isPlaying;
+        }
 
-            audioPlayer.addEventListener('timeupdate', () => {
-                if(audioPlayer.duration) {
-                    const progressPercent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-                    progressBar.style.width = progressPercent + '%';
-                    
-                    let currentMins = Math.floor(audioPlayer.currentTime / 60);
-                    let currentSecs = Math.floor(audioPlayer.currentTime % 60);
-                    if(currentSecs < 10) currentSecs = "0" + currentSecs;
-                    timeCurrent.innerText = currentMins + ":" + currentSecs;
-                }
-            });
+        function resetAudioUI() {
+            audioPlayer.pause();
+            isPlaying = false;
+            iconPlay.classList.remove('hidden');
+            iconPause.classList.add('hidden');
+            progressBar.style.width = '0%';
+            timeCurrent.innerText = "0:00";
+        }
 
-            audioPlayer.addEventListener('ended', resetAudioUI);
-            
-         // Logika Aksesibilitas (Floating Button)
+        audioPlayer.addEventListener('timeupdate', () => {
+            if(audioPlayer.duration) {
+                const progressPercent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+                progressBar.style.width = progressPercent + '%';
+                
+                let currentMins = Math.floor(audioPlayer.currentTime / 60);
+                let currentSecs = Math.floor(audioPlayer.currentTime % 60);
+                if(currentSecs < 10) currentSecs = "0" + currentSecs;
+                timeCurrent.innerText = currentMins + ":" + currentSecs;
+            }
+        });
+
+        audioPlayer.addEventListener('ended', resetAudioUI);
+        
+        // ==========================================
+        // LOGIKA AKSESIBILITAS & LOCALSTORAGE
+        // ==========================================
         const a11yBtn = document.getElementById('a11yBtn');
         const a11yMenu = document.getElementById('a11yMenu');
         const dyslexiaToggle = document.getElementById('dyslexiaToggle');
         const colorblindToggle = document.getElementById('colorblindToggle');
+        const javaneseToggle = document.getElementById('javaneseToggle');
+        
+        const translatableElements = document.querySelectorAll('.translate-text');
 
-        // Buka/Tutup Menu
+        const applyTranslation = (isJavanese) => {
+            translatableElements.forEach(el => {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = isJavanese ? el.getAttribute('data-jv') : el.getAttribute('data-id');
+                } else {
+                    el.innerHTML = isJavanese ? el.getAttribute('data-jv') : el.getAttribute('data-id');
+                }
+            });
+        };
+
         a11yBtn.addEventListener('click', () => {
             a11yMenu.classList.toggle('hidden');
         });
 
-        // Toggle Disleksia
+        // --- INISIALISASI DARI LOCALSTORAGE ---
+        if (localStorage.getItem('dyslexiaMode') === 'true') {
+            document.body.classList.add('dyslexia-mode');
+            dyslexiaToggle.checked = true;
+        }
+        
+        if (localStorage.getItem('colorblindMode') === 'true') {
+            document.body.classList.add('colorblind-mode');
+            colorblindToggle.checked = true;
+        }
+
+        if (localStorage.getItem('javaneseMode') === 'true') {
+            javaneseToggle.checked = true;
+            applyTranslation(true); 
+        }
+
+        // --- EVENT LISTENER & PENYIMPANAN KE LOCALSTORAGE ---
         dyslexiaToggle.addEventListener('change', (e) => {
-            if (e.target.checked) {
+            const isActive = e.target.checked;
+            if (isActive) {
                 document.body.classList.add('dyslexia-mode');
             } else {
                 document.body.classList.remove('dyslexia-mode');
             }
+            localStorage.setItem('dyslexiaMode', isActive); 
         });
 
-        // Toggle Mode Buta Warna
         colorblindToggle.addEventListener('change', (e) => {
-            if (e.target.checked) {
+            const isActive = e.target.checked;
+            if (isActive) {
                 document.body.classList.add('colorblind-mode');
             } else {
                 document.body.classList.remove('colorblind-mode');
             }
+            localStorage.setItem('colorblindMode', isActive); 
         });
-        </script>
-    </body>
-    </html> 
+
+        javaneseToggle.addEventListener('change', (e) => {
+            const isJavanese = e.target.checked;
+            applyTranslation(isJavanese); 
+            localStorage.setItem('javaneseMode', isJavanese); 
+        });
+    </script>
+</body>
+</html>
