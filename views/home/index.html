@@ -130,7 +130,7 @@
           background-color: #F8F7F4;
           margin: 70px 30px;
           padding: 20px;
-          border-radius: 10px;
+          border-radius: 20px;
           justify-content: center;
           align-items: stretch;
           gap: 30px;
@@ -286,7 +286,7 @@
                 <span class="font-serif text-2xl font-bold tracking-wide text-brand-dark transition-colors">Pawitra<span class="text-brand-accent">.</span></span>
             </div>
             <div class="hidden lg:flex items-center space-x-8 text-sm font-medium text-gray-700">
-                <a href="../home/" class="translate-text border-b-2 border-brand-accent pb-1 text-brand-accent font-bold transition" data-id="Beranda" data-jv="Omah">Beranda</a>
+                <a href="../home/" class="translate-text border-b-2 border-brand-accent pb-1 text-brand-accent font-bold transition" data-id="Beranda" data-jv="Kaca Utama">Beranda</a>
                 <a href="../glossary/" class="translate-text hover:text-brand-accent transition" data-id="Glosarium" data-jv="Bausastra">Glosarium</a>
                 <a href="../about/" class="translate-text hover:text-brand-accent transition" data-id="Tentang Kami" data-jv="Babagan">Tentang Kami</a>
                 <a href="../cultural-exploration" class="translate-text hover:text-brand-accent transition" data-id="Eksplorasi Budaya" data-jv="Jlajah Budaya">Eksplorasi Budaya</a>
@@ -302,7 +302,7 @@
         <!-- Mobile Dropdown Menu -->
         <div id="mobileMenu" class="hidden lg:hidden px-6 pb-6 pt-2 bg-brand-bg border-t border-gray-200/60 mt-4 absolute w-full transition-colors">
             <div class="flex flex-col space-y-4 text-sm font-medium text-gray-700">
-                <a href="../home/" class="translate-text hover:text-brand-accent transition-colors" data-id="Beranda" data-jv="Omah">Beranda</a>
+                <a href="../home/" class="translate-text hover:text-brand-accent transition-colors" data-id="Beranda" data-jv="Kaca Utama">Beranda</a>
                 <a href="../glossary/" class="translate-text hover:text-brand-accent transition-colors" data-id="Glosarium" data-jv="Bausastra">Glosarium</a>
                 <a href="../about/" class="translate-text hover:text-brand-accent transition-colors" data-id="Tentang Kami" data-jv="Babagan">Tentang Kami</a>
                 <a href="../cultural-exploration" class="translate-text hover:text-brand-accent transition-colors" data-id="Eksplorasi Budaya" data-jv="Jlajah Budaya">Eksplorasi Budaya</a>
@@ -343,40 +343,281 @@
         </div>
     </header>
 
-    <!-- === CARD === -->
-    <div class="card" >
-        <div class="item">
-            <div class="icon-box"><i data-lucide="headphones"></i></div>
-            <h1 class="translate-text font-serif text-xl font-bold mb-3" data-id="Dengarkan" data-jv="Rungokake">Dengarkan</h1>
-            <p class="translate-text text-sm text-gray-500 leading-relaxed" data-id="Narasi profesional dengan nuansa gamelan yang menenangkan." data-jv="Narasi profesional kanthi swara gamelan sing gawe ayem.">
-                Narasi profesional dengan nuansa gamelan yang menenangkan.
-            </p>
-        </div>
+    <!-- ABOUT / FILOSOFI PREVIEW-->
+    <section class="max-w-7xl mx-auto px-6 py-24 reveal">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
 
-        <div class="item">
-            <div class="icon-box"><i data-lucide="eye"></i></div>        
-            <h1 class="translate-text font-serif text-xl font-bold mb-3" data-id="Lihat" data-jv="Deleng">Lihat</h1>
-            <p class="translate-text text-sm text-gray-500 leading-relaxed" data-id="Visual wayang dan ilustrasi yang memanjakan mata." data-jv="Visual wayang lan gambar sing nengsemake mripat.">
-                Visual wayang dan ilustrasi yang memanjakan mata.
-            </p>
-        </div>
+            <div class="relative order-2 lg:order-1">
+                <div class="bg-brand-dark rounded-[2rem] p-10 md:p-14 shadow-xl relative overflow-hidden">
+                    
+                    <div class="absolute -top-20 -right-20 w-60 h-60 bg-brand-gold/10 rounded-full"></div>
+                    <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-brand-accent/20 rounded-full"></div>
 
-        <div class="item">
-            <div class="icon-box"><i data-lucide="hand"></i></div>        
-            <h1 class="translate-text font-serif text-xl font-bold mb-3" data-id="Rasakan" data-jv="Rasakake">Rasakan</h1>
-            <p class="translate-text text-sm text-gray-500 leading-relaxed" data-id="Interaksi yang membuat cerita terasa nyata." data-jv="Interaksi sing nggawe crita krasa dadi kasunyatan.">
-                Interaksi yang membuat cerita terasa nyata.
-            </p>
-        </div>
+                    <div class="relative z-10 text-center">
+                        <p class="text-brand-gold text-xs uppercase tracking-[0.3em] mb-6">
+                            Filosofi Pawitra
+                        </p>
 
-        <div class="item">
-            <div class="icon-box"><i data-lucide="heart"></i></div>        
-            <h1 class="translate-text font-serif text-xl font-bold mb-3" data-id="Pahami" data-jv="Pahami">Pahami</h1>
-            <p class="translate-text text-sm text-gray-500 leading-relaxed" data-id="Nilai-nilai luhur dari cerita untuk kehidupan sehari-hari." data-jv="Nilai-nilai luhur saka crita kanggo panguripan saben dina.">
-                Nilai-nilai luhur dari cerita untuk kehidupan sehari-hari.
-            </p>
+                        <h3 class="font-serif text-5xl md:text-6xl text-white font-bold mb-4">
+                            Pawitra<span class="text-brand-gold">.</span>
+                        </h3>
+
+                        <div class="w-16 h-1 bg-brand-gold mx-auto rounded-full mb-6"></div>
+
+                        <p class="translate-text text-gray-300 text-sm leading-relaxed max-w-sm mx-auto"
+                            data-id="Suci. Murni. Air kehidupan."
+                            data-jv="Suci. Murni. Banyu Kahuripan.">
+                            Suci. Murni. Air kehidupan.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6 order-1 lg:order-2">
+                <span class="translate-text text-brand-gold text-xs font-bold tracking-[0.25em] uppercase"
+                    data-id="Tentang Pawitra"
+                    data-jv="Babagan Pawitra">
+                    Tentang Pawitra
+                </span>
+
+                <h2 class="translate-text font-serif text-4xl md:text-5xl font-bold text-brand-dark leading-tight"
+                    data-id="Dari Nama, Lahir Sebuah Makna."
+                    data-jv="Saka Asma, Lair Sawijining Makna.">
+                    Dari Nama, Lahir Sebuah Makna.
+                </h2>
+
+                <div class="w-16 h-1 bg-brand-gold rounded-full"></div>
+
+                <p class="translate-text text-gray-600 leading-relaxed"
+                    data-id="Pawitra berasal dari bahasa Sanskerta dan Jawa Kuno yang memiliki makna suci, murni, atau air kehidupan. Nama ini menjadi simbol semangat kami untuk menjaga dan mengenalkan kembali kekayaan budaya Jawa."
+                    data-jv="Pawitra asalé saka basa Sansekerta lan Jawa Kuna sing nduwèni teges suci, murni, utawa banyu urip. Asma iki dadi simbol semangat kita kanggo njaga lan ngenalake maneh kasugihan budaya Jawa.">
+                    Pawitra berasal dari bahasa Sanskerta dan Jawa Kuno yang memiliki makna
+                    suci, murni, atau air kehidupan. Nama ini menjadi simbol semangat kami
+                    untuk menjaga dan mengenalkan kembali kekayaan budaya Jawa.
+                </p>
+
+                <p class="translate-text text-gray-600 leading-relaxed"
+                    data-id="Kami percaya bahwa budaya akan terus hidup ketika dapat dipahami, dirasakan, dan dinikmati oleh siapa saja."
+                    data-jv="Kita percaya budaya bakal terus urip nalika bisa dimangerteni, dirasakake, lan dinikmati sapa wae.">
+                    Kami percaya bahwa budaya akan terus hidup ketika dapat dipahami,
+                    dirasakan, dan dinikmati oleh siapa saja.
+                </p>
+
+                <a href="../about/"
+                    class="inline-flex items-center gap-3 bg-brand-dark text-brand-gold px-7 py-3.5 rounded-full text-sm font-semibold hover:bg-brand-accent hover:text-white transition shadow-lg group">
+
+                    <span class="translate-text"
+                        data-id="Kenali Pawitra"
+                        data-jv="Kenali Pawitra">
+                        Kenali Pawitra
+                    </span>
+
+                    <span class="group-hover:translate-x-1 transition">
+                        →
+                    </span>
+                </a>
+            </div>
+
         </div>
-    </div>
+    </section>
+
+    <!-- GLOSSARY PREVIEW -->
+    <section class="bg-brand-dark bg-batik-pan text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 py-24">
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+                <!-- Text -->
+                <div class="space-y-6 reveal">
+
+                    <span class="translate-text text-brand-gold text-xs font-bold tracking-[0.25em] uppercase"
+                        data-id="Glosarium Budaya"
+                        data-jv="Bausastra Budaya">
+                        Glosarium Budaya
+                    </span>
+
+                    <h2 class="translate-text font-serif text-4xl md:text-5xl font-bold leading-tight text-white"
+                        data-id="Kenali Bahasa di Balik Budaya."
+                        data-jv="Kenali Basa ing Walik Budaya.">
+                        Kenali Bahasa di Balik Budaya.
+                    </h2>
+
+                    <div class="w-16 h-1 bg-brand-gold rounded-full"></div>
+
+                    <p class="translate-text text-gray-300 max-w-xl leading-relaxed"
+                        data-id="Temukan berbagai istilah budaya Jawa, makna di baliknya, serta pelajari Aksara Jawa dan bahasa isyarat BISINDO dalam satu ruang belajar."
+                        data-jv="Temokake maneka warna tetembungan budaya Jawa, makna ing balik, uga sinau Aksara Jawa lan basa isyarat BISINDO ing sawijining ruang sinau.">
+                        Temukan berbagai istilah budaya Jawa, makna di baliknya,
+                        serta pelajari Aksara Jawa dan bahasa isyarat BISINDO
+                        dalam satu ruang belajar.
+                    </p>
+
+                    <a href="../glossary/"
+                        class="inline-flex items-center gap-3 bg-brand-gold text-brand-dark px-7 py-3.5 rounded-full text-sm font-bold hover:bg-white transition shadow-lg group">
+
+                        <span class="translate-text"
+                            data-id="Jelajahi Glosarium"
+                            data-jv="Jelajahi Bausastra">
+                            Jelajahi Glosarium
+                        </span>
+
+                        <span class="group-hover:translate-x-1 transition">
+                            →
+                        </span>
+                    </a>
+
+                </div>
+
+                <!-- Preview Stats -->
+                <div class="grid grid-cols-2 gap-4 reveal">
+
+                    <div class="bg-white/10 border border-white/10 rounded-3xl p-8 text-center backdrop-blur-sm">
+                        <p class="font-serif text-4xl font-bold text-brand-gold">40+</p>
+                        <p class="translate-text text-xs text-gray-400 mt-2 uppercase tracking-widest"
+                            data-id="Kosa Kata"
+                            data-jv="Tembung">
+                            Kosa Kata
+                        </p>
+                    </div>
+
+                    <div class="bg-white/10 border border-white/10 rounded-3xl p-8 text-center backdrop-blur-sm">
+                        <p class="font-serif text-4xl font-bold text-brand-gold">HD</p>
+                        <p class="translate-text text-xs text-gray-400 mt-2 uppercase tracking-widest"
+                            data-id="Video Isyarat"
+                            data-jv="Video Isyarat">
+                            Video Isyarat
+                        </p>
+                    </div>
+
+                    <div class="bg-white/10 border border-white/10 rounded-3xl p-8 text-center backdrop-blur-sm">
+                        <p class="font-serif text-4xl font-bold text-brand-gold">A-Z</p>
+                        <p class="translate-text text-xs text-gray-400 mt-2 uppercase tracking-widest"
+                            data-id="Aksara Jawa"
+                            data-jv="Aksara Jawa">
+                            Aksara Jawa
+                        </p>
+                    </div>
+
+                    <div class="bg-white/10 border border-white/10 rounded-3xl p-8 text-center backdrop-blur-sm">
+                        <p class="font-serif text-4xl font-bold text-brand-gold">∞</p>
+                        <p class="translate-text text-xs text-gray-400 mt-2 uppercase tracking-widest"
+                            data-id="Untuk Semua"
+                            data-jv="Kangge Sedaya">
+                            Untuk Semua
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- CARD -->
+    <main class="max-w-7xl mx-auto px-6 py-15 reveal">
+        
+        <div class="card" >
+            <div class="item">
+                <div class="icon-box"><i data-lucide="headphones"></i></div>
+                <h1 class="translate-text font-serif text-xl font-bold mb-3" data-id="Dengarkan" data-jv="Rungokake">Dengarkan</h1>
+                <p class="translate-text text-sm text-gray-500 leading-relaxed" data-id="Narasi profesional dengan nuansa gamelan yang menenangkan." data-jv="Narasi profesional kanthi swara gamelan sing gawe ayem.">
+                    Narasi profesional dengan nuansa gamelan yang menenangkan.
+                </p>
+            </div>
+
+            <div class="item">
+                <div class="icon-box"><i data-lucide="eye"></i></div>        
+                <h1 class="translate-text font-serif text-xl font-bold mb-3" data-id="Lihat" data-jv="Deleng">Lihat</h1>
+                <p class="translate-text text-sm text-gray-500 leading-relaxed" data-id="Visual wayang dan ilustrasi yang memanjakan mata." data-jv="Visual wayang lan gambar sing nengsemake mripat.">
+                    Visual wayang dan ilustrasi yang memanjakan mata.
+                </p>
+            </div>
+
+            <div class="item">
+                <div class="icon-box"><i data-lucide="hand"></i></div>        
+                <h1 class="translate-text font-serif text-xl font-bold mb-3" data-id="Rasakan" data-jv="Rasakake">Rasakan</h1>
+                <p class="translate-text text-sm text-gray-500 leading-relaxed" data-id="Interaksi yang membuat cerita terasa nyata." data-jv="Interaksi sing nggawe crita krasa dadi kasunyatan.">
+                    Interaksi yang membuat cerita terasa nyata.
+                </p>
+            </div>
+
+            <div class="item">
+                <div class="icon-box"><i data-lucide="heart"></i></div>        
+                <h1 class="translate-text font-serif text-xl font-bold mb-3" data-id="Pahami" data-jv="Pahami">Pahami</h1>
+                <p class="translate-text text-sm text-gray-500 leading-relaxed" data-id="Nilai-nilai luhur dari cerita untuk kehidupan sehari-hari." data-jv="Nilai-nilai luhur saka crita kanggo panguripan saben dina.">
+                    Nilai-nilai luhur dari cerita untuk kehidupan sehari-hari.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- CULTURAL PREVIEW -->
+    <section class="max-w-7xl mx-auto px-6 py-24 reveal">
+        <div class="bg-brand-dark rounded-[2rem] overflow-hidden shadow-2xl">
+            <div class="grid lg:grid-cols-2">
+
+                <!-- IMAGE -->
+                <div class="relative min-h-[350px] overflow-hidden">
+
+                    <img
+                        src="gamelan.jpg"
+                        alt="Gamelan Jawa"
+                        class="absolute inset-0 w-full h-full object-cover opacity-60 hover:scale-105 transition duration-700"
+                    >
+
+                    <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/30 to-brand-dark/80"></div>
+
+                    <div class="absolute bottom-6 left-6">
+                        <span class="bg-brand-gold text-brand-dark px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest">
+                            Audio Visual
+                        </span>
+                    </div>
+
+                </div>
+
+                <!-- CONTENT -->
+                <div class="p-8 md:p-12 flex flex-col justify-center">
+
+                    <span class="translate-text text-brand-gold text-xs font-bold tracking-[0.25em] uppercase mb-4"
+                        data-id="Eksplorasi Budaya"
+                        data-jv="Jlajah Budaya">
+                        Eksplorasi Budaya
+                    </span>
+
+                    <h2 class="translate-text font-serif text-4xl md:text-5xl font-bold text-white mb-5"
+                        data-id="Dengarkan Harmoni Jawa."
+                        data-jv="Rungokake Harmoni Jawa.">
+                        Dengarkan Harmoni Jawa.
+                    </h2>
+
+                    <div class="w-16 h-1 bg-brand-gold rounded-full mb-6"></div>
+
+                    <p class="translate-text text-gray-300 leading-relaxed mb-8"
+                        data-id="Kenali berbagai instrumen Gamelan Jawa, pahami perannya, dan dengarkan karakter suaranya melalui pengalaman interaktif."
+                        data-jv="Kenali maneka warna piranti Gamelan Jawa, pahami perane, lan rungokake karakter swarane liwat pengalaman interaktif.">
+                        Kenali berbagai instrumen Gamelan Jawa, pahami perannya,
+                        dan dengarkan karakter suaranya melalui pengalaman interaktif.
+                    </p>
+
+                    <a href="../cultural-exploration/"
+                        class="inline-flex items-center gap-3 w-max bg-brand-gold text-brand-dark px-7 py-3.5 rounded-full text-sm font-bold hover:bg-white transition shadow-lg group">
+
+                        <span class="translate-text"
+                            data-id="Mulai Eksplorasi"
+                            data-jv="Miwiti Eksplorasi">
+                            Mulai Eksplorasi
+                        </span>
+
+                        <span class="group-hover:translate-x-1 transition">
+                            →
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- FOOTER Section -->
     <footer class="bg-white border-t border-gray-200/60 pt-20 pb-10 relative z-10 reveal">
@@ -401,7 +642,7 @@
                 <div class="md:col-span-3">
                     <h4 class="translate-text text-xs font-bold tracking-widest uppercase text-brand-dark mb-6" data-id="Jelajahi Pawitra" data-jv="Jelajah Pawitra">Jelajahi Pawitra</h4>
                     <ul class="space-y-4 text-sm font-medium text-gray-500">
-                        <li><a href="../home/" class="translate-text hover:text-brand-accent transition" data-id="Beranda" data-jv="Omah">Beranda</a></li>
+                        <li><a href="../home/" class="translate-text hover:text-brand-accent transition" data-id="Beranda" data-jv="Kaca Utama">Beranda</a></li>
                         <li><a href="../glossary/" class="translate-text hover:text-brand-accent transition" data-id="Glosarium" data-jv="Bausastra">Glosarium</a></li>
                         <li><a href="../about/" class="translate-text hover:text-brand-accent transition" data-id="Tentang Kami" data-jv="Babagan">Tentang Kami</a></li>
                         <li><a href="../cultural-exploration" class="translate-text hover:text-brand-accent transition" data-id="Eksplorasi Budaya" data-jv="Jlajah Budaya">Eksplorasi Budaya</a></li>
