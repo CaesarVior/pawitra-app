@@ -49,7 +49,6 @@
         }
         .animate-spin-slow { animation: spinSlow 12s linear infinite; }
 
-        /* --- ANIMASI MARQUEE DIPERCEPAT & SEAMLESS --- */
         @keyframes marquee {
             0% { transform: translateX(0%); }
             100% { transform: translateX(-50%); }
@@ -87,21 +86,18 @@
             visibility: hidden;
         }
 
-        /* Background Pattern Standar untuk Body */
         .bg-pattern {
             background-image: radial-gradient(#d4af37 1px, transparent 1px);
             background-size: 30px 30px;
             background-color: #F8F7F4;
         }
 
-        /* Background Khusus Header */
         .header-warm-bg {
             background-image: radial-gradient(#c2a878 1.2px, transparent 1.2px);
             background-size: 32px 32px;
             background-color: #EFECE6; 
         }
 
-        /* --- AKSESIBILITAS: MODE DISLEKSIA --- */
         body.dyslexia-mode,
         body.dyslexia-mode * {
             font-family: 'Arial', sans-serif !important;
@@ -110,7 +106,6 @@
             line-height: 1.8 !important;
         }
 
-        /* --- AKSESIBILITAS: MODE BUTA WARNA (COLORBLIND FRIENDLY / HIGH CONTRAST) --- */
         body.colorblind-mode {
             background-color: #0A192F !important;
             background-image: none !important;
@@ -328,7 +323,9 @@
                     
                     <div class="mt-8 bg-brand-dark p-5 rounded-2xl border border-brand-accent shadow-lg text-white">
                         <p class="translate-text text-[10px] font-bold tracking-widest uppercase text-brand-gold mb-4" data-id="Putar Suara" data-jv="Puter Swara">Putar Suara</p>
+                        
                         <audio id="audio-player" src=""></audio>
+
                         <div class="flex items-center gap-4">
                             <button onclick="togglePlay()" id="play-btn" class="w-14 h-14 flex-shrink-0 bg-brand-gold text-brand-dark rounded-full flex items-center justify-center hover:scale-105 transition transform shadow-md focus:outline-none">
                                 <svg id="icon-play" class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"/></svg>
@@ -342,7 +339,7 @@
                                 </div>
                                 <div class="flex justify-between mt-2 text-xs text-white/60 font-medium">
                                     <span id="time-current">0:00</span>
-                                    <span class="translate-text" data-id="Tutup Audio" data-jv="Tutup Swara" id="time-total">Tutup Audio</span>
+                                    <span id="time-total">0:00</span>
                                 </div>
                             </div>
                         </div>
@@ -472,59 +469,47 @@
             const loader = document.getElementById("loader");
             const progressBar = document.getElementById("loader-progress");
             
-            setTimeout(() => {
-                progressBar.style.width = "100%";
-            }, 100);
-
-            setTimeout(() => {
-                loader.classList.add("fade-out");
-            }, 900);
+            setTimeout(() => { progressBar.style.width = "100%"; }, 100);
+            setTimeout(() => { loader.classList.add("fade-out"); }, 900);
         });
 
         document.addEventListener("DOMContentLoaded", function() {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
-
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
+                    if (entry.isIntersecting) { entry.target.classList.add('active'); }
                 });
             }, observerOptions);
 
-            document.querySelectorAll('.reveal').forEach(element => {
-                observer.observe(element);
-            });
+            document.querySelectorAll('.reveal').forEach(element => { observer.observe(element); });
         });
-
+// ==========================================
+        // DATA INSTRUMEN & FILE AUDIO LOKAL
+        // ==========================================
         const instrumentsData = {
             gong: {
                 title: "Gong",
                 category: "Penanda Waktu",
                 desc: "Gong adalah instrumen terbesar dalam gamelan yang terbuat dari perunggu. Berfungsi sebagai penanda akhir dari sebuah siklus gending. Bunyinya yang menggema dipercaya melambangkan kedamaian alam semesta.",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
+                audio: "../../assets/audio/gong.mp3"
             },
             bonang: {
                 title: "Bonang",
                 category: "Alat Pukul Melodis",
                 desc: "Bonang terdiri dari deretan pot perunggu kecil yang diletakkan di atas rak kayu. Instrumen ini berfungsi sebagai penuntun melodi utama atau memberikan pola ritmis yang mengikat instrumen lainnya.",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+                audio: "../../assets/audio/bonang.mp3"
             },
             saron: {
                 title: "Saron",
                 category: "Alat Pukul Bilah",
                 desc: "Saron adalah instrumen berbilah logam yang dipukul menggunakan tabuh dari kayu. Saron memegang peran penting dalam memainkan balungan (kerangka melodi dasar) dari sebuah gending Jawa.",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+                audio: "../../assets/audio/saron.mp3"
             },
             kendang: {
                 title: "Kendang",
                 category: "Alat Tabuh (Pemimpin)",
                 desc: "Kendang mengatur tempo, cepat-lambatnya permainan, serta memberikan tanda perpindahan bagian dalam lagu. Instrumen ini ibarat nyawa yang memimpin alur sebuah pertunjukan gamelan.",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
+                audio: "../../assets/audio/kendang.mp3"
             }
         };
 
@@ -534,6 +519,7 @@
         const iconPause = document.getElementById('icon-pause');
         const progressBar = document.getElementById('audio-progress');
         const timeCurrent = document.getElementById('time-current');
+        const timeTotal = document.getElementById('time-total');
 
         let isPlaying = false;
 
@@ -553,19 +539,23 @@
             document.getElementById('info-desc').innerText = data.desc;
             document.getElementById('bg-letter').innerText = data.title.charAt(0);
 
+            // Masukkan file audio lokal ke elemen audio
             audioPlayer.src = data.audio;
             resetAudioUI();
         }
 
         function togglePlay() {
-            if (audioPlayer.src === "" || audioPlayer.src.includes(window.location.href)) return;
+            if (!audioPlayer.src || audioPlayer.src.includes(window.location.href)) return;
 
             if (isPlaying) {
                 audioPlayer.pause();
                 iconPlay.classList.remove('hidden');
                 iconPause.classList.add('hidden');
             } else {
-                audioPlayer.play();
+                audioPlayer.play().catch(error => {
+                    console.error("Gagal memutar audio. Pastikan file audio ada di folder assets/audio/!", error);
+                    alert("File audio tidak ditemukan di direktori assets/audio/!");
+                });
                 iconPlay.classList.add('hidden');
                 iconPause.classList.remove('hidden');
             }
@@ -574,26 +564,35 @@
 
         function resetAudioUI() {
             audioPlayer.pause();
+            audioPlayer.currentTime = 0;
             isPlaying = false;
             iconPlay.classList.remove('hidden');
             iconPause.classList.add('hidden');
             progressBar.style.width = '0%';
             timeCurrent.innerText = "0:00";
+            timeTotal.innerText = "0:00";
         }
 
+        // Update progress bar saat audio berjalan
         audioPlayer.addEventListener('timeupdate', () => {
-            if(audioPlayer.duration) {
-                const progressPercent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-                progressBar.style.width = progressPercent + '%';
-                
-                let currentMins = Math.floor(audioPlayer.currentTime / 60);
-                let currentSecs = Math.floor(audioPlayer.currentTime % 60);
-                if(currentSecs < 10) currentSecs = "0" + currentSecs;
-                timeCurrent.innerText = currentMins + ":" + currentSecs;
+            if (audioPlayer.duration) {
+                const percent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+                progressBar.style.width = percent + '%';
+                timeCurrent.innerText = formatTime(audioPlayer.currentTime);
+                timeTotal.innerText = formatTime(audioPlayer.duration);
             }
         });
 
-        audioPlayer.addEventListener('ended', resetAudioUI);
+        audioPlayer.addEventListener('ended', () => {
+            resetAudioUI();
+        });
+
+        function formatTime(secs) {
+            let m = Math.floor(secs / 60);
+            let s = Math.floor(secs % 60);
+            if (s < 10) s = "0" + s;
+            return m + ":" + s;
+        }
         
         // ==========================================
         // LOGIKA AKSESIBILITAS & LOCALSTORAGE
@@ -616,11 +615,8 @@
             });
         };
 
-        a11yBtn.addEventListener('click', () => {
-            a11yMenu.classList.toggle('hidden');
-        });
+        a11yBtn.addEventListener('click', () => { a11yMenu.classList.toggle('hidden'); });
 
-        // --- INISIALISASI DARI LOCALSTORAGE ---
         if (localStorage.getItem('dyslexiaMode') === 'true') {
             document.body.classList.add('dyslexia-mode');
             dyslexiaToggle.checked = true;
@@ -636,24 +632,15 @@
             applyTranslation(true); 
         }
 
-        // --- EVENT LISTENER & PENYIMPANAN KE LOCALSTORAGE ---
         dyslexiaToggle.addEventListener('change', (e) => {
             const isActive = e.target.checked;
-            if (isActive) {
-                document.body.classList.add('dyslexia-mode');
-            } else {
-                document.body.classList.remove('dyslexia-mode');
-            }
+            document.body.classList.toggle('dyslexia-mode', isActive);
             localStorage.setItem('dyslexiaMode', isActive); 
         });
 
         colorblindToggle.addEventListener('change', (e) => {
             const isActive = e.target.checked;
-            if (isActive) {
-                document.body.classList.add('colorblind-mode');
-            } else {
-                document.body.classList.remove('colorblind-mode');
-            }
+            document.body.classList.toggle('colorblind-mode', isActive);
             localStorage.setItem('colorblindMode', isActive); 
         });
 
