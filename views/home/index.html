@@ -10,6 +10,18 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
+    <!-- MediaPipe Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- File Eksternal AutoScroll.js -->
+    <script src="../assets/js/AutoScroll.js"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -1206,20 +1218,6 @@
         </svg>
       </button>
     </div>
-
-    <!-- MediaPipe Libraries -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"
-      crossorigin="anonymous"
-    ></script>
-
-    <!-- File Eksternal AutoScript.js -->
-    <script src="../assets/js/AutoScroll.js"></script>
-
     <script>
       // ==========================================
       // UI LOGIC UTAMA HALAMAN
@@ -1357,7 +1355,7 @@
 
       if (localStorage.getItem("cameraActiveMode") === "true" && cameraToggle) {
         cameraToggle.checked = true;
-        // Memanggil fungsi setCameraState dari AutoScript.js jika tersedia saat dimuat
+        // Memanggil fungsi setCameraState dari AutoScroll.js jika tersedia saat dimuat
         if (typeof setCameraState === "function") {
           setCameraState(true);
         }

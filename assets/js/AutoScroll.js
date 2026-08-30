@@ -1,5 +1,5 @@
 /**
- * AutoScript.js - Eye Tracking Auto Scroll System using MediaPipe Face Mesh
+ * AutoScroll.js - Eye Tracking Auto Scroll System using MediaPipe Face Mesh
  * Pawitra Accessibility Feature (Section-by-Section Navigation)
  */
 
