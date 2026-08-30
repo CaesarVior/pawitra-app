@@ -1,524 +1,1098 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tentang Kami - Pawitra</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MediaPipe Face Mesh & Camera Utils -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../../assets/js/AutoScroll.js"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        serif: ['"Playfair Display"', 'serif'],
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            bg: '#F8F7F4', 
-                            dark: '#2C3029', 
-                            accent: '#4C5946', 
-                            gold: '#d4af37',
-                            card: '#FFFFFF'
-                        }
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['"Playfair Display"', "serif"],
+              sans: ["Inter", "sans-serif"],
+            },
+            colors: {
+              brand: {
+                bg: "#F8F7F4",
+                dark: "#2C3029",
+                accent: "#4C5946",
+                gold: "#d4af37",
+                card: "#FFFFFF",
+              },
+            },
+          },
+        },
+      };
     </script>
     <style>
-        /* Luxury Loader */
-        #loader {
-            position: fixed;
-            inset: 0;
-            background-color: #1a1c18;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-        #loader.fade-out {
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        /* Animasi Garis Loader */
-        @keyframes lineGrow {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-        .loader-line { 
-            animation: lineGrow 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards; 
-        }
+      /* Luxury Loader */
+      #loader {
+        position: fixed;
+        inset: 0;
+        background-color: #1a1c18;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition:
+          opacity 0.8s ease,
+          visibility 0.8s ease;
+      }
+      #loader.fade-out {
+        opacity: 0;
+        visibility: hidden;
+      }
 
-        /* Scroll Reveal Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      /* Animasi Garis Loader */
+      @keyframes lineGrow {
+        0% {
+          width: 0%;
         }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        100% {
+          width: 100%;
         }
+      }
+      .loader-line {
+        animation: lineGrow 1.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+      }
 
-        /* Animasi Melayang */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        .animate-float { animation: float 4s ease-in-out infinite; }
+      /* Scroll Reveal Animation */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
-        /* Background Pattern */
-        .bg-pattern {
-            background-image: radial-gradient(#d4af37 1px, transparent 1px);
-            background-size: 30px 30px;
-            background-color: #F8F7F4;
+      /* Animasi Melayang */
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
         }
-        
-        /* Batik Glow Header */
-        .header-glow {
-            background: radial-gradient(circle at center, rgba(212,175,55,0.08) 0%, rgba(248,247,244,1) 70%);
+        50% {
+          transform: translateY(-10px);
         }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+      .animate-float {
+        animation: float 4s ease-in-out infinite;
+      }
 
-        /* --- AKSESIBILITAS: MODE DISLEKSIA --- */
-        body.dyslexia-mode,
-        body.dyslexia-mode * {
-            font-family: 'Arial', sans-serif !important;
-            letter-spacing: 0.12em !important;
-            word-spacing: 0.3em !important;
-            line-height: 1.8 !important;
-        }
+      /* Background Pattern */
+      .bg-pattern {
+        background-image: radial-gradient(#d4af37 1px, transparent 1px);
+        background-size: 30px 30px;
+        background-color: #f8f7f4;
+      }
 
-        /* --- AKSESIBILITAS: MODE BUTA WARNA (COLORBLIND FRIENDLY / HIGH CONTRAST) --- */
-        body.colorblind-mode {
-            background-color: #0A192F !important;
-            background-image: none !important;
-            color: #E6F1FF !important;
-        }
-        body.colorblind-mode [class*="bg-white"],
-        body.colorblind-mode [class*="bg-[#"],
-        body.colorblind-mode [class*="bg-brand-bg"],
-        body.colorblind-mode .header-glow {
-            background-color: #112240 !important;
-            border-color: #64FFDA !important;
-            background-image: none !important;
-        }
-        body.colorblind-mode p,
-        body.colorblind-mode li,
-        body.colorblind-mode span:not(.text-brand-gold):not(.text-brand-accent) {
-            color: #CCD6F6 !important;            
-        }
-        body.colorblind-mode h1, 
-        body.colorblind-mode h2, 
-        body.colorblind-mode h3, 
-        body.colorblind-mode h4,
-        body.colorblind-mode strong {
-            color: #64FFDA !important;            
-        }
-        body.colorblind-mode nav,
-        body.colorblind-mode #mobileMenu {
-            background-color: rgba(10, 25, 47, 0.95) !important;
-            border-bottom-color: #64FFDA !important;
-        }
-        body.colorblind-mode nav a,
-        body.colorblind-mode #mobileMenu a,
-        body.colorblind-mode nav button,
-        body.colorblind-mode nav span {
-            color: #E6F1FF !important;
-        }
-        body.colorblind-mode nav a:hover,
-        body.colorblind-mode #mobileMenu a:hover,
-        body.colorblind-mode nav a.text-brand-accent,
-        body.colorblind-mode #mobileMenu a.text-brand-accent {
-            color: #FFD166 !important;
-            border-bottom-color: #FFD166 !important;
-        }
-        body.colorblind-mode .bg-brand-dark {
-            background-color: #1D3557 !important;
-            border: 2px solid #FFD166 !important;  
-        }
-        body.colorblind-mode .text-brand-gold,
-        body.colorblind-mode .text-brand-dark {
-            color: #FFD166 !important;            
-        }
+      /* Batik Glow Header */
+      .header-glow {
+        background: radial-gradient(
+          circle at center,
+          rgba(212, 175, 55, 0.08) 0%,
+          rgba(248, 247, 244, 1) 70%
+        );
+      }
+
+      /* --- AKSESIBILITAS: MODE DISLEKSIA --- */
+      body.dyslexia-mode,
+      body.dyslexia-mode * {
+        font-family: "Arial", sans-serif !important;
+        letter-spacing: 0.12em !important;
+        word-spacing: 0.3em !important;
+        line-height: 1.8 !important;
+      }
+
+      /* --- AKSESIBILITAS: MODE BUTA WARNA (COLORBLIND FRIENDLY / HIGH CONTRAST) --- */
+      body.colorblind-mode {
+        background-color: #0a192f !important;
+        background-image: none !important;
+        color: #e6f1ff !important;
+      }
+      body.colorblind-mode [class*="bg-white"],
+      body.colorblind-mode [class*="bg-[#"],
+      body.colorblind-mode [class*="bg-brand-bg"],
+      body.colorblind-mode .header-glow {
+        background-color: #112240 !important;
+        border-color: #64ffda !important;
+        background-image: none !important;
+      }
+      body.colorblind-mode p,
+      body.colorblind-mode li,
+      body.colorblind-mode span:not(.text-brand-gold):not(.text-brand-accent) {
+        color: #ccd6f6 !important;
+      }
+      body.colorblind-mode h1,
+      body.colorblind-mode h2,
+      body.colorblind-mode h3,
+      body.colorblind-mode h4,
+      body.colorblind-mode strong {
+        color: #64ffda !important;
+      }
+      body.colorblind-mode nav,
+      body.colorblind-mode #mobileMenu {
+        background-color: rgba(10, 25, 47, 0.95) !important;
+        border-bottom-color: #64ffda !important;
+      }
+      body.colorblind-mode nav a,
+      body.colorblind-mode #mobileMenu a,
+      body.colorblind-mode nav button,
+      body.colorblind-mode nav span {
+        color: #e6f1ff !important;
+      }
+      body.colorblind-mode nav a:hover,
+      body.colorblind-mode #mobileMenu a:hover,
+      body.colorblind-mode nav a.text-brand-accent,
+      body.colorblind-mode #mobileMenu a.text-brand-accent {
+        color: #ffd166 !important;
+        border-bottom-color: #ffd166 !important;
+      }
+      body.colorblind-mode .bg-brand-dark {
+        background-color: #1d3557 !important;
+        border: 2px solid #ffd166 !important;
+      }
+      body.colorblind-mode .text-brand-gold,
+      body.colorblind-mode .text-brand-dark {
+        color: #ffd166 !important;
+      }
     </style>
-</head>
+  </head>
 
-<body class="bg-pattern text-brand-dark font-sans antialiased relative min-h-screen flex flex-col transition-colors duration-300">
-
+  <body
+    class="bg-pattern text-brand-dark font-sans antialiased relative min-h-screen flex flex-col transition-colors duration-300"
+  >
     <div id="loader">
-        <div class="text-center space-y-4 px-6">
-            <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#d4af37] tracking-wider">Pawitra<span class="text-white">.</span></h1>
-            <p class="translate-text text-xs text-gray-400 uppercase tracking-widest font-light" data-id="Memuat Halaman Tentang Kami..." data-jv="Mbukak Kaca Babagan...">Memuat Halaman Tentang Kami...</p>
-            <div class="w-48 h-[2px] bg-white/10 mx-auto rounded-full overflow-hidden mt-6">
-                <div id="loader-progress" class="h-full bg-[#d4af37] w-0 transition-all duration-1000"></div>
-            </div>
+      <div class="text-center space-y-4 px-6">
+        <h1
+          class="font-serif text-4xl md:text-5xl font-bold text-[#d4af37] tracking-wider"
+        >
+          Pawitra<span class="text-white">.</span>
+        </h1>
+        <p
+          class="translate-text text-xs text-gray-400 uppercase tracking-widest font-light"
+          data-id="Memuat Halaman Tentang Kami..."
+          data-jv="Mbukak Kaca Babagan..."
+        >
+          Memuat Halaman Tentang Kami...
+        </p>
+        <div
+          class="w-48 h-[2px] bg-white/10 mx-auto rounded-full overflow-hidden mt-6"
+        >
+          <div
+            id="loader-progress"
+            class="h-full bg-[#d4af37] w-0 transition-all duration-1000"
+          ></div>
         </div>
+      </div>
     </div>
 
-    <div class="absolute inset-0 bg-white/60 pointer-events-none z-[-1] min-h-screen"></div>
+    <!-- FLOATING CAMERA PREVIEW (WEBCAM INTEGRATION) -->
+    <div
+      id="cameraPreviewContainer"
+      class="fixed top-20 right-6 z-40 hidden flex-col items-end gap-2"
+    >
+      <div
+        class="relative w-44 h-32 bg-black rounded-xl overflow-hidden border-2 border-[#d4af37] shadow-xl"
+      >
+        <video
+          id="webcam"
+          class="w-full h-full object-cover -scale-x-100"
+          autoplay
+          playsinline
+        ></video>
+        <!-- Progress Bar Delay Pejam Kedua Mata -->
+        <div
+          id="progressBar"
+          class="absolute top-0 left-0 h-1.5 bg-amber-400 w-0 transition-all duration-75"
+        ></div>
+        <div
+          id="statusBadge"
+          class="absolute bottom-1 left-1 right-1 bg-black/80 text-[10px] text-center text-green-400 py-1 rounded font-mono"
+        >
+          Mata Terbuka
+        </div>
+      </div>
+      <div
+        class="bg-black/80 text-[11px] p-2.5 rounded-xl border border-gray-700 text-gray-300 max-w-xs space-y-1 shadow-lg"
+      >
+        <p>👁️ <b>Mata Kanan:</b> Scroll Down 👇</p>
+        <p>👁️ <b>Mata Kiri:</b> Scroll Up 👆</p>
+        <p
+          class="text-amber-400 font-semibold border-t border-gray-700 pt-1 mt-1"
+        >
+          😴 <b>Pejam 2 Mata (1.5s):</b> Reset Ke Paling Atas 🔝
+        </p>
+      </div>
+    </div>
 
-    <nav class="fixed top-0 left-0 w-full z-50 bg-brand-bg/90 backdrop-blur-md border-b border-gray-200/50 transition-colors">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative">
-            <div class="flex items-center gap-2">
-                <span class="font-serif text-2xl font-bold tracking-wide text-brand-dark">Pawitra<span class="text-brand-accent">.</span></span>
-            </div>
-            <div class="hidden lg:flex items-center space-x-8 text-sm font-medium text-gray-700">
-                <a href="../home/" class="translate-text hover:text-brand-accent transition" data-id="Beranda" data-jv="Kaca Utama">Beranda</a>
-                <a href="../glossary/" class="translate-text hover:text-brand-accent transition" data-id="Glosarium" data-jv="Bausastra">Glosarium</a>
-                <a href="../about/" class="translate-text border-b-2 border-brand-accent pb-1 text-brand-accent font-bold transition" data-id="Tentang Kami" data-jv="Babagan">Tentang Kami</a>
-                <a href="../cultural-exploration" class="translate-text hover:text-brand-accent transition" data-id="Eksplorasi Budaya" data-jv="Jlajah Budaya">Eksplorasi Budaya</a>
-                <a href="../inclusive-stories" class="translate-text hover:text-brand-accent transition" data-id="Cerita Rakyat" data-jv="Crita Inklusif">Cerita Rakyat</a>
-            </div>
-            <div class="hidden lg:block">
-                <a href="../glossary/#kamus" class="translate-text bg-brand-dark text-white px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide hover:bg-brand-accent transition" data-id="Mulai Belajar" data-jv="Ayo Sinau">Mulai Belajar</a>
-            </div>
-            <button id="mobileMenuBtn" class="lg:hidden text-brand-dark focus:outline-none hover:text-brand-accent transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
+    <div
+      class="absolute inset-0 bg-white/60 pointer-events-none z-[-1] min-h-screen"
+    ></div>
+
+    <nav
+      class="fixed top-0 left-0 w-full z-50 bg-brand-bg/90 backdrop-blur-md border-b border-gray-200/50 transition-colors"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative"
+      >
+        <div class="flex items-center gap-2">
+          <span
+            class="font-serif text-2xl font-bold tracking-wide text-brand-dark"
+            >Pawitra<span class="text-brand-accent">.</span></span
+          >
         </div>
-        
-        <div id="mobileMenu" class="hidden lg:hidden px-6 pb-6 pt-2 bg-brand-bg border-t border-gray-200/60 mt-4 absolute w-full transition-colors">
-            <div class="flex flex-col space-y-4 text-sm font-medium text-gray-700">
-                <a href="../home/" class="translate-text hover:text-brand-accent" data-id="Beranda" data-jv="Kaca Utama">Beranda</a>
-                <a href="../glossary/" class="translate-text hover:text-brand-accent" data-id="Glosarium" data-jv="Bausastra">Glosarium</a>
-                <a href="../about/" class="translate-text text-brand-accent font-bold" data-id="Tentang Kami" data-jv="Babagan">Tentang Kami</a>
-                <a href="../cultural-exploration" class="translate-text hover:text-brand-accent" data-id="Eksplorasi Budaya" data-jv="Jlajah Budaya">Eksplorasi Budaya</a>
-                <a href="../inclusive-stories" class="translate-text hover:text-brand-accent" data-id="Cerita Rakyat" data-jv="Crita Inklusif">Cerita Rakyat</a>
-            </div>
+        <div
+          class="hidden lg:flex items-center space-x-8 text-sm font-medium text-gray-700"
+        >
+          <a
+            href="../home/"
+            class="translate-text hover:text-brand-accent transition"
+            data-id="Beranda"
+            data-jv="Kaca Utama"
+            >Beranda</a
+          >
+          <a
+            href="../glossary/"
+            class="translate-text hover:text-brand-accent transition"
+            data-id="Glosarium"
+            data-jv="Bausastra"
+            >Glosarium</a
+          >
+          <a
+            href="../about/"
+            class="translate-text border-b-2 border-brand-accent pb-1 text-brand-accent font-bold transition"
+            data-id="Tentang Kami"
+            data-jv="Babagan"
+            >Tentang Kami</a
+          >
+          <a
+            href="../cultural-exploration"
+            class="translate-text hover:text-brand-accent transition"
+            data-id="Eksplorasi Budaya"
+            data-jv="Jlajah Budaya"
+            >Eksplorasi Budaya</a
+          >
+          <a
+            href="../inclusive-stories"
+            class="translate-text hover:text-brand-accent transition"
+            data-id="Cerita Rakyat"
+            data-jv="Crita Inklusif"
+            >Cerita Rakyat</a
+          >
         </div>
+        <div class="hidden lg:block">
+          <a
+            href="../glossary/#kamus"
+            class="translate-text bg-brand-dark text-white px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide hover:bg-brand-accent transition"
+            data-id="Mulai Belajar"
+            data-jv="Ayo Sinau"
+            >Mulai Belajar</a
+          >
+        </div>
+        <button
+          id="mobileMenuBtn"
+          class="lg:hidden text-brand-dark focus:outline-none hover:text-brand-accent transition"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <div
+        id="mobileMenu"
+        class="hidden lg:hidden px-6 pb-6 pt-2 bg-brand-bg border-t border-gray-200/60 mt-4 absolute w-full transition-colors"
+      >
+        <div class="flex flex-col space-y-4 text-sm font-medium text-gray-700">
+          <a
+            href="../home/"
+            class="translate-text hover:text-brand-accent"
+            data-id="Beranda"
+            data-jv="Kaca Utama"
+            >Beranda</a
+          >
+          <a
+            href="../glossary/"
+            class="translate-text hover:text-brand-accent"
+            data-id="Glosarium"
+            data-jv="Bausastra"
+            >Glosarium</a
+          >
+          <a
+            href="../about/"
+            class="translate-text text-brand-accent font-bold"
+            data-id="Tentang Kami"
+            data-jv="Babagan"
+            >Tentang Kami</a
+          >
+          <a
+            href="../cultural-exploration"
+            class="translate-text hover:text-brand-accent"
+            data-id="Eksplorasi Budaya"
+            data-jv="Jlajah Budaya"
+            >Eksplorasi Budaya</a
+          >
+          <a
+            href="../inclusive-stories"
+            class="translate-text hover:text-brand-accent"
+            data-id="Cerita Rakyat"
+            data-jv="Crita Inklusif"
+            >Cerita Rakyat</a
+          >
+        </div>
+      </div>
     </nav>
 
-    <header class="min-h-screen flex flex-col justify-center items-center relative overflow-hidden pt-24 pb-16 header-glow border-b border-brand-gold/20 z-10 transition-colors">
-        <div class="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center relative z-10 reveal">
-            
-            <div class="text-left space-y-6">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-gold/50 bg-brand-gold/10 text-brand-gold text-xs font-bold tracking-widest uppercase shadow-sm animate-float">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-gold"></span>
-                    </span>
-                    <span class="translate-text" data-id="Mengenal Kami" data-jv="Kenal Kita">Mengenal Kami</span>
-                </div>
-                
-                <h1 class="translate-text font-serif text-5xl md:text-6xl lg:text-7xl font-black text-brand-dark tracking-tight leading-tight relative inline-block"
-                    data-id="Merajut Budaya, <br> <span class='italic text-brand-accent'>Membuka Ruang.</span>"
-                    data-jv="Merajut Budaya, <br> <span class='italic text-brand-accent'>Mbukak Ruang.</span>">
-                    Merajut Budaya, <br> <span class="italic text-brand-accent">Membuka Ruang.</span>
-                </h1>
-                
-                <p class="translate-text text-gray-600 max-w-xl text-lg md:text-xl leading-relaxed font-light"
-                   data-id="Pawitra hadir sebagai jembatan yang menghubungkan keindahan warisan budaya Jawa dengan aksesibilitas tanpa batas untuk semua kalangan, termasuk kawan Tuli."
-                   data-jv="Pawitra hadir minangka kreteg sing nggandheng kaendahan warisan budaya Jawa kanthi aksesibilitas tanpa wates kanggo kabeh kalangan, kalebu kanca Tuli.">
-                    Pawitra hadir sebagai jembatan yang menghubungkan keindahan warisan budaya Jawa dengan aksesibilitas tanpa batas untuk semua kalangan, termasuk kawan Tuli.
-                </p>
-            </div>
+    <header
+      class="min-h-screen flex flex-col justify-center items-center relative overflow-hidden pt-24 pb-16 header-glow border-b border-brand-gold/20 z-10 transition-colors"
+    >
+      <div
+        class="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center relative z-10 reveal"
+      >
+        <div class="text-left space-y-6">
+          <div
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-gold/50 bg-brand-gold/10 text-brand-gold text-xs font-bold tracking-widest uppercase shadow-sm animate-float"
+          >
+            <span class="relative flex h-2 w-2">
+              <span
+                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75"
+              ></span>
+              <span
+                class="relative inline-flex rounded-full h-2 w-2 bg-brand-gold"
+              ></span>
+            </span>
+            <span
+              class="translate-text"
+              data-id="Mengenal Kami"
+              data-jv="Kenal Kita"
+              >Mengenal Kami</span
+            >
+          </div>
 
-            <div class="relative w-full h-[400px] lg:h-[500px] bg-gradient-to-br from-[#4a3e2e] to-[#2a2118] rounded-[3rem] shadow-2xl border border-brand-gold/30 overflow-hidden group flex items-center justify-center transition-colors">
-                
-                <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20"></div>
-                <div class="absolute top-1/4 left-1/4 w-40 h-40 bg-brand-gold/20 rounded-full blur-3xl animate-pulse"></div>
-                <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-brand-gold/10 rounded-full blur-3xl animate-pulse delay-500"></div>
+          <h1
+            class="translate-text font-serif text-5xl md:text-6xl lg:text-7xl font-black text-brand-dark tracking-tight leading-tight relative inline-block"
+            data-id="Merajut Budaya, <br> <span class='italic text-brand-accent'>Membuka Ruang.</span>"
+            data-jv="Merajut Budaya, <br> <span class='italic text-brand-accent'>Mbukak Ruang.</span>"
+          >
+            Merajut Budaya, <br />
+            <span class="italic text-brand-accent">Membuka Ruang.</span>
+          </h1>
 
-                <img src="../../img/warisan-budaya.jpg" alt="Warisan Budaya" class="absolute w-44 lg:w-56 h-56 lg:h-72 object-cover rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-2 border-brand-gold/20 animate-float top-8 left-8 lg:top-12 lg:left-12 -rotate-6 group-hover:rotate-0 group-hover:scale-105 transition duration-700 ease-out z-10">
-                
-                <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Ruang Bersama" class="absolute w-48 lg:w-64 h-60 lg:h-80 object-cover rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-2 border-brand-gold/20 animate-float delay-300 bottom-8 right-8 lg:bottom-12 lg:right-12 rotate-6 group-hover:-rotate-3 group-hover:scale-105 transition duration-700 ease-out z-20">
-                
-                <div class="absolute bottom-6 left-6 bg-black/50 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/10 text-brand-gold text-[10px] lg:text-xs font-bold tracking-widest uppercase z-30 flex items-center gap-2 shadow-lg">
-                    <span class="relative flex h-2.5 w-2.5">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-gold"></span>
-                    </span>
-                    <span class="translate-text" data-id="Ruang Inklusif" data-jv="Ruang Inklusif">Ruang Inklusif</span>
-                </div>
-            </div>
-            
+          <p
+            class="translate-text text-gray-600 max-w-xl text-lg md:text-xl leading-relaxed font-light"
+            data-id="Pawitra hadir sebagai jembatan yang menghubungkan keindahan warisan budaya Jawa dengan aksesibilitas tanpa batas untuk semua kalangan, termasuk kawan Tuli."
+            data-jv="Pawitra hadir minangka kreteg sing nggandheng kaendahan warisan budaya Jawa kanthi aksesibilitas tanpa wates kanggo kabeh kalangan, kalebu kanca Tuli."
+          >
+            Pawitra hadir sebagai jembatan yang menghubungkan keindahan warisan
+            budaya Jawa dengan aksesibilitas tanpa batas untuk semua kalangan,
+            termasuk kawan Tuli.
+          </p>
         </div>
+
+        <div
+          class="relative w-full h-[400px] lg:h-[500px] bg-gradient-to-br from-[#4a3e2e] to-[#2a2118] rounded-[3rem] shadow-2xl border border-brand-gold/30 overflow-hidden group flex items-center justify-center transition-colors"
+        >
+          <div
+            class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20"
+          ></div>
+          <div
+            class="absolute top-1/4 left-1/4 w-40 h-40 bg-brand-gold/20 rounded-full blur-3xl animate-pulse"
+          ></div>
+          <div
+            class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-brand-gold/10 rounded-full blur-3xl animate-pulse delay-500"
+          ></div>
+
+          <img
+            src="../../img/warisan-budaya.jpg"
+            alt="Warisan Budaya"
+            class="absolute w-44 lg:w-56 h-56 lg:h-72 object-cover rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-2 border-brand-gold/20 animate-float top-8 left-8 lg:top-12 lg:left-12 -rotate-6 group-hover:rotate-0 group-hover:scale-105 transition duration-700 ease-out z-10"
+          />
+
+          <img
+            src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            alt="Ruang Bersama"
+            class="absolute w-48 lg:w-64 h-60 lg:h-80 object-cover rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-2 border-brand-gold/20 animate-float delay-300 bottom-8 right-8 lg:bottom-12 lg:right-12 rotate-6 group-hover:-rotate-3 group-hover:scale-105 transition duration-700 ease-out z-20"
+          />
+
+          <div
+            class="absolute bottom-6 left-6 bg-black/50 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/10 text-brand-gold text-[10px] lg:text-xs font-bold tracking-widest uppercase z-30 flex items-center gap-2 shadow-lg"
+          >
+            <span class="relative flex h-2.5 w-2.5">
+              <span
+                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-gold opacity-75"
+              ></span>
+              <span
+                class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-gold"
+              ></span>
+            </span>
+            <span
+              class="translate-text"
+              data-id="Ruang Inklusif"
+              data-jv="Ruang Inklusif"
+              >Ruang Inklusif</span
+            >
+          </div>
+        </div>
+      </div>
     </header>
 
-    <main class="flex-grow max-w-7xl mx-auto w-full px-6 py-20 space-y-24 relative z-10">
-        
-        <section class="grid lg:grid-cols-2 gap-12 items-center reveal">
-            <div class="relative order-2 lg:order-1">
-                <div class="w-full aspect-[4/5] bg-brand-dark rounded-br-[5rem] rounded-tl-[5rem] overflow-hidden shadow-2xl relative">
-                    <img src="../../img/gunung-penanggungan.jpg" alt="Gunung Penanggungan" class="w-full h-full object-cover opacity-80 mix-blend-luminosity hover:mix-blend-normal transition duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent"></div>
-                </div>
-                <div class="absolute -bottom-8 -right-8 bg-brand-gold p-6 rounded-full shadow-xl animate-float">
-                    <svg class="w-10 h-10 text-brand-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                </div>
-            </div>
-            
-            <div class="space-y-6 order-1 lg:order-2">
-                <h2 class="translate-text font-serif text-4xl font-bold text-brand-dark" data-id="Filosofi <br> Nama 'Pawitra'" data-jv="Filosofi <br> Asma 'Pawitra'">Filosofi <br> Nama "Pawitra"</h2>
-                <div class="w-16 h-1 bg-brand-gold rounded-full"></div>
-                <p class="translate-text text-gray-600 leading-relaxed" 
-                   data-id="Dalam bahasa Sanskerta dan Jawa Kuno, <strong>'Pawitra'</strong> memiliki makna <em>suci, murni, atau air kehidupan</em>. Nama ini juga merupakan nama kuno dari Gunung Penanggungan di Jawa Timur, sebuah gunung suci yang kaya akan situs peninggalan budaya."
-                   data-jv="Ing basa Sansekerta lan Jawa Kuna, <strong>'Pawitra'</strong> tegese <em>suci, murni, utawa banyu urip</em>. Asma iki uga dadi aran kuna saka Gunung Penanggungan ing Jawa Wetan, gunung suci sing sugih situs tilas budaya.">
-                    Dalam bahasa Sanskerta dan Jawa Kuno, <strong>"Pawitra"</strong> memiliki makna <em>suci, murni, atau air kehidupan</em>. Nama ini juga merupakan nama kuno dari Gunung Penanggungan di Jawa Timur, sebuah gunung suci yang kaya akan situs peninggalan budaya.
-                </p>
-                <p class="translate-text text-gray-600 leading-relaxed" 
-                   data-id="Pemilihan nama ini mencerminkan komitmen kami. Seperti air yang suci dan jernih, kami ingin menghadirkan edukasi budaya yang transparan, mudah dipahami, dan mengalir ke semua lapisan masyarakat tanpa terhalang sekat fisik maupun bahasa."
-                   data-jv="Pamilihan asma iki nuduhake komitmen kita. Kaya banyu sing suci lan bening, kita pengin nampilake pendidikan budaya sing transparan, gampang dingerteni, lan mili menyang kabeh lapisan masyarakat tanpa diwatesi sekat fisik utawa basa.">
-                    Pemilihan nama ini mencerminkan komitmen kami. Seperti air yang suci dan jernih, kami ingin menghadirkan edukasi budaya yang transparan, mudah dipahami, dan mengalir ke semua lapisan masyarakat tanpa terhalang sekat fisik maupun bahasa.
-                </p>
-            </div>
-        </section>
+    <main
+      class="flex-grow max-w-7xl mx-auto w-full px-6 py-20 space-y-24 relative z-10"
+    >
+      <section class="grid lg:grid-cols-2 gap-12 items-center reveal">
+        <div class="relative order-2 lg:order-1">
+          <div
+            class="w-full aspect-[4/5] bg-brand-dark rounded-br-[5rem] rounded-tl-[5rem] overflow-hidden shadow-2xl relative"
+          >
+            <img
+              src="../../img/gunung-penanggungan.jpg"
+              alt="Gunung Penanggungan"
+              class="w-full h-full object-cover opacity-80 mix-blend-luminosity hover:mix-blend-normal transition duration-700"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent"
+            ></div>
+          </div>
+          <div
+            class="absolute -bottom-8 -right-8 bg-brand-gold p-6 rounded-full shadow-xl animate-float"
+          >
+            <svg
+              class="w-10 h-10 text-brand-dark"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+              ></path>
+            </svg>
+          </div>
+        </div>
 
-        <section class="reveal">
-            <div class="text-center mb-16">
-                <h2 class="translate-text font-serif text-4xl font-bold text-brand-dark" data-id="Visi & Misi" data-jv="Visi & Misi">Visi & Misi</h2>
-                <p class="translate-text text-gray-500 mt-4 max-w-xl mx-auto" data-id="Tujuan mulia yang menjadi kompas dalam setiap langkah kami mengembangkan platform edukasi budaya ini." data-jv="Tujuan mulia sing dadi pedoman ing saben langkah kita ngembangake platform pendidikan budaya iki.">Tujuan mulia yang menjadi kompas dalam setiap langkah kami mengembangkan platform edukasi budaya ini.</p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-[#f0e8d2] p-10 rounded-3xl shadow-sm border border-brand-gold/30 hover:shadow-xl transition duration-300 md:-translate-y-4 transition-colors">
-                    <span class="text-5xl mb-6 block">👁️</span>
-                    <h3 class="translate-text font-serif text-2xl font-bold mb-4" data-id="Visi Kami" data-jv="Visi Kita">Visi Kami</h3>
-                    <p class="translate-text text-gray-600 leading-relaxed" 
-                       data-id="Menjadi pelopor platform edukasi budaya Nusantara yang inklusif, memastikan bahwa setiap individu, termasuk kelompok disabilitas, memiliki akses yang setara untuk mengenal, mencintai, dan melestarikan warisan budaya Indonesia."
-                       data-jv="Dadi pelopor platform pendidikan budaya Nusantara sing inklusif, mesthekake yen saben individu, kalebu kelompok disabilitas, duwe akses sing padha kanggo ngengen, tresna, lan njaga warisan budaya Indonesia.">
-                        Menjadi pelopor platform edukasi budaya Nusantara yang inklusif, memastikan bahwa setiap individu, termasuk kelompok disabilitas, memiliki akses yang setara untuk mengenal, mencintai, dan melestarikan warisan budaya Indonesia.
-                    </p>
-                </div>
-                
-                <div class="bg-brand-dark text-white p-10 rounded-3xl shadow-lg border border-brand-accent hover:shadow-2xl transition duration-300 transform md:-translate-y-4 transition-colors">
-                    <span class="text-5xl mb-6 block">🚀</span>
-                    <h3 class="translate-text font-serif text-2xl font-bold mb-4 text-brand-gold" data-id="Misi Kami" data-jv="Misi Kita">Misi Kami</h3>
-                    <ul class="space-y-4 text-gray-300 text-sm">
-                        <li class="flex gap-3">
-                            <span class="text-brand-gold">✦</span> 
-                            <span class="translate-text" data-id=" Menyediakan glosarium budaya Jawa yang terintegrasi dengan BISINDO (Bahasa Isyarat Indonesia)." data-jv=" Nyedhiyakake bausastra budaya Jawa sing terintegrasi karo BISINDO (Basa Isyarat Indonesia)."> Menyediakan glosarium budaya Jawa yang terintegrasi dengan BISINDO (Bahasa Isyarat Indonesia).</span>
-                        </li>
-                        <li class="flex gap-3">
-                            <span class="text-brand-gold">✦</span> 
-                            <span class="translate-text" data-id=" Merancang pengalaman eksplorasi audio-visual yang interaktif dan mendidik." data-jv=" Ngrancang pengalaman eksplorasi audio-visual sing interaktif lan ndidik."> Merancang pengalaman eksplorasi audio-visual yang interaktif dan mendidik.</span>
-                        </li>
-                        <li class="flex gap-3">
-                            <span class="text-brand-gold">✦</span> 
-                            <span class="translate-text" data-id=" Mengangkat kisah-kisah tokoh kebudayaan dari berbagai latar belakang, termasuk penyandang disabilitas." data-jv=" Ngangkat crita para tokoh kebudayaan saka maneka warna latar mburi, kalebu penyandang disabilitas."> Mengangkat kisah-kisah tokoh kebudayaan dari berbagai latar belakang, termasuk penyandang disabilitas.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+        <div class="space-y-6 order-1 lg:order-2">
+          <h2
+            class="translate-text font-serif text-4xl font-bold text-brand-dark"
+            data-id="Filosofi <br> Nama 'Pawitra'"
+            data-jv="Filosofi <br> Asma 'Pawitra'"
+          >
+            Filosofi <br />
+            Nama "Pawitra"
+          </h2>
+          <div class="w-16 h-1 bg-brand-gold rounded-full"></div>
+          <p
+            class="translate-text text-gray-600 leading-relaxed"
+            data-id="Dalam bahasa Sanskerta dan Jawa Kuno, <strong>'Pawitra'</strong> memiliki makna <em>suci, murni, atau air kehidupan</em>. Nama ini juga merupakan nama kuno dari Gunung Penanggungan di Jawa Timur, sebuah gunung suci yang kaya akan situs peninggalan budaya."
+            data-jv="Ing basa Sansekerta lan Jawa Kuna, <strong>'Pawitra'</strong> tegese <em>suci, murni, utawa banyu urip</em>. Asma iki uga dadi aran kuna saka Gunung Penanggungan ing Jawa Wetan, gunung suci sing sugih situs tilas budaya."
+          >
+            Dalam bahasa Sanskerta dan Jawa Kuno,
+            <strong>"Pawitra"</strong> memiliki makna
+            <em>suci, murni, atau air kehidupan</em>. Nama ini juga merupakan
+            nama kuno dari Gunung Penanggungan di Jawa Timur, sebuah gunung suci
+            yang kaya akan situs peninggalan budaya.
+          </p>
+          <p
+            class="translate-text text-gray-600 leading-relaxed"
+            data-id="Pemilihan nama ini mencerminkan komitmen kami. Seperti air yang suci dan jernih, kami ingin menghadirkan edukasi budaya yang transparan, mudah dipahami, dan mengalir ke semua lapisan masyarakat tanpa terhalang sekat fisik maupun bahasa."
+            data-jv="Pamilihan asma iki nuduhake komitmen kita. Kaya banyu sing suci lan bening, kita pengin nampilake pendidikan budaya sing transparan, gampang dingerteni, lan mili menyang kabeh lapisan masyarakat tanpa diwatesi sekat fisik utawa basa."
+          >
+            Pemilihan nama ini mencerminkan komitmen kami. Seperti air yang suci
+            dan jernih, kami ingin menghadirkan edukasi budaya yang transparan,
+            mudah dipahami, dan mengalir ke semua lapisan masyarakat tanpa
+            terhalang sekat fisik maupun bahasa.
+          </p>
+        </div>
+      </section>
 
-        <section class="reveal">
-            <div class="bg-[#f0e8d2] rounded-[3rem] p-12 md:p-16 border border-brand-gold/20 shadow-inner text-center transition-colors">
-                <h2 class="translate-text font-serif text-3xl font-bold text-brand-dark mb-12" data-id="Nilai Inti yang Kami Pegang" data-jv="Nilai Inti sing Kita Gugah">Nilai Inti yang Kami Pegang</h2>
-                
-                <div class="grid md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-brand-gold/30">
-                    <div class="px-6 py-4 md:py-0">
-                        <h4 class="translate-text font-serif text-xl font-bold text-brand-dark mb-3" data-id="Empati" data-jv="Empati">Empati</h4>
-                        <p class="translate-text text-sm text-gray-600" data-id="Berangkat dari rasa saling memahami untuk menciptakan ruang yang aman dan nyaman bagi semua orang." data-jv="Miwiti saka rasa saling ngerteni kanggo nggawe papan sing aman lan nyaman kanggo kabeh wong.">Berangkat dari rasa saling memahami untuk menciptakan ruang yang aman dan nyaman bagi semua orang.</p>
-                    </div>
-                    <div class="px-6 py-4 md:py-0">
-                        <h4 class="translate-text font-serif text-xl font-bold text-brand-dark mb-3" data-id="Harmoni" data-jv="Harmoni">Harmoni</h4>
-                        <p class="translate-text text-sm text-gray-600" data-id="Menyelaraskan nilai-nilai luhur budaya tradisional dengan kebutuhan masyarakat modern." data-jv="Nyelarasake nilai-nilai luhur budaya tradisional karo kabutuhan masyarakat modern.">Menyelaraskan nilai-nilai luhur budaya tradisional dengan kebutuhan masyarakat modern.</p>
-                    </div>
-                    <div class="px-6 py-4 md:py-0">
-                        <h4 class="translate-text font-serif text-xl font-bold text-brand-dark mb-3" data-id="Inovasi" data-jv="Inovasi">Inovasi</h4>
-                        <p class="translate-text text-sm text-gray-600" data-id="Terus memanfaatkan teknologi untuk mendobrak batasan dalam dunia edukasi dan pelestarian budaya." data-jv="Terus ngoptimalake teknologi kanggo nerobos watesan ing jagad pendidikan lan pelestarian budaya.">Terus memanfaatkan teknologi untuk mendobrak batasan dalam dunia edukasi dan pelestarian budaya.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <section class="reveal">
+        <div class="text-center mb-16">
+          <h2
+            class="translate-text font-serif text-4xl font-bold text-brand-dark"
+            data-id="Visi & Misi"
+            data-jv="Visi & Misi"
+          >
+            Visi & Misi
+          </h2>
+          <p
+            class="translate-text text-gray-500 mt-4 max-w-xl mx-auto"
+            data-id="Tujuan mulia yang menjadi kompas dalam setiap langkah kami mengembangkan platform edukasi budaya ini."
+            data-jv="Tujuan mulia sing dadi pedoman ing saben langkah kita ngembangake platform pendidikan budaya iki."
+          >
+            Tujuan mulia yang menjadi kompas dalam setiap langkah kami
+            mengembangkan platform edukasi budaya ini.
+          </p>
+        </div>
 
+        <div class="grid md:grid-cols-2 gap-8">
+          <div
+            class="bg-[#f0e8d2] p-10 rounded-3xl shadow-sm border border-brand-gold/30 hover:shadow-xl transition duration-300 md:-translate-y-4 transition-colors"
+          >
+            <span class="text-5xl mb-6 block">👁️</span>
+            <h3
+              class="translate-text font-serif text-2xl font-bold mb-4"
+              data-id="Visi Kami"
+              data-jv="Visi Kita"
+            >
+              Visi Kami
+            </h3>
+            <p
+              class="translate-text text-gray-600 leading-relaxed"
+              data-id="Menjadi pelopor platform edukasi budaya Nusantara yang inklusif, memastikan bahwa setiap individu, termasuk kelompok disabilitas, memiliki akses yang setara untuk mengenal, mencintai, dan melestarikan warisan budaya Indonesia."
+              data-jv="Dadi pelopor platform pendidikan budaya Nusantara sing inklusif, mesthekake yen saben individu, kalebu kelompok disabilitas, duwe akses sing padha kanggo ngengen, tresna, lan njaga warisan budaya Indonesia."
+            >
+              Menjadi pelopor platform edukasi budaya Nusantara yang inklusif,
+              memastikan bahwa setiap individu, termasuk kelompok disabilitas,
+              memiliki akses yang setara untuk mengenal, mencintai, dan
+              melestarikan warisan budaya Indonesia.
+            </p>
+          </div>
+
+          <div
+            class="bg-brand-dark text-white p-10 rounded-3xl shadow-lg border border-brand-accent hover:shadow-2xl transition duration-300 transform md:-translate-y-4 transition-colors"
+          >
+            <span class="text-5xl mb-6 block">🚀</span>
+            <h3
+              class="translate-text font-serif text-2xl font-bold mb-4 text-brand-gold"
+              data-id="Misi Kami"
+              data-jv="Misi Kita"
+            >
+              Misi Kami
+            </h3>
+            <ul class="space-y-4 text-gray-300 text-sm">
+              <li class="flex gap-3">
+                <span class="text-brand-gold">✦</span>
+                <span
+                  class="translate-text"
+                  data-id=" Menyediakan glosarium budaya Jawa yang terintegrasi dengan BISINDO (Bahasa Isyarat Indonesia)."
+                  data-jv=" Nyedhiyakake bausastra budaya Jawa sing terintegrasi karo BISINDO (Basa Isyarat Indonesia)."
+                >
+                  Menyediakan glosarium budaya Jawa yang terintegrasi dengan
+                  BISINDO (Bahasa Isyarat Indonesia).</span
+                >
+              </li>
+              <li class="flex gap-3">
+                <span class="text-brand-gold">✦</span>
+                <span
+                  class="translate-text"
+                  data-id=" Merancang pengalaman eksplorasi audio-visual yang interaktif dan mendidik."
+                  data-jv=" Ngrancang pengalaman eksplorasi audio-visual sing interaktif lan ndidik."
+                >
+                  Merancang pengalaman eksplorasi audio-visual yang interaktif
+                  dan mendidik.</span
+                >
+              </li>
+              <li class="flex gap-3">
+                <span class="text-brand-gold">✦</span>
+                <span
+                  class="translate-text"
+                  data-id=" Mengangkat kisah-kisah tokoh kebudayaan dari berbagai latar belakang, termasuk penyandang disabilitas."
+                  data-jv=" Ngangkat crita para tokoh kebudayaan saka maneka warna latar mburi, kalebu penyandang disabilitas."
+                >
+                  Mengangkat kisah-kisah tokoh kebudayaan dari berbagai latar
+                  belakang, termasuk penyandang disabilitas.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <div
+          class="bg-[#f0e8d2] rounded-[3rem] p-12 md:p-16 border border-brand-gold/20 shadow-inner text-center transition-colors"
+        >
+          <h2
+            class="translate-text font-serif text-3xl font-bold text-brand-dark mb-12"
+            data-id="Nilai Inti yang Kami Pegang"
+            data-jv="Nilai Inti sing Kita Gugah"
+          >
+            Nilai Inti yang Kami Pegang
+          </h2>
+
+          <div
+            class="grid md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-brand-gold/30"
+          >
+            <div class="px-6 py-4 md:py-0">
+              <h4
+                class="translate-text font-serif text-xl font-bold text-brand-dark mb-3"
+                data-id="Empati"
+                data-jv="Empati"
+              >
+                Empati
+              </h4>
+              <p
+                class="translate-text text-sm text-gray-600"
+                data-id="Berangkat dari rasa saling memahami untuk menciptakan ruang yang aman dan nyaman bagi semua orang."
+                data-jv="Miwiti saka rasa saling ngerteni kanggo nggawe papan sing aman lan nyaman kanggo kabeh wong."
+              >
+                Berangkat dari rasa saling memahami untuk menciptakan ruang yang
+                aman dan nyaman bagi semua orang.
+              </p>
+            </div>
+            <div class="px-6 py-4 md:py-0">
+              <h4
+                class="translate-text font-serif text-xl font-bold text-brand-dark mb-3"
+                data-id="Harmoni"
+                data-jv="Harmoni"
+              >
+                Harmoni
+              </h4>
+              <p
+                class="translate-text text-sm text-gray-600"
+                data-id="Menyelaraskan nilai-nilai luhur budaya tradisional dengan kebutuhan masyarakat modern."
+                data-jv="Nyelarasake nilai-nilai luhur budaya tradisional karo kabutuhan masyarakat modern."
+              >
+                Menyelaraskan nilai-nilai luhur budaya tradisional dengan
+                kebutuhan masyarakat modern.
+              </p>
+            </div>
+            <div class="px-6 py-4 md:py-0">
+              <h4
+                class="translate-text font-serif text-xl font-bold text-brand-dark mb-3"
+                data-id="Inovasi"
+                data-jv="Inovasi"
+              >
+                Inovasi
+              </h4>
+              <p
+                class="translate-text text-sm text-gray-600"
+                data-id="Terus memanfaatkan teknologi untuk mendobrak batasan dalam dunia edukasi dan pelestarian budaya."
+                data-jv="Terus ngoptimalake teknologi kanggo nerobos watesan ing jagad pendidikan lan pelestarian budaya."
+              >
+                Terus memanfaatkan teknologi untuk mendobrak batasan dalam dunia
+                edukasi dan pelestarian budaya.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <footer class="bg-white border-t border-gray-200/60 pt-20 pb-10 relative z-10 reveal mt-10 transition-colors duration-300">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="bg-brand-bg rounded-[2rem] p-8 md:p-12 mb-16 flex flex-col md:flex-row items-center justify-between gap-8 border border-gray-100 shadow-sm relative overflow-hidden transition-colors">
-                <div class="absolute right-0 top-0 w-32 h-32 bg-brand-gold/10 rounded-full blur-2xl animate-pulse"></div>
-                <div class="max-w-md relative z-10">
-                    <h3 class="translate-text font-serif text-3xl font-bold text-brand-dark mb-2" data-id="Tetap Terhubung." data-jv="Tetep Nyambung.">Tetap Terhubung.</h3>
-                    <p class="translate-text text-gray-600 text-sm leading-relaxed" data-id="Dapatkan pembaruan terbaru mengenai kosa kata budaya langsung di kotak masukmu." data-jv="Entuk warta anyar babagan kosa kata budaya langsung menyang kothak mlebumu.">Dapatkan pembaruan terbaru mengenai kosa kata budaya langsung di kotak masukmu.</p>
-                </div>
-                <div class="w-full md:w-auto flex-1 max-w-md relative z-10">
-                    <input type="email" placeholder="Alamat email Anda..." class="translate-text w-full pl-6 pr-32 py-4 rounded-full border border-gray-200 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition text-sm" data-id="Alamat email Anda..." data-jv="Alamat email panjenengan...">
-                    <button class="translate-text absolute right-2 top-2 bottom-2 bg-brand-dark text-brand-gold px-6 rounded-full text-xs font-bold hover:bg-brand-accent hover:text-white transition" data-id="Subscribe &rarr;" data-jv="Langganan &rarr;">Subscribe &rarr;</button>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
-                <div class="md:col-span-5 space-y-6">
-                    <a href="../home/" class="inline-block"><h2 class="font-serif text-3xl font-bold text-brand-dark tracking-wide">Pawitra<span class="text-brand-accent">.</span></h2></a>
-                    <p class="translate-text text-gray-500 text-sm leading-relaxed max-w-sm" data-id="Menjembatani nilai-nilai luhur budaya Jawa dengan ruang yang inklusif untuk semua." data-jv="Dadi kreteg kanggo nilai-nilai luhur budaya Jawa kanthi papan sing inklusif kanggo kabeh.">Menjembatani nilai-nilai luhur budaya Jawa dengan ruang yang inklusif untuk semua.</p>
-                </div>
-                <div class="md:col-span-3">
-                    <h4 class="translate-text text-xs font-bold tracking-widest uppercase text-brand-dark mb-6" data-id="Jelajahi Pawitra" data-jv="Jelajah Pawitra">Jelajahi Pawitra</h4>
-                    <ul class="space-y-4 text-sm font-medium text-gray-500">
-                        <li><a href="../home/" class="translate-text hover:text-brand-accent transition" data-id="Beranda" data-jv="Kaca Utama">Beranda</a></li>
-                        <li><a href="../glossary/" class="translate-text hover:text-brand-accent transition" data-id="Glosarium" data-jv="Bausastra">Glosarium</a></li>
-                        <li><a href="../about/" class="translate-text hover:text-brand-accent transition" data-id="Tentang Kami" data-jv="Babagan">Tentang Kami</a></li>
-                        <li><a href="../cultural-exploration" class="translate-text hover:text-brand-accent transition" data-id="Eksplorasi Budaya" data-jv="Jlajah Budaya">Eksplorasi Budaya</a></li>
-                        <li><a href="../inclusive-stories" class="translate-text hover:text-brand-accent transition" data-id="Cerita Rakyat" data-jv="Crita Inklusif">Cerita Rakyat</a></li>
-                    </ul>
-                </div>
-                <div class="md:col-span-4">
-                    <h4 class="translate-text text-xs font-bold tracking-widest uppercase text-brand-dark mb-6" data-id="Hubungi Kami" data-jv="Hubungi Kita">Hubungi Kami</h4>
-                    <ul class="space-y-4 text-sm text-gray-500">
-                        <li class="flex items-start gap-3"><span class="text-brand-accent mt-0.5">📍</span><span>Sawojajar, Kota Malang<br>Jawa Timur, Indonesia</span></li>
-                        <li class="flex items-center gap-3"><span class="text-brand-accent">✉️</span><a href="mailto:halo@pawitra.id" class="hover:text-brand-accent transition">halo@pawitra.id</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="translate-text text-xs text-gray-400 font-medium" data-id="&copy; 2026 Pawitra App. Dibuat dengan 💚 untuk Budaya." data-jv="&copy; 2026 Pawitra App. Digawe kanthi 💚 kanggo Budaya.">&copy; 2026 Pawitra App. Dibuat dengan 💚 untuk Budaya.</p>
-            </div>
+    <footer
+      class="bg-white border-t border-gray-200/60 pt-20 pb-10 relative z-10 reveal mt-10 transition-colors duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-6">
+        <div
+          class="bg-brand-bg rounded-[2rem] p-8 md:p-12 mb-16 flex flex-col md:flex-row items-center justify-between gap-8 border border-gray-100 shadow-sm relative overflow-hidden transition-colors"
+        >
+          <div
+            class="absolute right-0 top-0 w-32 h-32 bg-brand-gold/10 rounded-full blur-2xl animate-pulse"
+          ></div>
+          <div class="max-w-md relative z-10">
+            <h3
+              class="translate-text font-serif text-3xl font-bold text-brand-dark mb-2"
+              data-id="Tetap Terhubung."
+              data-jv="Tetep Nyambung."
+            >
+              Tetap Terhubung.
+            </h3>
+            <p
+              class="translate-text text-gray-600 text-sm leading-relaxed"
+              data-id="Dapatkan pembaruan terbaru mengenai kosa kata budaya langsung di kotak masukmu."
+              data-jv="Entuk warta anyar babagan kosa kata budaya langsung menyang kothak mlebumu."
+            >
+              Dapatkan pembaruan terbaru mengenai kosa kata budaya langsung di
+              kotak masukmu.
+            </p>
+          </div>
+          <div class="w-full md:w-auto flex-1 max-w-md relative z-10">
+            <input
+              type="email"
+              placeholder="Alamat email Anda..."
+              class="translate-text w-full pl-6 pr-32 py-4 rounded-full border border-gray-200 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition text-sm"
+              data-id="Alamat email Anda..."
+              data-jv="Alamat email panjenengan..."
+            />
+            <button
+              class="translate-text absolute right-2 top-2 bottom-2 bg-brand-dark text-brand-gold px-6 rounded-full text-xs font-bold hover:bg-brand-accent hover:text-white transition"
+              data-id="Subscribe &rarr;"
+              data-jv="Langganan &rarr;"
+            >
+              Subscribe &rarr;
+            </button>
+          </div>
         </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+          <div class="md:col-span-5 space-y-6">
+            <a href="../home/" class="inline-block"
+              ><h2
+                class="font-serif text-3xl font-bold text-brand-dark tracking-wide"
+              >
+                Pawitra<span class="text-brand-accent">.</span>
+              </h2></a
+            >
+            <p
+              class="translate-text text-gray-500 text-sm leading-relaxed max-w-sm"
+              data-id="Menjembatani nilai-nilai luhur budaya Jawa dengan ruang yang inklusif untuk semua."
+              data-jv="Dadi kreteg kanggo nilai-nilai luhur budaya Jawa kanthi papan sing inklusif kanggo kabeh."
+            >
+              Menjembatani nilai-nilai luhur budaya Jawa dengan ruang yang
+              inklusif untuk semua.
+            </p>
+          </div>
+          <div class="md:col-span-3">
+            <h4
+              class="translate-text text-xs font-bold tracking-widest uppercase text-brand-dark mb-6"
+              data-id="Jelajahi Pawitra"
+              data-jv="Jelajah Pawitra"
+            >
+              Jelajahi Pawitra
+            </h4>
+            <ul class="space-y-4 text-sm font-medium text-gray-500">
+              <li>
+                <a
+                  href="../home/"
+                  class="translate-text hover:text-brand-accent transition"
+                  data-id="Beranda"
+                  data-jv="Kaca Utama"
+                  >Beranda</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../glossary/"
+                  class="translate-text hover:text-brand-accent transition"
+                  data-id="Glosarium"
+                  data-jv="Bausastra"
+                  >Glosarium</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../about/"
+                  class="translate-text hover:text-brand-accent transition"
+                  data-id="Tentang Kami"
+                  data-jv="Babagan"
+                  >Tentang Kami</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../cultural-exploration"
+                  class="translate-text hover:text-brand-accent transition"
+                  data-id="Eksplorasi Budaya"
+                  data-jv="Jlajah Budaya"
+                  >Eksplorasi Budaya</a
+                >
+              </li>
+              <li>
+                <a
+                  href="../inclusive-stories"
+                  class="translate-text hover:text-brand-accent transition"
+                  data-id="Cerita Rakyat"
+                  data-jv="Crita Inklusif"
+                  >Cerita Rakyat</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="md:col-span-4">
+            <h4
+              class="translate-text text-xs font-bold tracking-widest uppercase text-brand-dark mb-6"
+              data-id="Hubungi Kami"
+              data-jv="Hubungi Kita"
+            >
+              Hubungi Kami
+            </h4>
+            <ul class="space-y-4 text-sm text-gray-500">
+              <li class="flex items-start gap-3">
+                <span class="text-brand-accent mt-0.5">📍</span
+                ><span>Sawojajar, Kota Malang<br />Jawa Timur, Indonesia</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="text-brand-accent">✉️</span
+                ><a
+                  href="mailto:halo@pawitra.id"
+                  class="hover:text-brand-accent transition"
+                  >halo@pawitra.id</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
+        >
+          <p
+            class="translate-text text-xs text-gray-400 font-medium"
+            data-id="&copy; 2026 Pawitra App. Dibuat dengan 💚 untuk Budaya."
+            data-jv="&copy; 2026 Pawitra App. Digawe kanthi 💚 kanggo Budaya."
+          >
+            &copy; 2026 Pawitra App. Dibuat dengan 💚 untuk Budaya.
+          </p>
+        </div>
+      </div>
     </footer>
 
     <div class="fixed bottom-6 right-6 z-[100] flex flex-col items-end">
-        <div id="a11yMenu" class="hidden mb-4 bg-white rounded-2xl shadow-2xl p-5 border border-brand-gold/30 w-64 transform transition-all duration-300 origin-bottom-right">
-            <h4 class="text-sm font-bold font-serif mb-4 text-brand-dark border-b border-gray-100 pb-2 flex items-center gap-2">
-                <svg class="w-4 h-4 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                Aksesibilitas
-            </h4>
-            
-            <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-semibold text-gray-700">Mode Disleksia</span>
-                <label class="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" id="dyslexiaToggle" class="sr-only peer">
-                    <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-accent"></div>
-                </label>
-            </div>
-            
-            <div class="flex items-center justify-between mb-4">
-                <span class="text-xs font-semibold text-gray-700">Mode Buta Warna</span>
-                <label class="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" id="colorblindToggle" class="sr-only peer">
-                    <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-accent"></div>
-                </label>
-            </div>
+      <div
+        id="a11yMenu"
+        class="hidden mb-4 bg-white rounded-2xl shadow-2xl p-5 border border-brand-gold/30 w-64 transform transition-all duration-300 origin-bottom-right"
+      >
+        <h4
+          class="text-sm font-bold font-serif mb-4 text-brand-dark border-b border-gray-100 pb-2 flex items-center gap-2"
+        >
+          <svg
+            class="w-4 h-4 text-brand-accent"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            ></path>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+            ></path>
+          </svg>
+          Aksesibilitas
+        </h4>
 
-            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                <span class="text-xs font-semibold text-gray-700">Bahasa Jawa</span>
-                <label class="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" id="javaneseToggle" class="sr-only peer">
-                    <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-accent"></div>
-                </label>
-            </div>
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-semibold text-gray-700"
+            >Mode Disleksia</span
+          >
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="dyslexiaToggle" class="sr-only peer" />
+            <div
+              class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-accent"
+            ></div>
+          </label>
         </div>
 
-        <button id="a11yBtn" class="w-14 h-14 bg-brand-dark text-brand-gold rounded-full shadow-[0_10px_25px_rgba(0,0,0,0.3)] flex items-center justify-center hover:scale-105 hover:bg-brand-accent hover:text-white transition-all duration-300 focus:outline-none ring-4 ring-white/50 group">
-            <svg class="w-7 h-7 group-hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-        </button>
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-semibold text-gray-700"
+            >Mode Buta Warna</span
+          >
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="colorblindToggle" class="sr-only peer" />
+            <div
+              class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-accent"
+            ></div>
+          </label>
+        </div>
+
+        <!-- Toggle Mode Auto Scroll (Kamera Eye Tracking) -->
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xs font-semibold text-gray-700"
+            >Mode Auto Scroll Kamera</span
+          >
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="cameraToggle" class="sr-only peer" />
+            <div
+              class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-accent"
+            ></div>
+          </label>
+        </div>
+
+        <div
+          class="flex items-center justify-between pt-4 border-t border-gray-100"
+        >
+          <span class="text-xs font-semibold text-gray-700">Bahasa Jawa</span>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="javaneseToggle" class="sr-only peer" />
+            <div
+              class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-accent"
+            ></div>
+          </label>
+        </div>
+      </div>
+
+      <button
+        id="a11yBtn"
+        class="w-14 h-14 bg-brand-dark text-brand-gold rounded-full shadow-[0_10px_25px_rgba(0,0,0,0.3)] flex items-center justify-center hover:scale-105 hover:bg-brand-accent hover:text-white transition-all duration-300 focus:outline-none ring-4 ring-white/50 group"
+      >
+        <svg
+          class="w-7 h-7 group-hover:rotate-180 transition-transform duration-500"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+          ></path>
+        </svg>
+      </button>
     </div>
 
     <script>
-        // Logika Mobile Menu
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+      // Logika Mobile Menu
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      mobileMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
 
-        // Logika Luxury Loader
-        window.addEventListener("load", function() {
-            const loader = document.getElementById("loader");
-            const progressBar = document.getElementById("loader-progress");
-            
-            setTimeout(() => {
-                progressBar.style.width = "100%";
-            }, 100);
+      // Logika Luxury Loader
+      window.addEventListener("load", function () {
+        const loader = document.getElementById("loader");
+        const progressBar = document.getElementById("loader-progress");
 
-            setTimeout(() => {
-                loader.classList.add("fade-out");
-            }, 900);
-        });
+        setTimeout(() => {
+          progressBar.style.width = "100%";
+        }, 100);
 
-        // Logika Scroll Reveal (Intersection Observer)
-        document.addEventListener("DOMContentLoaded", function() {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
+        setTimeout(() => {
+          loader.classList.add("fade-out");
+        }, 900);
+      });
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.reveal').forEach(element => {
-                observer.observe(element);
-            });
-        });
-
-        // ==========================================
-        // LOGIKA AKSESIBILITAS & LOCALSTORAGE
-        // ==========================================
-        const a11yBtn = document.getElementById('a11yBtn');
-        const a11yMenu = document.getElementById('a11yMenu');
-        const dyslexiaToggle = document.getElementById('dyslexiaToggle');
-        const colorblindToggle = document.getElementById('colorblindToggle');
-        const javaneseToggle = document.getElementById('javaneseToggle');
-        
-        const translatableElements = document.querySelectorAll('.translate-text');
-
-        const applyTranslation = (isJavanese) => {
-            translatableElements.forEach(el => {
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    el.placeholder = isJavanese ? el.getAttribute('data-jv') : el.getAttribute('data-id');
-                } else {
-                    el.innerHTML = isJavanese ? el.getAttribute('data-jv') : el.getAttribute('data-id');
-                }
-            });
+      // Logika Scroll Reveal (Intersection Observer)
+      document.addEventListener("DOMContentLoaded", function () {
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px",
+          threshold: 0.15,
         };
 
-        a11yBtn.addEventListener('click', () => {
-            a11yMenu.classList.toggle('hidden');
-        });
-
-        // --- INISIALISASI DARI LOCALSTORAGE ---
-        if (localStorage.getItem('dyslexiaMode') === 'true') {
-            document.body.classList.add('dyslexia-mode');
-            dyslexiaToggle.checked = true;
-        }
-        
-        if (localStorage.getItem('colorblindMode') === 'true') {
-            document.body.classList.add('colorblind-mode');
-            colorblindToggle.checked = true;
-        }
-
-        if (localStorage.getItem('javaneseMode') === 'true') {
-            javaneseToggle.checked = true;
-            applyTranslation(true); 
-        }
-
-        // --- EVENT LISTENER & PENYIMPANAN KE LOCALSTORAGE ---
-        dyslexiaToggle.addEventListener('change', (e) => {
-            const isActive = e.target.checked;
-            if (isActive) {
-                document.body.classList.add('dyslexia-mode');
-            } else {
-                document.body.classList.remove('dyslexia-mode');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
             }
-            localStorage.setItem('dyslexiaMode', isActive); 
-        });
+          });
+        }, observerOptions);
 
-        colorblindToggle.addEventListener('change', (e) => {
-            const isActive = e.target.checked;
-            if (isActive) {
-                document.body.classList.add('colorblind-mode');
-            } else {
-                document.body.classList.remove('colorblind-mode');
-            }
-            localStorage.setItem('colorblindMode', isActive); 
+        document.querySelectorAll(".reveal").forEach((element) => {
+          observer.observe(element);
         });
+      });
 
-        javaneseToggle.addEventListener('change', (e) => {
-            const isJavanese = e.target.checked;
-            applyTranslation(isJavanese); 
-            localStorage.setItem('javaneseMode', isJavanese); 
+      // ==========================================
+      // LOGIKA AKSESIBILITAS & LOCALSTORAGE
+      // ==========================================
+      const a11yBtn = document.getElementById("a11yBtn");
+      const a11yMenu = document.getElementById("a11yMenu");
+      const dyslexiaToggle = document.getElementById("dyslexiaToggle");
+      const colorblindToggle = document.getElementById("colorblindToggle");
+      const javaneseToggle = document.getElementById("javaneseToggle");
+
+      const translatableElements = document.querySelectorAll(".translate-text");
+
+      const applyTranslation = (isJavanese) => {
+        translatableElements.forEach((el) => {
+          if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+            el.placeholder = isJavanese
+              ? el.getAttribute("data-jv")
+              : el.getAttribute("data-id");
+          } else {
+            el.innerHTML = isJavanese
+              ? el.getAttribute("data-jv")
+              : el.getAttribute("data-id");
+          }
         });
+      };
+
+      a11yBtn.addEventListener("click", () => {
+        a11yMenu.classList.toggle("hidden");
+      });
+
+      // --- INISIALISASI DARI LOCALSTORAGE ---
+      if (localStorage.getItem("cameraActiveMode") === "true") {
+        cameraToggle.checked = true;
+        if (typeof setCameraState === "function") {
+          setCameraState(true);
+        }
+      }
+
+      if (localStorage.getItem("dyslexiaMode") === "true") {
+        document.body.classList.add("dyslexia-mode");
+        dyslexiaToggle.checked = true;
+      }
+
+      if (localStorage.getItem("colorblindMode") === "true") {
+        document.body.classList.add("colorblind-mode");
+        colorblindToggle.checked = true;
+      }
+
+      if (localStorage.getItem("javaneseMode") === "true") {
+        javaneseToggle.checked = true;
+        applyTranslation(true);
+      }
+
+      // --- EVENT LISTENER & PENYIMPANAN KE LOCALSTORAGE ---
+      cameraToggle?.addEventListener("change", (e) => {
+        const isActive = e.target.checked;
+        if (typeof setCameraState === "function") {
+          setCameraState(isActive);
+        }
+        if (!isActive && typeof stopCamera === "function") {
+          stopCamera();
+        }
+        localStorage.setItem("cameraActiveMode", isActive);
+      });
+
+      dyslexiaToggle.addEventListener("change", (e) => {
+        const isActive = e.target.checked;
+        if (isActive) {
+          document.body.classList.add("dyslexia-mode");
+        } else {
+          document.body.classList.remove("dyslexia-mode");
+        }
+        localStorage.setItem("dyslexiaMode", isActive);
+      });
+
+      colorblindToggle.addEventListener("change", (e) => {
+        const isActive = e.target.checked;
+        if (isActive) {
+          document.body.classList.add("colorblind-mode");
+        } else {
+          document.body.classList.remove("colorblind-mode");
+        }
+        localStorage.setItem("colorblindMode", isActive);
+      });
+
+      javaneseToggle.addEventListener("change", (e) => {
+        const isJavanese = e.target.checked;
+        applyTranslation(isJavanese);
+        localStorage.setItem("javaneseMode", isJavanese);
+      });
     </script>
-</body>
+  </body>
 </html>
