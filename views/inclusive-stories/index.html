@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inclusive Story - Pawitra</title>
+    <title>Inclusive Stories - Pawitra</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -128,18 +128,9 @@
         .story-header {
             padding: 60px 6% 40px;
             margin-top: auto;
-
-            background:
-                linear-gradient(
-                    to bottom,
-                    rgba(12, 9, 6, 0.95),
-                    rgba(12, 9, 6, 0.75)
-                );
-
+            background: linear-gradient(to bottom, rgba(12, 9, 6, 0.95), rgba(12, 9, 6, 0.75));
             border-bottom: 1px solid rgba(201, 149, 60, 0.3);
         }
-
-        /* bagian atas */
 
         .story-top {
             display: flex;
@@ -152,140 +143,84 @@
             color: #100b06;
         }
 
-
-        /* judul */
-
         .header-title {
             max-width: 800px;
-
             margin: 50px auto 0;
-
             text-align: center;
         }
 
         .story-category {
             color: #c9953c;
-
             font-size: 12px;
             letter-spacing: 3px;
         }
 
         .header-title h1 {
             margin-top: 12px;
-
             color: #f5efe5;
-
             font-family: Georgia, serif;
             font-size: clamp(40px, 5vw, 64px);
-
             font-weight: 400;
-
             text-transform: capitalize;
         }
 
         .header-title p {
             max-width: 550px;
-
             margin: 15px auto 0;
-
             color: #aaa197;
-
             font-size: 16px;
             line-height: 1.8;
         }
-
-
-        /* ornamen */
 
         .ornament {
             display: flex;
             align-items: center;
             justify-content: center;
-
             gap: 12px;
-
             margin-top: 25px;
-
             color: #c9953c;
         }
 
         .ornament i {
             width: 70px;
             height: 1px;
-
-            background: linear-gradient(
-                to right,
-                transparent,
-                #c9953c
-            );
+            background: linear-gradient(to right, transparent, #c9953c);
         }
 
         .ornament i:nth-child(4) {
-            background: linear-gradient(
-                to left,
-                transparent,
-                #c9953c
-            );
+            background: linear-gradient(to left, transparent, #c9953c);
         }
 
-        .header-warm-bg {
-            background-image: radial-gradient(#c2a878 1.2px, transparent 1.2px);
-            background-size: 32px 32px;
-            background-color: #EFECE6;
-        }
-
-        
-        /* MODAl */
+        /* MODAL */
         .story-modal {
             display: none;
-
             position: fixed;
-
             inset: 0;
-
             z-index: 999;
-
             background: rgba(0, 0, 0, 0.75);
-
             backdrop-filter: blur(8px);
-
             align-items: center;
             justify-content: center;
-
             padding: 30px;
         }
 
         .story-reader {
             position: relative;
-
             width: min(1000px, 95vw);
             max-height: 90vh;
             overflow-y: auto;
-
             display: grid;
             grid-template-columns: 35% 65%;
-
             background: #15100b;
             border: 1px solid #a97832;
             border-radius: 20px;
-            box-shadow:
-                0 30px 80px rgba(0, 0, 0, 0.7);
-
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
             animation: modalOpen 0.3s ease;
         }
 
         @keyframes modalOpen {
-
-            from {
-                opacity: 0;
-                transform: translateY(30px) scale(0.96);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-
+            from { opacity: 0; transform: translateY(30px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .reader-image {
@@ -296,7 +231,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 20px;
+            border-radius: 20px 0 0 20px;
         }
 
         .reader-content {
@@ -313,7 +248,7 @@
             margin: 10px 0 25px;
             color: #f5efe5;
             font-family: Georgia, serif;
-            font-size: 42px;
+            font-size: 36px;
             font-weight: 400;
         }
 
@@ -330,35 +265,32 @@
             color: #8f877c;
             cursor: pointer;
             transition: 0.3s;
+            font-size: 13px;
         }
 
         .reader-tabs button:hover,
         .reader-tabs button.active {
             color: #d4a44f;
-
             border-bottom: 2px solid #d4a44f;
         }
 
         .close-button {
             position: absolute;
-
             top: 15px;
             right: 15px;
-
             width: 40px;
             height: 40px;
-
             border-radius: 50%;
             border: 1px solid #c9953c;
-
             background: rgba(0, 0, 0, 0.6);
             color: #d4a44f;
-
             font-size: 25px;
             cursor: pointer;
-
             z-index: 10;
             transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .close-button:hover {
@@ -367,47 +299,52 @@
         }
 
         .reader-tools {
-            padding: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
         .reader-left {
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            background: #100b06;
+            border-radius: 20px 0 0 20px;
         }
 
-        .reader-button{
+        .reader-button {
             display: inline-flex;
-            top: 15px;
-            right: 15px;
-            padding: 5px;
-            margin: 7px;
-
+            padding: 10px 15px;
             border-radius: 10px;
             border: 1px solid #c9953c;
-
             background: rgba(0, 0, 0, 0.6);
             color: #d4a44f;
- 
             cursor: pointer;
-
             transition: 0.3s;
-
             justify-content: center;
             align-items: center;
             gap: 10px;
+            font-size: 14px;
+        }
+
+        .reader-button:hover {
+            background: #c9953c;
+            color: #15100b;
         }
         
         .dyslexia-text {
-            font-family: Arial, sans-serif;
-            font-size: 18px;
-            line-height: 2;
-            letter-spacing: 0.5px;
-            word-spacing: 3px;
+            font-family: Arial, sans-serif !important;
+            font-size: 18px !important;
+            line-height: 2 !important;
+            letter-spacing: 0.12em !important;
+            word-spacing: 0.3em !important;
         }
 
         .dyslexia-text p {
             margin-bottom: 20px;
         }
+
         /* --- AKSESIBILITAS: MODE DISLEKSIA --- */
         body.dyslexia-mode,
         body.dyslexia-mode * {
@@ -419,7 +356,7 @@
 
         /* --- AKSESIBILITAS: MODE BUTA WARNA (COLORBLIND FRIENDLY / HIGH CONTRAST) --- */
         body.colorblind-mode {
-            background-color: #0A192F !important; /* Latar biru tua gelap yang sangat kontras */
+            background-color: #0A192F !important;
             background-image: none !important;
             color: #E6F1FF !important;
         }
@@ -428,39 +365,55 @@
         body.colorblind-mode [class*="bg-brand-bg"] {
             background-color: #112240 !important;
             border-color: #64FFDA !important;
+            background-image: none !important;
         }
         body.colorblind-mode p,
         body.colorblind-mode li,
         body.colorblind-mode span:not(.text-brand-gold):not(.text-brand-accent) {
-            color: #CCD6F6 !important;            /* Teks putih kebiruan terang */
+            color: #CCD6F6 !important;            
         }
         body.colorblind-mode h1, 
         body.colorblind-mode h2, 
         body.colorblind-mode h3, 
         body.colorblind-mode h4,
         body.colorblind-mode strong {
-            color: #64FFDA !important;            /* Judul berubah menjadi Cyan Cerah agar mudah dibaca */
+            color: #64FFDA !important;            
         }
-        body.colorblind-mode nav {
+        body.colorblind-mode nav,
+        body.colorblind-mode #mobileMenu {
             background-color: rgba(10, 25, 47, 0.95) !important;
             border-bottom-color: #64FFDA !important;
         }
+        body.colorblind-mode nav a,
+        body.colorblind-mode #mobileMenu a,
+        body.colorblind-mode nav button,
+        body.colorblind-mode nav span {
+            color: #E6F1FF !important;
+        }
+        body.colorblind-mode nav a:hover,
+        body.colorblind-mode #mobileMenu a:hover,
+        body.colorblind-mode nav a.text-brand-accent,
+        body.colorblind-mode #mobileMenu a.text-brand-accent {
+            color: #FFD166 !important;
+            border-bottom-color: #FFD166 !important;
+        }
         body.colorblind-mode .bg-brand-dark {
             background-color: #1D3557 !important;
-            border: 2px solid #FFD166 !important;  /* Border kuning emas terang */
+            border: 2px solid #FFD166 !important;  
         }
         body.colorblind-mode .text-brand-gold,
         body.colorblind-mode .text-brand-dark {
-            color: #FFD166 !important;            /* Aksen warna kuning emas mencolok */
+            color: #FFD166 !important;            
         }
     </style>
 </head>
 <body class="bg-pattern text-brand-dark font-sans antialiased flex flex-col min-h-screen relative">
+    
     <!-- LUXURY LOADING SCREEN -->
     <div id="loader">
         <div class="text-center space-y-4 px-6">
             <h1 class="font-serif text-4xl md:text-5xl font-bold text-[#d4af37] tracking-wider">Pawitra<span class="text-white">.</span></h1>
-            <p class="text-xs text-gray-400 uppercase tracking-widest font-light">Memuat Cerita Inklusif...</p>
+            <p class="translate-text text-xs text-gray-400 uppercase tracking-widest font-light" data-id="Memuat Cerita Rakyat..." data-jv="Mbukak Crita Rakyat...">Memuat Cerita Rakyat...</p>
             <div class="w-48 h-[2px] bg-white/10 mx-auto rounded-full overflow-hidden mt-6">
                 <div id="loader-progress" class="h-full bg-[#d4af37] w-0 transition-all duration-1000"></div>
             </div>
@@ -471,43 +424,48 @@
     <div class="absolute inset-0 bg-white/70 pointer-events-none z-[-1] min-h-screen"></div>
 
     <!-- Navbar -->
-      <nav class="fixed top-0 left-0 w-full z-50 bg-brand-bg/90 backdrop-blur-md border-b border-gray-200/50">
+    <nav class="fixed top-0 left-0 w-full z-50 bg-brand-bg/90 backdrop-blur-md border-b border-gray-200/50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative">
             <div class="flex items-center gap-2">
                 <span class="font-serif text-2xl font-bold tracking-wide">Pawitra<span class="text-brand-accent">.</span></span>
             </div>
             <div class="hidden lg:flex items-center space-x-8 text-sm font-medium text-gray-700">
-                <a href="../home/" class="hover:text-brand-accent transition">Home</a>
-                <a href="../glossary/" class="hover:text-brand-accent transition ">Glossary</a>
-                <a href="../about/" class="hover:text-brand-accent transition">About</a>
-                <a href="../cultural-exploration" class="hover:text-brand-accent transition">Cultural Exploration</a>
-                <a href="../inclusive-stories" class="border-b-2 border-brand-accent pb-1 text-brand-accent font-bold transition">Inclusive Stories</a>
+                <a href="../home/" class="translate-text hover:text-brand-accent transition" data-id="Beranda" data-jv="Omah">Beranda</a>
+                <a href="../glossary/" class="translate-text hover:text-brand-accent transition" data-id="Glosarium" data-jv="Bausastra">Glosarium</a>
+                <a href="../about/" class="translate-text hover:text-brand-accent transition" data-id="Tentang Kami" data-jv="Babagan">Tentang Kami</a>
+                <a href="../cultural-exploration" class="translate-text hover:text-brand-accent transition" data-id="Eksplorasi Budaya" data-jv="Jlajah Budaya">Eksplorasi Budaya</a>
+                <a href="../inclusive-stories" class="translate-text border-b-2 border-brand-accent pb-1 text-brand-accent font-bold transition" data-id="Cerita Rakyat" data-jv="Crita Inklusif">Cerita Rakyat</a>
             </div>
             <div class="hidden lg:block">
-                <a href="#kamus" class="bg-brand-dark text-white px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide hover:bg-brand-accent transition">Mulai Belajar</a>
-                </a>
+                <a href="../glossary/#kamus" class="translate-text bg-brand-dark text-white px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide hover:bg-brand-accent transition" data-id="Mulai Belajar" data-jv="Miwiti Sinau">Mulai Belajar</a>
             </div>
             <button id="mobileMenuBtn" class="lg:hidden text-brand-dark focus:outline-none hover:text-brand-accent transition">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </div>
-
+        
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden px-6 pb-6 pt-2 bg-brand-bg border-t border-gray-200/60 mt-4 absolute w-full">
+            <div class="flex flex-col space-y-4 text-sm font-medium text-gray-700">
+                <a href="../home/" class="translate-text hover:text-brand-accent" data-id="Beranda" data-jv="Omah">Beranda</a>
+                <a href="../glossary/" class="translate-text hover:text-brand-accent" data-id="Glosarium" data-jv="Bausastra">Glosarium</a>
+                <a href="../about/" class="translate-text hover:text-brand-accent" data-id="Tentang Kami" data-jv="Babagan">Tentang Kami</a>
+                <a href="../cultural-exploration" class="translate-text hover:text-brand-accent" data-id="Eksplorasi Budaya" data-jv="Jlajah Budaya">Eksplorasi Budaya</a>
+                <a href="../inclusive-stories" class="translate-text text-brand-accent font-bold" data-id="Cerita Rakyat" data-jv="Crita Inklusif">Cerita Rakyat</a>
+            </div>
+        </div>
+    </nav>
 
     <!-- ==== HEADER ==== -->
-    <header class="story-header">
-
+    <header class="story-header pt-28">
         <div class="header-title">
-
-            <span class="story-category">
+            <span class="translate-text story-category" data-id="CERITA RAKYAT JAWA" data-jv="CRITA RAKYAT JAWA">
                 CERITA RAKYAT JAWA
             </span>
-
-            <h1>Dengarkan. Lihat. Rasakan Ceritanya.</h1>
-
-            <p>
+            <h1 class="translate-text" data-id="Dengarkan. Lihat. Rasakan Ceritanya." data-jv="Dirungokake. Deleng. Rasakake Critane.">Dengarkan. Lihat. Rasakan Ceritanya.</h1>
+            <p class="translate-text" data-id="Nikmati kisah rakyat Jawa melalui narasi suara, teks ramah disleksia, dan peragaan BISINDO." data-jv="Nikmati crita rakyat Jawa lumantar narasi swara, teks ramah disleksia, lan peragaan BISINDO.">
                 Nikmati kisah rakyat Jawa melalui narasi suara, teks ramah disleksia, dan peragaan BISINDO.
             </p>
-
             <div class="ornament">
                 <span>◆</span>
                 <i></i>
@@ -515,16 +473,14 @@
                 <i></i>
                 <span>◆</span>
             </div>
-
         </div>
-
     </header>
 
-  <section id="cerita" class="max-w-7xl mx-auto px-6 py-20 relative z-10 reveal">
+    <section id="cerita" class="max-w-7xl mx-auto px-6 py-20 relative z-10 reveal">
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div>
-                <p class="text-xs font-semibold tracking-widest uppercase text-brand-gold mb-2">Katalog Cerita Rakyat</p>
-                <h2 class="font-serif text-4xl font-bold">Lihat, dan Dengarkan Cerita Rakyat asal Jawa  </h2>
+                <p class="translate-text text-xs font-semibold tracking-widest uppercase text-brand-gold mb-2" data-id="Katalog Cerita Rakyat" data-jv="Katalog Crita Rakyat">Katalog Cerita Rakyat</p>
+                <h2 class="translate-text font-serif text-4xl font-bold" data-id="Lihat, dan Dengarkan Cerita Rakyat asal Jawa" data-jv="Deleng, lan Rungokake Crita Rakyat saka Jawa">Lihat, dan Dengarkan Cerita Rakyat asal Jawa</h2>
             </div>
         </div>
 
@@ -534,52 +490,52 @@
                 <div class="w-full aspect-square bg-gray-200 rounded-2xl mb-4 overflow-hidden relative group">
                     <img src="cover-timunmas.png" alt="Timun" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" style="object-fit: fill;">
                     <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span class="text-white text-xs bg-brand-accent px-4 py-2 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2">
+                        <span class="translate-text text-white text-xs bg-brand-accent px-4 py-2 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2" data-id="Baca Sekarang" data-jv="Waca Saiki">
                             <span class="w-2 h-2 bg-white rounded-full animate-ping"></span> Baca Sekarang
                         </span>
                     </div>
                 </div>
                 <h3 class="font-serif text-xl font-bold term-title">Timun Mas</h3>
-                <p class="text-sm text-gray-500 mt-1 line-clamp-2">Kisah gadis pemberani yang melarikan diri dari kejaran raksasa.</p>
+                <p class="translate-text text-sm text-gray-500 mt-1 line-clamp-2" data-id="Kisah gadis pemberani yang melarikan diri dari kejaran raksasa." data-jv="Crita prawan wani sing mlayu saka buronan raseksa.">Kisah gadis pemberani yang melarikan diri dari kejaran raksasa.</p>
             </div>
             
             <div class="kamus-item bg-brand-card rounded-3xl p-4 card-hover cursor-pointer border border-gray-100 shadow-sm" onclick="openStory('roroJonggrang')">
                 <div class="w-full aspect-square bg-gray-200 rounded-2xl mb-4 overflow-hidden relative group">
                     <img src="cover-roro.png" alt="Roro" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" style="object-fit: fill;">
                     <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span class="text-white text-xs bg-brand-accent px-4 py-2 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2">
+                        <span class="translate-text text-white text-xs bg-brand-accent px-4 py-2 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2" data-id="Baca Sekarang" data-jv="Waca Saiki">
                             <span class="w-2 h-2 bg-white rounded-full animate-ping"></span> Baca Sekarang
                         </span>
                     </div>
                 </div>
                 <h3 class="font-serif text-xl font-bold term-title">Roro Jonggrang</h3>
-                <p class="text-sm text-gray-500 mt-1 line-clamp-2">Kisah seorang putri dan Bandung Bondowoso yang berkaitan dengan legenda Candi Prambanan.</p>
+                <p class="translate-text text-sm text-gray-500 mt-1 line-clamp-2" data-id="Kisah seorang putri dan Bandung Bondowoso yang berkaitan dengan legenda Candi Prambanan." data-jv="Crita sawijining putri lan Bandung Bondowoso sing ana gandhengane karo legenda Candi Prambanan.">Kisah seorang putri dan Bandung Bondowoso yang berkaitan dengan legenda Candi Prambanan.</p>
             </div>
 
             <div class="kamus-item bg-brand-card rounded-3xl p-4 card-hover cursor-pointer border border-gray-100 shadow-sm" onclick="openStory('siKancil')">
                 <div class="w-full aspect-square bg-gray-200 rounded-2xl mb-4 overflow-hidden relative group">
                     <img src="cover-kancil.png" alt="Kancil" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" style="object-fit: fill;">
                     <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span class="text-white text-xs bg-brand-accent px-4 py-2 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2">
+                        <span class="translate-text text-white text-xs bg-brand-accent px-4 py-2 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2" data-id="Baca Sekarang" data-jv="Waca Saiki">
                             <span class="w-2 h-2 bg-white rounded-full animate-ping"></span> Baca Sekarang
                         </span>
                     </div>
                 </div>
                 <h3 class="font-serif text-xl font-bold term-title">Si Kancil</h3>
-                <p class="text-sm text-gray-500 mt-1 line-clamp-2">Kisah seekor kancil yang dikenal cerdik dan selalu menemukan cara untuk keluar dari berbagai masalah.</p>
+                <p class="translate-text text-sm text-gray-500 mt-1 line-clamp-2" data-id="Kisah seekor kancil yang dikenal cerdik dan selalu menemukan cara untuk keluar dari berbagai masalah." data-jv="Crita kancil sing dikenal cerdik lan tansah nemokake cara kanggo metu saka macem-macem masalah.">Kisah seekor kancil yang dikenal cerdik dan selalu menemukan cara untuk keluar dari berbagai masalah.</p>
             </div>
 
             <div class="kamus-item bg-brand-card rounded-3xl p-4 card-hover cursor-pointer border border-gray-100 shadow-sm" onclick="openStory('ajiSaka')">
                 <div class="w-full aspect-square bg-gray-200 rounded-2xl mb-4 overflow-hidden relative group">
                     <img src="cover-aji.png" alt="Aji" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" style="object-fit: fill;">
                     <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span class="text-white text-xs bg-brand-accent px-4 py-2 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2">
+                        <span class="translate-text text-white text-xs bg-brand-accent px-4 py-2 rounded-full backdrop-blur-md shadow-lg flex items-center gap-2" data-id="Baca Sekarang" data-jv="Waca Saiki">
                             <span class="w-2 h-2 bg-white rounded-full animate-ping"></span> Baca Sekarang
                         </span>
                     </div>
                 </div>
                 <h3 class="font-serif text-xl font-bold term-title">Aji Saka</h3>
-                <p class="text-sm text-gray-500 mt-1 line-clamp-2">Legenda yang berkaitan dengan asal-usul aksara Jawa.</p>
+                <p class="translate-text text-sm text-gray-500 mt-1 line-clamp-2" data-id="Legenda yang berkaitan dengan asal-usul aksara Jawa." data-jv="Legenda sing ana gandhengane karo asal-usul aksara Jawa.">Legenda yang berkaitan dengan asal-usul aksara Jawa.</p>
             </div>
         </div>
         <div id="noResult" class="hidden text-center py-10 text-gray-500">Istilah tidak ditemukan.</div>
@@ -588,130 +544,73 @@
     <!-- MODAL -->
     <div id="storyModal" class="story-modal">
         <div class="story-reader">
-            <button
-                class="close-button"
-                onclick="closeStory()"
-            >
-                ×
-            </button>
+            <button class="close-button" onclick="closeStory()">×</button>
 
             <div class="reader-left">
                 <div class="reader-image">
-
-                    <img
-                        id="storyImage"
-                        src=""
-                        alt=""
-                    >
-
+                    <img id="storyImage" src="" alt="">
                 </div>
-
-                
                 <div class="reader-tools">
-
                     <button class="reader-button">
-                        <i
-                            data-lucide="volume-2"
-                            class="w-4 h-4"
-                        ></i>
-
-                        <span>Dengarkan</span>
+                        <i data-lucide="volume-2" class="w-4 h-4"></i>
+                        <span class="translate-text" data-id="Dengarkan" data-jv="Dirungokake">Dengarkan</span>
                     </button>
-
-
                     <button class="reader-button">
-
-                        <i
-                            data-lucide="hand"
-                            class="w-4 h-4"
-                        ></i>
-
+                        <i data-lucide="hand" class="w-4 h-4"></i>
                         <span>BISINDO</span>
-
                     </button>
                 </div>
             </div>
-
 
             <div class="reader-content">
+                <span class="translate-text" id="storyCategory" data-id="CERITA RAKYAT JAWA" data-jv="CRITA RAKYAT JAWA">CERITA RAKYAT JAWA</span>
+                <h2 id="storyTitle">Timun Mas</h2>
 
-                <span id="storyCategory">
-                    CERITA RAKYAT JAWA
-                </span>
+                <div class="reader-tabs">
+                    <button class="translate-text active" onclick="showIndonesia(this)" data-id="Indonesia" data-jv="Indonesia">Indonesia</button>
+                    <button class="translate-text" onclick="showAksaraJawa(this)" data-id="Aksara Jawa" data-jv="Aksara Jawa">Aksara Jawa</button>
+                    <button class="translate-text" onclick="showDyslexia(this)" data-id="Ramah Disleksia" data-jv="Ramah Disleksia">Ramah Disleksia</button>
+                </div>
 
-                <h2 id="storyTitle">
-                    Timun Mas
-                </h2>
-
-
-            <div class="reader-tabs">
-
-                <button
-                    class="active"
-                    onclick="showIndonesia(this)"
-                >
-                    Indonesia
-                </button>
-
-                <button
-                    onclick="showAksaraJawa(this)"
-                >
-                    Aksara Jawa
-                </button>
-
-                <button
-                    onclick="showDyslexia(this)"
-                >
-                    Ramah Disleksia
-                </button>
-
-            </div>
-
-
-                <div
-                    class="story-text"
-                    id="storyText"
-                    style="color: #EFECE6;"
-                >
-                    <!-- Isi cerita akan dimasukkan JavaScript -->
+                <div class="story-text" id="storyText" style="color: #EFECE6; max-height: 400px; overflow-y: auto; padding-right: 10px;">
+                    <!-- Isi cerita dimasukkan script -->
                 </div>
             </div>
         </div>
     </div>
     
-
-    <!-- Footer Section (Ditambah class reveal) -->
+    <!-- Footer Section -->
     <footer class="bg-white border-t border-gray-200/60 pt-20 pb-10 relative z-10 reveal">
         <div class="max-w-7xl mx-auto px-6">
             <div class="bg-brand-bg rounded-[2rem] p-8 md:p-12 mb-16 flex flex-col md:flex-row items-center justify-between gap-8 border border-gray-100 shadow-sm relative overflow-hidden">
                 <div class="absolute right-0 top-0 w-32 h-32 bg-brand-gold/10 rounded-full blur-2xl animate-pulse"></div>
                 <div class="max-w-md relative z-10">
-                    <h3 class="font-serif text-3xl font-bold text-brand-dark mb-2">Tetap Terhubung.</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">Dapatkan pembaruan terbaru mengenai kosa kata budaya langsung di kotak masukmu.</p>
+                    <h3 class="translate-text font-serif text-3xl font-bold text-brand-dark mb-2" data-id="Tetap Terhubung." data-jv="Tetep Nyambung.">Tetap Terhubung.</h3>
+                    <p class="translate-text text-gray-600 text-sm leading-relaxed" data-id="Dapatkan pembaruan terbaru mengenai kosa kata budaya langsung di kotak masukmu." data-jv="Entuk warta anyar babagan kosa kata budaya langsung menyang kothak mlebumu.">Dapatkan pembaruan terbaru mengenai kosa kata budaya langsung di kotak masukmu.</p>
                 </div>
                 <div class="w-full md:w-auto flex-1 max-w-md relative z-10">
-                    <input type="email" placeholder="Alamat email Anda..." class="w-full pl-6 pr-32 py-4 rounded-full border border-gray-200 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition text-sm">
-                    <button class="absolute right-2 top-2 bottom-2 bg-brand-dark text-brand-gold px-6 rounded-full text-xs font-bold hover:bg-brand-accent hover:text-white transition">Subscribe &rarr;</button>
+                    <input type="email" placeholder="Alamat email Anda..." class="translate-text w-full pl-6 pr-32 py-4 rounded-full border border-gray-200 focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition text-sm" data-id="Alamat email Anda..." data-jv="Alamat email panjenengan...">
+                    <button class="translate-text absolute right-2 top-2 bottom-2 bg-brand-dark text-brand-gold px-6 rounded-full text-xs font-bold hover:bg-brand-accent hover:text-white transition" data-id="Subscribe &rarr;" data-jv="Langganan &rarr;">Subscribe &rarr;</button>
                 </div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
                 <div class="md:col-span-5 space-y-6">
-                    <a href="../home/index.html" class="inline-block"><h2 class="font-serif text-3xl font-bold text-brand-dark tracking-wide">Pawitra<span class="text-brand-accent">.</span></h2></a>
-                    <p class="text-gray-500 text-sm leading-relaxed max-w-sm">Menjembatani nilai-nilai luhur budaya Jawa dengan ruang yang inklusif untuk semua.</p>
+                    <a href="../home/" class="inline-block"><h2 class="font-serif text-3xl font-bold text-brand-dark tracking-wide">Pawitra<span class="text-brand-accent">.</span></h2></a>
+                    <p class="translate-text text-gray-500 text-sm leading-relaxed max-w-sm" data-id="Menjembatani nilai-nilai luhur budaya Jawa dengan ruang yang inklusif untuk semua." data-jv="Dadi kreteg kanggo nilai-nilai luhur budaya Jawa kanthi papan sing inklusif kanggo kabeh.">Menjembatani nilai-nilai luhur budaya Jawa dengan ruang yang inklusif untuk semua.</p>
                 </div>
                 <div class="md:col-span-3">
-                    <h4 class="text-xs font-bold tracking-widest uppercase text-brand-dark mb-6">Jelajahi Pawitra</h4>
+                    <h4 class="translate-text text-xs font-bold tracking-widest uppercase text-brand-dark mb-6" data-id="Jelajahi Pawitra" data-jv="Jelajah Pawitra">Jelajahi Pawitra</h4>
                     <ul class="space-y-4 text-sm font-medium text-gray-500">
-                        <li><a href="../home/index.html" class="hover:text-brand-accent transition">Home</a></li>
-                        <li><a href="../glossary/index.html" class="hover:text-brand-accent transition">Glossary</a></li>
-                        <li><a href="../about/index.html" class="hover:text-brand-accent transition">About</a></li>
-                        <li><a href="../cultural-exploration/index.html" class="hover:text-brand-accent transition">Cultural Exploration</a></li>
-                        <li><a href="index.html" class="hover:text-brand-accent transition">Inclusive Stories </a></li>
+                        <li><a href="../home/" class="translate-text hover:text-brand-accent transition" data-id="Beranda" data-jv="Omah">Beranda</a></li>
+                        <li><a href="../glossary/" class="translate-text hover:text-brand-accent transition" data-id="Glosarium" data-jv="Bausastra">Glosarium</a></li>
+                        <li><a href="../about/" class="translate-text hover:text-brand-accent transition" data-id="Tentang Kami" data-jv="Babagan">Tentang Kami</a></li>
+                        <li><a href="../cultural-exploration" class="translate-text hover:text-brand-accent transition" data-id="Eksplorasi Budaya" data-jv="Jlajah Budaya">Eksplorasi Budaya</a></li>
+                        <li><a href="../inclusive-stories" class="translate-text hover:text-brand-accent transition" data-id="Cerita Rakyat" data-jv="Crita Inklusif">Cerita Rakyat</a></li>
                     </ul>
                 </div>
                 <div class="md:col-span-4">
-                    <h4 class="text-xs font-bold tracking-widest uppercase text-brand-dark mb-6">Hubungi Kami</h4>
+                    <h4 class="translate-text text-xs font-bold tracking-widest uppercase text-brand-dark mb-6" data-id="Hubungi Kami" data-jv="Hubungi Kita">Hubungi Kami</h4>
                     <ul class="space-y-4 text-sm text-gray-500">
                         <li class="flex items-start gap-3"><span class="text-brand-accent mt-0.5">📍</span><span>Sawojajar, Kota Malang<br>Jawa Timur, Indonesia</span></li>
                         <li class="flex items-center gap-3"><span class="text-brand-accent">✉️</span><a href="mailto:halo@pawitra.id" class="hover:text-brand-accent transition">halo@pawitra.id</a></li>
@@ -719,10 +618,11 @@
                 </div>
             </div>
             <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-xs text-gray-400 font-medium">&copy; 2026 Pawitra App. Dibuat dengan 💚 untuk Budaya.</p>
+                <p class="translate-text text-xs text-gray-400 font-medium" data-id="&copy; 2026 Pawitra App. Dibuat dengan 💚 untuk Budaya." data-jv="&copy; 2026 Pawitra App. Digawe kanthi 💚 kanggo Budaya.">&copy; 2026 Pawitra App. Dibuat dengan 💚 untuk Budaya.</p>
             </div>
         </div>
     </footer>
+
     <!-- FLOATING ACCESSIBILITY BUTTON -->
     <div class="fixed bottom-6 right-6 z-[100] flex flex-col items-end">
         <!-- Menu Popup -->
@@ -742,10 +642,19 @@
             </div>
             
             <!-- Toggle Mode Buta Warna -->
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between mb-4">
                 <span class="text-xs font-semibold text-gray-700">Mode Buta Warna</span>
                 <label class="relative inline-flex items-center cursor-pointer">
                     <input type="checkbox" id="colorblindToggle" class="sr-only peer">
+                    <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-accent"></div>
+                </label>
+            </div>
+
+            <!-- Toggle Bahasa Jawa -->
+            <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                <span class="text-xs font-semibold text-gray-700">Bahasa Jawa</span>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="javaneseToggle" class="sr-only peer">
                     <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand-accent"></div>
                 </label>
             </div>
@@ -756,323 +665,233 @@
             <svg class="w-7 h-7 group-hover:rotate-180 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
         </button>
     </div>
-<script>
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
 
-    mobileMenuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
+    <!-- Scripts -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
 
-    document.addEventListener('DOMContentLoaded', () => {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
 
-        const searchInput = document.getElementById('searchInput');
-
-        // Jalankan search HANYA jika halaman memiliki searchInput
-        if (searchInput) {
-
-            const items = document.querySelectorAll('.kamus-item');
-            const noResult = document.getElementById('noResult');
-
-            searchInput.addEventListener('input', (e) => {
-
-                const searchTerm = e.target.value.toLowerCase();
-                let hasResult = false;
-
-                items.forEach(item => {
-
-                    const title = item
-                        .querySelector('.term-title')
-                        .textContent
-                        .toLowerCase();
-
-                    if (title.includes(searchTerm)) {
-                        item.style.display = 'block';
-                        hasResult = true;
-                    } else {
-                        item.style.display = 'none';
-                    }
-
-                });
-
-                if (hasResult) {
-                    noResult.classList.add('hidden');
+        // Terjemahan Bahasa
+        const translatableElements = document.querySelectorAll('.translate-text');
+        const applyTranslation = (isJavanese) => {
+            translatableElements.forEach(el => {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = isJavanese ? el.getAttribute('data-jv') : el.getAttribute('data-id');
                 } else {
-                    noResult.classList.remove('hidden');
+                    el.innerHTML = isJavanese ? el.getAttribute('data-jv') : el.getAttribute('data-id');
                 }
-
             });
-
-        }
-
-        // SCROLL REVEAL
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        document.addEventListener('DOMContentLoaded', () => {
+            // SCROLL REVEAL
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
 
-            entries.forEach(entry => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
 
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-
+            document.querySelectorAll('.reveal').forEach(element => {
+                observer.observe(element);
             });
 
-        }, observerOptions);
+            // INISIALISASI AKSESIBILITAS DARI LOCALSTORAGE
+            const dyslexiaToggle = document.getElementById('dyslexiaToggle');
+            const colorblindToggle = document.getElementById('colorblindToggle');
+            const javaneseToggle = document.getElementById('javaneseToggle');
 
+            if (localStorage.getItem('dyslexiaMode') === 'true') {
+                document.body.classList.add('dyslexia-mode');
+                if(dyslexiaToggle) dyslexiaToggle.checked = true;
+            }
+            
+            if (localStorage.getItem('colorblindMode') === 'true') {
+                document.body.classList.add('colorblind-mode');
+                if(colorblindToggle) colorblindToggle.checked = true;
+            }
 
-        document.querySelectorAll('.reveal').forEach(element => {
-            observer.observe(element);
+            if (localStorage.getItem('javaneseMode') === 'true') {
+                if(javaneseToggle) javaneseToggle.checked = true;
+                applyTranslation(true);
+            }
         });
 
-    });
+        // LOADING SCREEN
+        window.addEventListener("load", function() {
+            const loader = document.getElementById("loader");
+            const progressBar = document.getElementById("loader-progress");
 
-    // LOADING SCREEN
-    window.addEventListener("load", function() {
+            setTimeout(() => {
+                progressBar.style.width = "100%";
+            }, 100);
 
-        const loader = document.getElementById("loader");
-        const progressBar = document.getElementById("loader-progress");
-
-        setTimeout(() => {
-            progressBar.style.width = "100%";
-        }, 100);
-
-        setTimeout(() => {
-            loader.classList.add("fade-out");
-        }, 900);
-
-    });
-
-    let currentStory = "";
-    
-    function openStory(story) {
-
-        currentStory = story;
-
-        const modal = document.getElementById("storyModal");
-        const data = stories[story];
-
-        if (!data) return;
-
-        document.getElementById("storyTitle").textContent =
-            data.title;
-
-        document.getElementById("storyCategory").textContent =
-            data.category;
-
-        document.getElementById("storyImage").src =
-            data.image;
-
-        const storyText = document.getElementById("storyText");
-
-        storyText.innerHTML = data.indonesia;
-        storyText.classList.remove("dyslexia-text");
-
-        // Reset tab
-        const tabs = document.querySelectorAll(".reader-tabs button");
-
-        tabs.forEach((tab, index) => {
-            tab.classList.toggle("active", index === 0);
+            setTimeout(() => {
+                loader.classList.add("fade-out");
+            }, 900);
         });
 
-        modal.style.display = "flex";
+        let currentStory = "";
+        
+        const stories = {
+            timunMas: {
+                title: "Timun Mas",
+                category: "CERITA RAKYAT JAWA",
+                image: "cover-timunmas.png",
+                indonesia: `
+                    <p>Dikisahkan pada zaman dahulu kala, hidup sepasang suami istri petani di sebuah desa dekat hutan. Mereka belum juga dikaruniai anak, hingga suatu hari seorang raksasa sakti mendatangi mereka dan memberikan biji timun dengan syarat: ketika anak itu lahir dan besar kelak, ia harus diserahkan kembali kepada sang raksasa.</p>
+                    <p>Waktu berlalu, lahirlah seorang anak perempuan cantik yang dinamai Timun Mas. Ketika Timun Mas menginjak usia remaja, raksasa tersebut datang menagih janji. Sang ibu yang keturunan penyihir memberikan empat kantong kecil berisi biji timun, jarum, garam, dan terasi sebagai senjata pelarian.</p>
+                    <p>Dengan kecerdikan dan bantuan kantong ajaib tersebut, Timun Mas berhasil melarikan diri dari kejaran raksasa hingga sang raksasa terjebak dan binasa di lautan lumpur hidup. Timun Mas dan ibunya pun hidup bahagia selamanya.</p>
+                `,
+                aksaraJawa: `
+                    <p>ꦥꦢ ꦗꦩꦤ꧀ ꦢꦲꦸꦭꦸ꧈ ꦲꦶꦢꦸꦥ꧀ ꦱꦺꦥꦱꦁ ꦱꦸꦩꦶ ꦆꦱ꧀ꦠꦿꦶ ꦥꦼꦠꦤꦶ ꦆꦤ꧀ ꦱꦼꦧꦸꦲ꧀ ꦢꦺꦱ ꦢꦺꦏꦠ꧀ ꦲꦸꦠꦤ꧀꧉ ꦩꦺꦫꦼꦏ ꦧꦼꦭꦩ꧀ ꦗꦸꦒ ꦢꦶꦏꦂꦤꦸꦤꦶ ꦄꦤꦏ꧀꧉</p>
+                `
+            },
+            roroJonggrang: {
+                title: "Roro Jonggrang",
+                category: "LEGENDA JAWA",
+                image: "cover-roro.png",
+                indonesia: `
+                    <p>Konon, Prabu Baka yang memimpin kerajaan dikalahkan oleh Bandung Bondowoso dari Pengging. Bandung Bondowoso kemudian jatuh cinta kepada putri Prabu Baka yang bernama Roro Jonggrang.</p>
+                    <p>Roro Jonggrang yang tidak mencintai pembunuh ayahnya mengajukan syarat mustahil: meminta Bandung Bondowoso membangun seribu candi dalam waktu satu malam saja.</p>
+                    <p>Dengan bantuan makhluk halus, Bandung Bondowoso hampir merampungkan seribu candi tersebut. Mengetahui hal ini, Roro Jonggrang memerintahkan para wanita desa menumbuk lesung dan membakar jerami agar tampak seperti fajar menyingsing. Para ayam jantan berkokok, membuat makhluk halus lari ketakutan.</p>
+                    <p>Menyadari dirinya dicurangi, Bandung Bondowoso murka dan mengutuk Roro Jonggrang menjadi arca batu yang melengkapi candi keseribu, yang kini dikenal sebagai Candi Prambanan.</p>
+                `,
+                aksaraJawa: `
+                    <p>ꦫꦺꦴꦫꦺꦴ ꦗꦺꦴꦁꦒꦿꦁ ꦥꦸꦠꦿꦶ ꦱꦶꦁ ꦄꦪꦸ ꦄꦱꦺꦩ꧀ꦮꦠ꧀ ꦱꦏ ꦠꦤ꧀ꦲꦃ ꦗꦮ꧉ ꦢꦶꦕꦶꦠꦤ꧀ꦏꦺꦤ꧀ ꦝꦺꦮꦺꦏꦺ ꦢꦶꦏꦸꦠꦸꦏ꧀ ꦢꦢꦶ ꦕꦤ꧀ꦝꦶ ꦩꦂꦒ ꦥꦩ꧀ꦭꦶꦤ꧀ꦠꦸꦂ ꦧꦤ꧀ꦢꦸꦁ ꦧꦺꦴꦤ꧀ꦢꦺꦴꦮꦺꦴꦱꦺꦴ꧉</p>
+                `
+            },
+            siKancil: {
+                title: "Si Kancil",
+                category: "DONGENG NUSANTARA",
+                image: "cover-kancil.png",
+                indonesia: `
+                    <p>Si Kancil adalah seekor hewan kecil berbulu cokelat yang terkenal paling cerdik di seluruh penjuru hutan rimba. Seringkali, Kancil dihadapkan pada situasi berbahaya, berhadapan dengan harimau, buaya, atau petani yang marah karena kebun ketimunnya dicuri.</p>
+                    <p>Namun, berkat akal bulus dan kecerdasannya, Kancil selalu berhasil meloloskan diri. Cerita Si Kancil bukan sekadar dongeng pengantar tidur, melainkan sarat akan pesan moral bahwa kecerdikan dan ketenangan pikiran akan selalu mengalahkan kekuatan fisik yang besar.</p>
+                `,
+                aksaraJawa: `
+                    <p>ꦱꦶ ꦏꦚ꧀ꦕꦶꦭ꧀ ꦪꦲꦶꦏꦸ ꦱꦺꦮꦺꦴꦭꦃ ꦧꦶꦤꦠꦤ꧀ ꦱꦶꦁ ꦕꦼꦂꦢꦶꦏ꧀ ꦭꦤ꧀ ꦗꦶꦏꦪ ꦄꦏꦭ꧀ ꦆꦤ꧀ ꦄꦠꦺꦫꦼꦤ꧀ ꦲꦸꦠꦤ꧀꧉</p>
+                `
+            },
+            ajiSaka: {
+                title: "Aji Saka",
+                category: "LEGENDA JAWA",
+                image: "cover-aji.png",
+                indonesia: `
+                    <p>Legenda Aji Saka mengisahkan asal-usul terciptanya Aksara Jawa yang kita kenal hari ini. Cerita bermula dari pengabdian dua orang abdi setia Aji Saka bernama Dora dan Sembada.</p>
+                    <p>Aji Saka menitipkan keris pusakanya kepada Sembada dengan pesan mutlak: jangan berikan keris itu kepada siapapun kecuali kepada Aji Saka sendiri. Di tempat lain, Aji Saka berpesan kepada Dora untuk mengambil keris tersebut.</p>
+                    <p>Akibat kesalahpahaman sumpah setia dan teguhnya pesan masing-masing abdi, terjadilah pertarungan sengit antara Dora dan Sembada hingga keduanya gugur bersama. Untuk mengenang kesetiaan mereka berdua, Aji Saka menciptakan puisi sakral berbunyi: <em>Ha-Na-Ca-Ra-Ka</em> (Ada utusan), <em>Da-Ta-Sa-Wa-La</em> (Saling bertengkar), <em>Pa-Dha-Ja-Ya-Nyà</em> (Mereka sama-sama sakti), <em>Ma-Ga-Ba-Thະ-Nga</em> (Mati menjadi mayat).</p>
+                `,
+                aksaraJawa: `
+                    <p>ꦄꦗꦶ ꦱꦏ ꦩꦶꦫꦸꦥ꧀ꦏꦤ꧀ ꦠꦺꦴꦏꦺꦴꦃ ꦱꦶꦁ ꦔꦤ꧀ꦝꦸꦩ꧀ ꦄꦱꦭ꧀ ꦲꦸꦱꦸꦭ꧀ ꦲꦏ꧀ꦱꦫ ꦗꦮ ꦲꦶꦤ꧀ ꦠꦤ꧀ꦲꦃ ꦤꦸꦱꦤ꧀ꦠꦫ꧉</p>
+                `
+            }
+        };
 
-        document.body.style.overflow = "hidden";
-    }
+        function openStory(story) {
+            currentStory = story;
+            const modal = document.getElementById("storyModal");
+            const data = stories[story];
 
-    function closeStory() {
-    const modal = document.getElementById("storyModal");
-    modal.style.display = "none";
-    document.body.style.overflow = "auto";
-    }
+            if (!data) return;
 
-    const stories = {
+            document.getElementById("storyTitle").textContent = data.title;
+            document.getElementById("storyCategory").textContent = data.category;
+            document.getElementById("storyImage").src = data.image;
 
-        timunMas: {
-            title: "Timun Mas",
-            category: "CERITA RAKYAT JAWA",
-            description: "Kisah gadis pemberani yang melarikan diri dari kejaran raksasa.",
-            image: "cover-timunmas.png",
+            const storyText = document.getElementById("storyText");
+            storyText.innerHTML = data.indonesia;
+            storyText.classList.remove("dyslexia-text");
 
-            indonesia: `
-                <p>
-                    Pada zaman dahulu, hiduplah seorang gadis
-                    bernama Timun Mas bersama ibunya.
-                </p>
+            // Reset tab
+            const tabs = document.querySelectorAll(".reader-tabs button");
+            tabs.forEach((tab, index) => {
+                tab.classList.toggle("active", index === 0);
+            });
 
-                <p>
-                    Timun Mas dikenal sebagai gadis yang
-                    pemberani dan baik hati.
-                </p>
-            `,
-
-            aksaraJawa: `
-                <p>
-                    ꦥꦢ ꦗꦩꦤ꧀ ꦢꦲꦸꦭꦸ꧈
-                </p>
-            `,
-
-            audio: "audio/timun-mas.mp3",
-            bisindo: "video/timun-mas-bisindo.mp4"
-        },
-
-
-        roroJonggrang: {
-            title: "Roro Jonggrang",
-            category: "LEGENDA JAWA",
-            description: "Kisah seorang putri dan legenda Candi Prambanan.",
-
-            image: "cover-roro.png",
-
-            indonesia: `
-                <p>
-                    Pada zaman dahulu, hiduplah seorang putri
-                    bernama Roro Jonggrang.
-                </p>
-            `,
-
-            aksaraJawa: `
-                <p>
-                    ꦫꦺꦴꦫꦺꦴ ꦗꦺꦴꦁꦒꦿꦁ
-                </p>
-            `,
-
-            audio: "audio/roro-jonggrang.mp3",
-            bisindo: "video/roro-jonggrang-bisindo.mp4"
-        },
-
-
-        siKancil: {
-            title: "Si Kancil",
-            category: "DONGENG NUSANTARA",
-            description: "Kisah kancil yang cerdik menghadapi berbagai masalah.",
-
-            image: "cover-kancil.png",
-
-            indonesia: `
-                <p>
-                    Pada suatu hari, Si Kancil berjalan
-                    menyusuri hutan.
-                </p>
-            `,
-
-            aksaraJawa: `
-                <p>
-                    ꦱꦶ ꦏꦚ꧀ꦕꦶꦭ꧀
-                </p>
-            `,
-
-            audio: "audio/si-kancil.mp3",
-            bisindo: "video/si-kancil-bisindo.mp4"
-        },
-
-
-        ajiSaka: {
-            title: "Aji Saka",
-            category: "LEGENDA JAWA",
-            description: "Kisah yang berkaitan dengan legenda Aksara Jawa.",
-
-            image: "cover-aji.png",
-
-            indonesia: `
-                <p>
-                    Aji Saka merupakan tokoh yang dikenal
-                    dalam legenda masyarakat Jawa.
-                </p>
-            `,
-
-            aksaraJawa: `
-                <p>
-                    ꦄꦗꦶ ꦱꦏ
-                </p>
-            `,
-
-            audio: "audio/aji-saka.mp3",
-            bisindo: "video/aji-saka-bisindo.mp4"
+            modal.style.display = "flex";
+            document.body.style.overflow = "hidden";
         }
 
-    };
+        function closeStory() {
+            const modal = document.getElementById("storyModal");
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
 
-    function showIndonesia(button) {
+        function showIndonesia(button) {
+            const data = stories[currentStory];
+            const storyText = document.getElementById("storyText");
+            storyText.innerHTML = data.indonesia;
+            storyText.classList.remove("dyslexia-text");
+            setActiveTab(button);
+        }
 
-        const data = stories[currentStory];
+        function showAksaraJawa(button) {
+            const data = stories[currentStory];
+            const storyText = document.getElementById("storyText");
+            storyText.innerHTML = data.aksaraJawa;
+            storyText.classList.remove("dyslexia-text");
+            setActiveTab(button);
+        }
 
-        const storyText = document.getElementById("storyText");
+        function showDyslexia(button) {
+            const data = stories[currentStory];
+            const storyText = document.getElementById("storyText");
+            storyText.innerHTML = data.indonesia;
+            storyText.classList.add("dyslexia-text");
+            setActiveTab(button);
+        }
 
-        storyText.innerHTML = data.indonesia;
-        storyText.classList.remove("dyslexia-text");
+        function setActiveTab(button) {
+            const buttons = document.querySelectorAll(".reader-tabs button");
+            buttons.forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
+        }
 
-        setActiveTab(button);
-    }
+        lucide.createIcons();
 
-    function showAksaraJawa(button) {
-
-        const data = stories[currentStory];
-
-        const storyText = document.getElementById("storyText");
-
-        storyText.innerHTML = data.aksaraJawa;
-        storyText.classList.remove("dyslexia-text");
-
-        setActiveTab(button);
-    }
-
-    function showDyslexia(button) {
-
-        const data = stories[currentStory];
-
-        const storyText = document.getElementById("storyText");
-
-        storyText.innerHTML = data.indonesia;
-        storyText.classList.add("dyslexia-text");
-
-        setActiveTab(button);
-    }
-
-    function setActiveTab(button) {
-
-        const buttons = document.querySelectorAll(".reader-tabs button");
-
-        buttons.forEach(btn => {
-            btn.classList.remove("active");
-        });
-
-        button.classList.add("active");
-    }
-
-    lucide.createIcons();
-                    // Logika Aksesibilitas (Floating Button)
+        // ==========================================
+        // LOGIKA AKSESIBILITAS & LOCALSTORAGE
+        // ==========================================
         const a11yBtn = document.getElementById('a11yBtn');
         const a11yMenu = document.getElementById('a11yMenu');
         const dyslexiaToggle = document.getElementById('dyslexiaToggle');
         const colorblindToggle = document.getElementById('colorblindToggle');
+        const javaneseToggle = document.getElementById('javaneseToggle');
 
-        // Buka/Tutup Menu
         a11yBtn.addEventListener('click', () => {
             a11yMenu.classList.toggle('hidden');
         });
 
-        // Toggle Disleksia
         dyslexiaToggle.addEventListener('change', (e) => {
-            if (e.target.checked) {
-                document.body.classList.add('dyslexia-mode');
-            } else {
-                document.body.classList.remove('dyslexia-mode');
-            }
+            const isActive = e.target.checked;
+            document.body.classList.toggle('dyslexia-mode', isActive);
+            localStorage.setItem('dyslexiaMode', isActive);
         });
 
-        // Toggle Mode Buta Warna
         colorblindToggle.addEventListener('change', (e) => {
-            if (e.target.checked) {
-                document.body.classList.add('colorblind-mode');
-            } else {
-                document.body.classList.remove('colorblind-mode');
-            }
+            const isActive = e.target.checked;
+            document.body.classList.toggle('colorblind-mode', isActive);
+            localStorage.setItem('colorblindMode', isActive);
         });
-</script>
+
+        javaneseToggle.addEventListener('change', (e) => {
+            const isJavanese = e.target.checked;
+            applyTranslation(isJavanese);
+            localStorage.setItem('javaneseMode', isJavanese);
+        });
+    </script>
 </body>
 </html>
