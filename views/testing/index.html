@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projek Kebudayaan Jawa</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Font Noto Sans Javanese -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Javanese:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Font class untuk Aksara Jawa */
+      .font-jawa {
+        font-family: "Noto Sans Javanese", serif;
+        line-height: 2.2; /* Line-height wajib lebih longgar agar sandhangan atas/bawah rapi */
+      }
+    </style>
+  </head>
+  <body class="bg-slate-100 text-slate-800 p-8">
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-xl shadow-md space-y-6">
+      <!-- Button Trigger -->
+      <button
+        id="toggleBtn"
+        class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 px-5 rounded-lg transition shadow-sm"
+      >
+        Ubah ke Aksara Jawa
+      </button>
+
+      <hr class="border-slate-200" />
+
+      <!-- Area Konten -->
+      <article class="space-y-4">
+        <!-- ELEMEN 1: Judul -->
+        <!-- Simpan hasil konversi Aksara Jawa manualmu di atribut data-aksara -->
+        <h1 class="translatable text-2xl font-bold" data-aksara="ꦱꦸꦒꦼꦁꦫꦮꦸꦃ">
+          Selamat Datang
+        </h1>
+      </article>
+    </div>
+
+    <script>
+      const btn = document.getElementById("toggleBtn");
+      let isAksara = false;
+
+      btn.addEventListener("click", () => {
+        // Ambil semua elemen yang menandakan konten dinamis
+        const elements = document.querySelectorAll(".translatable");
+
+        elements.forEach((el) => {
+          if (!isAksara) {
+            // 1. Simpan Teks Indonesia Asli ke atribut sementara (jika belum ada)
+            if (!el.dataset.indo) {
+              el.dataset.indo = el.innerText;
+            }
+
+            // 2. Tampilkan teks Aksara Jawa dari data-aksara
+            el.innerText = el.dataset.aksara;
+
+            // 3. Tambahkan styling font Aksara Jawa & sesuaikan ukurannya
+            el.classList.add("font-jawa", "text-2xl");
+          } else {
+            // 1. Kembalikan ke teks Indonesia Asli
+            el.innerText = el.dataset.indo;
+
+            // 2. Hapus styling Aksara Jawa
+            el.classList.remove("font-jawa", "text-2xl");
+          }
+        });
+
+        // Toggle status dan ubah teks tombolnya
+        isAksara = !isAksara;
+        btn.innerText = isAksara
+          ? "Kembalikan ke B. Indonesia"
+          : "Ubah ke Aksara Jawa";
+        btn.classList.toggle("bg-slate-700");
+      });
+    </script>
+  </body>
+</html>
