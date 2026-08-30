@@ -33,7 +33,7 @@ pipeline {
 
         stage('Deploy Container') {
             steps {
-                echo "Deploying ${env.CONTAINER_NAME} on port ${env.APP_PORT}..."
+                echo "Deploying ${env.CONTAINER_NAME} on port 8011..."
                 sh 'docker compose down || true'
                 sh 'docker compose up -d --build'
             }
@@ -41,9 +41,9 @@ pipeline {
 
         stage('Health Check') {
             steps {
-                echo "Checking application health on port ${env.APP_PORT}..."
+                echo "Checking application health on port 8011..."
                 sleep 5
-                sh "curl -f http://localhost:${env.APP_PORT} || exit 1"
+                sh "curl -f http://localhost:8011 || exit 1"
             }
         }
     }
@@ -54,7 +54,7 @@ pipeline {
             sh 'docker image prune -f'
         }
         success {
-            echo "Deployment successful! Access app at http://localhost:${env.APP_PORT}"
+            echo "Deployment successful! Access app at http://localhost:8011"
         }
         failure {
             echo "Deployment failed! Check Jenkins console output for details."
